@@ -13,8 +13,8 @@ start			: FUNC MAIN OP CP OCB bloqueCodigo CCB ;	//func main() { <codigo> }
 bloqueCodigo	: ( expresion )+ ;	//	por ahora requiere por lo menos una expresion
 expresion		: ( declararVar | math | ciclo | imprimirValor | escribirValor |HALT ) TERM ;	// ciclos terminan con ';' tambien
 declararVar		: ( decVar | asignVar ) ;
-asignVar		: decVar EQUALS valorVar
-				| decVar EQUALS variable; 
+asignVar		: tipoVar nombreVar EQUALS valorVar #asignarValor
+				| tipoVar nombreVar EQUALS variable #asignarVariable; 
 
 //	definicion de variables
 decVar			: tipoVar nombreVar ( COM nombreVar)* ;	//	number x , y , z, ..... n
@@ -49,9 +49,9 @@ condSeq			: SepCOND valorCond COND valorCond ;
 seccionFor		: asignVar TERM condicional TERM math ;
 
 //	in/out
-imprimirValor	: READ COL COL nombreValores ;
-nombreValores	: ( variable | valorString ) ( imprimirSeq )* ;
-imprimirSeq		: PLUS ( variable | valorString ) ;
+imprimirValor	: READ COL COL ( variable | valorString ) ;
+//nombreValores	: ( variable | valorString ) ( imprimirSeq )* ;
+//imprimirSeq		: PLUS ( variable | valorString ) ;
 escribirValor	: WRITE COL COL ( variable | valorString ) ;
 
 /*
@@ -76,7 +76,6 @@ DEC					: '.' ;
 EQUALS				: '=' ;
 COL					: ':' ;
 IF					: 'if' ;
-RENE				: 'rene' ;
 THEN				: 'then' ;
 WHILE				: 'while' ;
 FOR					: 'for' ;

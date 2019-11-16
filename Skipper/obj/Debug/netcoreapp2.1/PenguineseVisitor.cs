@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\AMD\Skipper\Skipper\Penguinese.g4 by ANTLR 4.6.6
+// Generated from C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\Penguinese.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -47,6 +47,22 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitSeqVar([NotNull] PenguineseParser.SeqVarContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>asignarValor</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsignarValor([NotNull] PenguineseParser.AsignarValorContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by the <c>asignarVariable</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsignarVariable([NotNull] PenguineseParser.AsignarVariableContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>cicloWhile</c>
@@ -271,20 +287,6 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitImprimirValor([NotNull] PenguineseParser.ImprimirValorContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="PenguineseParser.nombreValores"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitNombreValores([NotNull] PenguineseParser.NombreValoresContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="PenguineseParser.imprimirSeq"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitImprimirSeq([NotNull] PenguineseParser.ImprimirSeqContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.escribirValor"/>.

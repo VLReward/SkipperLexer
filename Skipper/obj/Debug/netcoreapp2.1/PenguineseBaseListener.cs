@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\AMD\Skipper\Skipper\Penguinese.g4 by ANTLR 4.6.6
+// Generated from C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\Penguinese.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -64,6 +64,36 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSeqVar([NotNull] PenguineseParser.SeqVarContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>asignarValor</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsignarValor([NotNull] PenguineseParser.AsignarValorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>asignarValor</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsignarValor([NotNull] PenguineseParser.AsignarValorContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>asignarVariable</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsignarVariable([NotNull] PenguineseParser.AsignarVariableContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>asignarVariable</c>
+	/// labeled alternative in <see cref="PenguineseParser.asignVar"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsignarVariable([NotNull] PenguineseParser.AsignarVariableContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>cicloWhile</c>
@@ -481,32 +511,6 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitImprimirValor([NotNull] PenguineseParser.ImprimirValorContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="PenguineseParser.nombreValores"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterNombreValores([NotNull] PenguineseParser.NombreValoresContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PenguineseParser.nombreValores"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitNombreValores([NotNull] PenguineseParser.NombreValoresContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="PenguineseParser.imprimirSeq"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterImprimirSeq([NotNull] PenguineseParser.ImprimirSeqContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="PenguineseParser.imprimirSeq"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitImprimirSeq([NotNull] PenguineseParser.ImprimirSeqContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.escribirValor"/>.

@@ -836,23 +836,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\boggy\\.nuget\\packages\\": {},
+    "C:\\Users\\Rolis\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\AMD\\Skipper\\Skipper\\Skipper.csproj",
+      "projectUniqueName": "C:\\Users\\Rolis\\Documents\\GitHub\\SkipperLexer\\Skipper\\Skipper.csproj",
       "projectName": "Skipper",
-      "projectPath": "C:\\AMD\\Skipper\\Skipper\\Skipper.csproj",
-      "packagesPath": "C:\\Users\\boggy\\.nuget\\packages\\",
-      "outputPath": "C:\\AMD\\Skipper\\Skipper\\obj\\",
+      "projectPath": "C:\\Users\\Rolis\\Documents\\GitHub\\SkipperLexer\\Skipper\\Skipper.csproj",
+      "packagesPath": "C:\\Users\\Rolis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rolis\\Documents\\GitHub\\SkipperLexer\\Skipper\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\boggy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Rolis\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

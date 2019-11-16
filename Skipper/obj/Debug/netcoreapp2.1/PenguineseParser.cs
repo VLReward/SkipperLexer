@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generated from C:\AMD\Skipper\Skipper\Penguinese.g4 by ANTLR 4.6.6
+// Generated from C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\Penguinese.g4 by ANTLR 4.6.6
 
 // Unreachable code detected
 #pragma warning disable 0162
@@ -33,9 +33,9 @@ public partial class PenguineseParser : Parser {
 	public const int
 		NUMERAL=1, OPERATOR=2, PLUS=3, COND=4, SepCOND=5, TERM=6, COM=7, OP=8, 
 		CP=9, OBR=10, CBR=11, OCB=12, CCB=13, DEC=14, EQUALS=15, COL=16, IF=17, 
-		RENE=18, THEN=19, WHILE=20, FOR=21, FUNC=22, MAIN=23, DOUBLE=24, CHARACTER=25, 
-		TEXT=26, NUMBER=27, ARRAYOF=28, BOOLEAN=29, HALT=30, RETURN=31, READ=32, 
-		WRITE=33, LETTER=34, CHAR=35, WORD=36, STRING=37, WHITESPACE=38;
+		THEN=18, WHILE=19, FOR=20, FUNC=21, MAIN=22, DOUBLE=23, CHARACTER=24, 
+		TEXT=25, NUMBER=26, ARRAYOF=27, BOOLEAN=28, HALT=29, RETURN=30, READ=31, 
+		WRITE=32, LETTER=33, CHAR=34, WORD=35, STRING=36, WHITESPACE=37;
 	public const int
 		RULE_start = 0, RULE_bloqueCodigo = 1, RULE_expresion = 2, RULE_declararVar = 3, 
 		RULE_asignVar = 4, RULE_decVar = 5, RULE_tipoVar = 6, RULE_tipoVarS = 7, 
@@ -43,28 +43,28 @@ public partial class PenguineseParser : Parser {
 		RULE_valorDec = 12, RULE_valorChar = 13, RULE_valorString = 14, RULE_math = 15, 
 		RULE_mathSeq = 16, RULE_valorNum = 17, RULE_ciclo = 18, RULE_condicional = 19, 
 		RULE_valorCond = 20, RULE_condSeq = 21, RULE_seccionFor = 22, RULE_imprimirValor = 23, 
-		RULE_nombreValores = 24, RULE_imprimirSeq = 25, RULE_escribirValor = 26;
+		RULE_escribirValor = 24;
 	public static readonly string[] ruleNames = {
 		"start", "bloqueCodigo", "expresion", "declararVar", "asignVar", "decVar", 
 		"tipoVar", "tipoVarS", "nombreVar", "variable", "valorVar", "valorEntero", 
 		"valorDec", "valorChar", "valorString", "math", "mathSeq", "valorNum", 
 		"ciclo", "condicional", "valorCond", "condSeq", "seccionFor", "imprimirValor", 
-		"nombreValores", "imprimirSeq", "escribirValor"
+		"escribirValor"
 	};
 
 	private static readonly string[] _LiteralNames = {
 		null, null, null, "'+'", null, null, "';'", "','", "'('", "')'", "'['", 
-		"']'", "'{'", "'}'", "'.'", "'='", "':'", "'if'", "'rene'", "'then'", 
-		"'while'", "'for'", "'func'", "'main'", "'double'", "'character'", "'text'", 
-		"'number'", "'arrayof'", "'boolean'", "'NOOT NOOT'", "'regresar'", "'imprimirVar'", 
+		"']'", "'{'", "'}'", "'.'", "'='", "':'", "'if'", "'then'", "'while'", 
+		"'for'", "'func'", "'main'", "'double'", "'character'", "'text'", "'number'", 
+		"'arrayof'", "'boolean'", "'NOOT NOOT'", "'regresar'", "'imprimirVar'", 
 		"'escribirVar'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "NUMERAL", "OPERATOR", "PLUS", "COND", "SepCOND", "TERM", "COM", 
 		"OP", "CP", "OBR", "CBR", "OCB", "CCB", "DEC", "EQUALS", "COL", "IF", 
-		"RENE", "THEN", "WHILE", "FOR", "FUNC", "MAIN", "DOUBLE", "CHARACTER", 
-		"TEXT", "NUMBER", "ARRAYOF", "BOOLEAN", "HALT", "RETURN", "READ", "WRITE", 
-		"LETTER", "CHAR", "WORD", "STRING", "WHITESPACE"
+		"THEN", "WHILE", "FOR", "FUNC", "MAIN", "DOUBLE", "CHARACTER", "TEXT", 
+		"NUMBER", "ARRAYOF", "BOOLEAN", "HALT", "RETURN", "READ", "WRITE", "LETTER", 
+		"CHAR", "WORD", "STRING", "WHITESPACE"
 	};
 	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
 
@@ -153,13 +153,13 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 54; Match(FUNC);
-			State = 55; Match(MAIN);
-			State = 56; Match(OP);
-			State = 57; Match(CP);
-			State = 58; Match(OCB);
-			State = 59; bloqueCodigo();
-			State = 60; Match(CCB);
+			State = 50; Match(FUNC);
+			State = 51; Match(MAIN);
+			State = 52; Match(OP);
+			State = 53; Match(CP);
+			State = 54; Match(OCB);
+			State = 55; bloqueCodigo();
+			State = 56; Match(CCB);
 			}
 		}
 		catch (RecognitionException re) {
@@ -208,16 +208,16 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 63;
+			State = 59;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			do {
 				{
 				{
-				State = 62; expresion();
+				State = 58; expresion();
 				}
 				}
-				State = 65;
+				State = 61;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << WHILE) | (1L << FOR) | (1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << ARRAYOF) | (1L << BOOLEAN) | (1L << HALT) | (1L << READ) | (1L << WRITE) | (1L << LETTER) | (1L << WORD))) != 0) );
@@ -279,7 +279,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 73;
+			State = 69;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case DOUBLE:
@@ -289,41 +289,41 @@ public partial class PenguineseParser : Parser {
 			case ARRAYOF:
 			case BOOLEAN:
 				{
-				State = 67; declararVar();
+				State = 63; declararVar();
 				}
 				break;
 			case LETTER:
 			case WORD:
 				{
-				State = 68; math();
+				State = 64; math();
 				}
 				break;
 			case IF:
 			case WHILE:
 			case FOR:
 				{
-				State = 69; ciclo();
+				State = 65; ciclo();
 				}
 				break;
 			case READ:
 				{
-				State = 70; imprimirValor();
+				State = 66; imprimirValor();
 				}
 				break;
 			case WRITE:
 				{
-				State = 71; escribirValor();
+				State = 67; escribirValor();
 				}
 				break;
 			case HALT:
 				{
-				State = 72; Match(HALT);
+				State = 68; Match(HALT);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			State = 75; Match(TERM);
+			State = 71; Match(TERM);
 			}
 		}
 		catch (RecognitionException re) {
@@ -371,18 +371,18 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 79;
+			State = 75;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
 			case 1:
 				{
-				State = 77; decVar();
+				State = 73; decVar();
 				}
 				break;
 
 			case 2:
 				{
-				State = 78; asignVar();
+				State = 74; asignVar();
 				}
 				break;
 			}
@@ -400,32 +400,66 @@ public partial class PenguineseParser : Parser {
 	}
 
 	public partial class AsignVarContext : ParserRuleContext {
-		public DecVarContext decVar() {
-			return GetRuleContext<DecVarContext>(0);
-		}
-		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
-		public ValorVarContext valorVar() {
-			return GetRuleContext<ValorVarContext>(0);
-		}
-		public VariableContext variable() {
-			return GetRuleContext<VariableContext>(0);
-		}
 		public AsignVarContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
 		public override int RuleIndex { get { return RULE_asignVar; } }
+	 
+		public AsignVarContext() { }
+		public virtual void CopyFrom(AsignVarContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class AsignarValorContext : AsignVarContext {
+		public TipoVarContext tipoVar() {
+			return GetRuleContext<TipoVarContext>(0);
+		}
+		public NombreVarContext nombreVar() {
+			return GetRuleContext<NombreVarContext>(0);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public ValorVarContext valorVar() {
+			return GetRuleContext<ValorVarContext>(0);
+		}
+		public AsignarValorContext(AsignVarContext context) { CopyFrom(context); }
 		public override void EnterRule(IParseTreeListener listener) {
 			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.EnterAsignVar(this);
+			if (typedListener != null) typedListener.EnterAsignarValor(this);
 		}
 		public override void ExitRule(IParseTreeListener listener) {
 			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.ExitAsignVar(this);
+			if (typedListener != null) typedListener.ExitAsignarValor(this);
 		}
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitAsignVar(this);
+			if (typedVisitor != null) return typedVisitor.VisitAsignarValor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class AsignarVariableContext : AsignVarContext {
+		public TipoVarContext tipoVar() {
+			return GetRuleContext<TipoVarContext>(0);
+		}
+		public NombreVarContext nombreVar() {
+			return GetRuleContext<NombreVarContext>(0);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public AsignarVariableContext(AsignVarContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterAsignarVariable(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitAsignarVariable(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAsignarVariable(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -435,24 +469,28 @@ public partial class PenguineseParser : Parser {
 		AsignVarContext _localctx = new AsignVarContext(_ctx, State);
 		EnterRule(_localctx, 8, RULE_asignVar);
 		try {
-			State = 89;
+			State = 87;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,3,_ctx) ) {
 			case 1:
+				_localctx = new AsignarValorContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 81; decVar();
-				State = 82; Match(EQUALS);
-				State = 83; valorVar();
+				State = 77; tipoVar();
+				State = 78; nombreVar();
+				State = 79; Match(EQUALS);
+				State = 80; valorVar();
 				}
 				break;
 
 			case 2:
+				_localctx = new AsignarVariableContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 85; decVar();
-				State = 86; Match(EQUALS);
-				State = 87; variable();
+				State = 82; tipoVar();
+				State = 83; nombreVar();
+				State = 84; Match(EQUALS);
+				State = 85; variable();
 				}
 				break;
 			}
@@ -510,19 +548,19 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 91; tipoVar();
-			State = 92; nombreVar();
-			State = 97;
+			State = 89; tipoVar();
+			State = 90; nombreVar();
+			State = 95;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==COM) {
 				{
 				{
-				State = 93; Match(COM);
-				State = 94; nombreVar();
+				State = 91; Match(COM);
+				State = 92; nombreVar();
 				}
 				}
-				State = 99;
+				State = 97;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
@@ -572,17 +610,17 @@ public partial class PenguineseParser : Parser {
 		TipoVarContext _localctx = new TipoVarContext(_ctx, State);
 		EnterRule(_localctx, 12, RULE_tipoVar);
 		try {
-			State = 107;
+			State = 105;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case ARRAYOF:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 100; Match(ARRAYOF);
-				State = 101; tipoVarS();
-				State = 102; Match(OBR);
-				State = 103; Match(NUMERAL);
-				State = 104; Match(CBR);
+				State = 98; Match(ARRAYOF);
+				State = 99; tipoVarS();
+				State = 100; Match(OBR);
+				State = 101; Match(NUMERAL);
+				State = 102; Match(CBR);
 				}
 				break;
 			case DOUBLE:
@@ -592,7 +630,7 @@ public partial class PenguineseParser : Parser {
 			case BOOLEAN:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 106; tipoVarS();
+				State = 104; tipoVarS();
 				}
 				break;
 			default:
@@ -644,7 +682,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 109;
+			State = 107;
 			_la = _input.La(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << BOOLEAN))) != 0)) ) {
 			_errHandler.RecoverInline(this);
@@ -700,7 +738,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 111;
+			State = 109;
 			_la = _input.La(1);
 			if ( !(_la==LETTER || _la==WORD) ) {
 			_errHandler.RecoverInline(this);
@@ -789,14 +827,14 @@ public partial class PenguineseParser : Parser {
 		VariableContext _localctx = new VariableContext(_ctx, State);
 		EnterRule(_localctx, 18, RULE_variable);
 		try {
-			State = 122;
+			State = 120;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				_localctx = new NombreSimpleContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 113; nombreVar();
+				State = 111; nombreVar();
 				}
 				break;
 
@@ -804,26 +842,26 @@ public partial class PenguineseParser : Parser {
 				_localctx = new NombreArregloContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 114; nombreVar();
-				State = 115; Match(OBR);
-				State = 118;
+				State = 112; nombreVar();
+				State = 113; Match(OBR);
+				State = 116;
 				_errHandler.Sync(this);
 				switch (_input.La(1)) {
 				case LETTER:
 				case WORD:
 					{
-					State = 116; nombreVar();
+					State = 114; nombreVar();
 					}
 					break;
 				case NUMERAL:
 					{
-					State = 117; valorEntero();
+					State = 115; valorEntero();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				State = 120; Match(CBR);
+				State = 118; Match(CBR);
 				}
 				break;
 			}
@@ -879,30 +917,30 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 128;
+			State = 126;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				{
-				State = 124; valorEntero();
+				State = 122; valorEntero();
 				}
 				break;
 
 			case 2:
 				{
-				State = 125; valorDec();
+				State = 123; valorDec();
 				}
 				break;
 
 			case 3:
 				{
-				State = 126; valorChar();
+				State = 124; valorChar();
 				}
 				break;
 
 			case 4:
 				{
-				State = 127; valorString();
+				State = 125; valorString();
 				}
 				break;
 			}
@@ -948,7 +986,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 130; Match(NUMERAL);
+			State = 128; Match(NUMERAL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -995,9 +1033,9 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
+			State = 130; Match(NUMERAL);
+			State = 131; Match(DEC);
 			State = 132; Match(NUMERAL);
-			State = 133; Match(DEC);
-			State = 134; Match(NUMERAL);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1040,7 +1078,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 136; Match(CHAR);
+			State = 134; Match(CHAR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1083,7 +1121,7 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 138; Match(STRING);
+			State = 136; Match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1174,26 +1212,26 @@ public partial class PenguineseParser : Parser {
 		EnterRule(_localctx, 30, RULE_math);
 		int _la;
 		try {
-			State = 158;
+			State = 156;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				_localctx = new OperacionVeNContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 140; variable();
-				State = 141; Match(EQUALS);
-				State = 142; valorNum();
-				State = 146;
+				State = 138; variable();
+				State = 139; Match(EQUALS);
+				State = 140; valorNum();
+				State = 144;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				while (_la==OPERATOR) {
 					{
 					{
-					State = 143; mathSeq();
+					State = 141; mathSeq();
 					}
 					}
-					State = 148;
+					State = 146;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				}
@@ -1204,19 +1242,19 @@ public partial class PenguineseParser : Parser {
 				_localctx = new OperacionVeVContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
+				State = 147; variable();
+				State = 148; Match(EQUALS);
 				State = 149; variable();
-				State = 150; Match(EQUALS);
-				State = 151; variable();
-				State = 155;
+				State = 153;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 				while (_la==OPERATOR) {
 					{
 					{
-					State = 152; mathSeq();
+					State = 150; mathSeq();
 					}
 					}
-					State = 157;
+					State = 155;
 					_errHandler.Sync(this);
 					_la = _input.La(1);
 				}
@@ -1293,15 +1331,15 @@ public partial class PenguineseParser : Parser {
 		MathSeqContext _localctx = new MathSeqContext(_ctx, State);
 		EnterRule(_localctx, 32, RULE_mathSeq);
 		try {
-			State = 164;
+			State = 162;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				_localctx = new SeqNumContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 160; Match(OPERATOR);
-				State = 161; valorNum();
+				State = 158; Match(OPERATOR);
+				State = 159; valorNum();
 				}
 				break;
 
@@ -1309,8 +1347,8 @@ public partial class PenguineseParser : Parser {
 				_localctx = new SeqVarContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 162; Match(OPERATOR);
-				State = 163; variable();
+				State = 160; Match(OPERATOR);
+				State = 161; variable();
 				}
 				break;
 			}
@@ -1358,20 +1396,20 @@ public partial class PenguineseParser : Parser {
 		ValorNumContext _localctx = new ValorNumContext(_ctx, State);
 		EnterRule(_localctx, 34, RULE_valorNum);
 		try {
-			State = 168;
+			State = 166;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 166; valorEntero();
+				State = 164; valorEntero();
 				}
 				break;
 
 			case 2:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 167; valorDec();
+				State = 165; valorDec();
 				}
 				break;
 			}
@@ -1488,48 +1526,48 @@ public partial class PenguineseParser : Parser {
 		CicloContext _localctx = new CicloContext(_ctx, State);
 		EnterRule(_localctx, 36, RULE_ciclo);
 		try {
-			State = 196;
+			State = 194;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case IF:
 				_localctx = new CicloIfContext(_localctx);
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 170; Match(IF);
-				State = 171; Match(OP);
-				State = 172; condicional();
-				State = 173; Match(CP);
-				State = 174; Match(THEN);
-				State = 175; Match(OCB);
-				State = 176; bloqueCodigo();
-				State = 177; Match(CCB);
+				State = 168; Match(IF);
+				State = 169; Match(OP);
+				State = 170; condicional();
+				State = 171; Match(CP);
+				State = 172; Match(THEN);
+				State = 173; Match(OCB);
+				State = 174; bloqueCodigo();
+				State = 175; Match(CCB);
 				}
 				break;
 			case WHILE:
 				_localctx = new CicloWhileContext(_localctx);
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 179; Match(WHILE);
-				State = 180; Match(OP);
-				State = 181; condicional();
-				State = 182; Match(CP);
-				State = 183; Match(THEN);
-				State = 184; Match(OCB);
-				State = 185; bloqueCodigo();
-				State = 186; Match(CCB);
+				State = 177; Match(WHILE);
+				State = 178; Match(OP);
+				State = 179; condicional();
+				State = 180; Match(CP);
+				State = 181; Match(THEN);
+				State = 182; Match(OCB);
+				State = 183; bloqueCodigo();
+				State = 184; Match(CCB);
 				}
 				break;
 			case FOR:
 				_localctx = new CicloForContext(_localctx);
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 188; Match(FOR);
-				State = 189; Match(OP);
-				State = 190; seccionFor();
-				State = 191; Match(CP);
-				State = 192; Match(OCB);
-				State = 193; bloqueCodigo();
-				State = 194; Match(CCB);
+				State = 186; Match(FOR);
+				State = 187; Match(OP);
+				State = 188; seccionFor();
+				State = 189; Match(CP);
+				State = 190; Match(OCB);
+				State = 191; bloqueCodigo();
+				State = 192; Match(CCB);
 				}
 				break;
 			default:
@@ -1589,19 +1627,19 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
+			State = 196; valorCond();
+			State = 197; Match(COND);
 			State = 198; valorCond();
-			State = 199; Match(COND);
-			State = 200; valorCond();
-			State = 204;
+			State = 202;
 			_errHandler.Sync(this);
 			_la = _input.La(1);
 			while (_la==SepCOND) {
 				{
 				{
-				State = 201; condSeq();
+				State = 199; condSeq();
 				}
 				}
-				State = 206;
+				State = 204;
 				_errHandler.Sync(this);
 				_la = _input.La(1);
 			}
@@ -1659,36 +1697,36 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 212;
+			State = 210;
 			_errHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(_input,16,_ctx) ) {
 			case 1:
 				{
-				State = 207; variable();
+				State = 205; variable();
 				}
 				break;
 
 			case 2:
 				{
-				State = 208; Match(NUMERAL);
+				State = 206; Match(NUMERAL);
 				}
 				break;
 
 			case 3:
 				{
-				State = 209; valorChar();
+				State = 207; valorChar();
 				}
 				break;
 
 			case 4:
 				{
-				State = 210; valorString();
+				State = 208; valorString();
 				}
 				break;
 
 			case 5:
 				{
-				State = 211; valorDec();
+				State = 209; valorDec();
 				}
 				break;
 			}
@@ -1741,10 +1779,10 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 214; Match(SepCOND);
+			State = 212; Match(SepCOND);
+			State = 213; valorCond();
+			State = 214; Match(COND);
 			State = 215; valorCond();
-			State = 216; Match(COND);
-			State = 217; valorCond();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1799,11 +1837,11 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 219; asignVar();
+			State = 217; asignVar();
+			State = 218; Match(TERM);
+			State = 219; condicional();
 			State = 220; Match(TERM);
-			State = 221; condicional();
-			State = 222; Match(TERM);
-			State = 223; math();
+			State = 221; math();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1823,8 +1861,11 @@ public partial class PenguineseParser : Parser {
 		public ITerminalNode COL(int i) {
 			return GetToken(PenguineseParser.COL, i);
 		}
-		public NombreValoresContext nombreValores() {
-			return GetRuleContext<NombreValoresContext>(0);
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public ValorStringContext valorString() {
+			return GetRuleContext<ValorStringContext>(0);
 		}
 		public ImprimirValorContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
@@ -1853,155 +1894,21 @@ public partial class PenguineseParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 225; Match(READ);
-			State = 226; Match(COL);
-			State = 227; Match(COL);
-			State = 228; nombreValores();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class NombreValoresContext : ParserRuleContext {
-		public VariableContext variable() {
-			return GetRuleContext<VariableContext>(0);
-		}
-		public ValorStringContext valorString() {
-			return GetRuleContext<ValorStringContext>(0);
-		}
-		public ImprimirSeqContext[] imprimirSeq() {
-			return GetRuleContexts<ImprimirSeqContext>();
-		}
-		public ImprimirSeqContext imprimirSeq(int i) {
-			return GetRuleContext<ImprimirSeqContext>(i);
-		}
-		public NombreValoresContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_nombreValores; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.EnterNombreValores(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.ExitNombreValores(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitNombreValores(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public NombreValoresContext nombreValores() {
-		NombreValoresContext _localctx = new NombreValoresContext(_ctx, State);
-		EnterRule(_localctx, 48, RULE_nombreValores);
-		int _la;
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 232;
+			State = 223; Match(READ);
+			State = 224; Match(COL);
+			State = 225; Match(COL);
+			State = 228;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case LETTER:
 			case WORD:
 				{
-				State = 230; variable();
+				State = 226; variable();
 				}
 				break;
 			case STRING:
 				{
-				State = 231; valorString();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			State = 237;
-			_errHandler.Sync(this);
-			_la = _input.La(1);
-			while (_la==PLUS) {
-				{
-				{
-				State = 234; imprimirSeq();
-				}
-				}
-				State = 239;
-				_errHandler.Sync(this);
-				_la = _input.La(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.ReportError(this, re);
-			_errHandler.Recover(this, re);
-		}
-		finally {
-			ExitRule();
-		}
-		return _localctx;
-	}
-
-	public partial class ImprimirSeqContext : ParserRuleContext {
-		public ITerminalNode PLUS() { return GetToken(PenguineseParser.PLUS, 0); }
-		public VariableContext variable() {
-			return GetRuleContext<VariableContext>(0);
-		}
-		public ValorStringContext valorString() {
-			return GetRuleContext<ValorStringContext>(0);
-		}
-		public ImprimirSeqContext(ParserRuleContext parent, int invokingState)
-			: base(parent, invokingState)
-		{
-		}
-		public override int RuleIndex { get { return RULE_imprimirSeq; } }
-		public override void EnterRule(IParseTreeListener listener) {
-			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.EnterImprimirSeq(this);
-		}
-		public override void ExitRule(IParseTreeListener listener) {
-			IPenguineseListener typedListener = listener as IPenguineseListener;
-			if (typedListener != null) typedListener.ExitImprimirSeq(this);
-		}
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitImprimirSeq(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-
-	[RuleVersion(0)]
-	public ImprimirSeqContext imprimirSeq() {
-		ImprimirSeqContext _localctx = new ImprimirSeqContext(_ctx, State);
-		EnterRule(_localctx, 50, RULE_imprimirSeq);
-		try {
-			EnterOuterAlt(_localctx, 1);
-			{
-			State = 240; Match(PLUS);
-			State = 243;
-			_errHandler.Sync(this);
-			switch (_input.La(1)) {
-			case LETTER:
-			case WORD:
-				{
-				State = 241; variable();
-				}
-				break;
-			case STRING:
-				{
-				State = 242; valorString();
+				State = 227; valorString();
 				}
 				break;
 			default:
@@ -2055,25 +1962,25 @@ public partial class PenguineseParser : Parser {
 	[RuleVersion(0)]
 	public EscribirValorContext escribirValor() {
 		EscribirValorContext _localctx = new EscribirValorContext(_ctx, State);
-		EnterRule(_localctx, 52, RULE_escribirValor);
+		EnterRule(_localctx, 48, RULE_escribirValor);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 245; Match(WRITE);
-			State = 246; Match(COL);
-			State = 247; Match(COL);
-			State = 250;
+			State = 230; Match(WRITE);
+			State = 231; Match(COL);
+			State = 232; Match(COL);
+			State = 235;
 			_errHandler.Sync(this);
 			switch (_input.La(1)) {
 			case LETTER:
 			case WORD:
 				{
-				State = 248; variable();
+				State = 233; variable();
 				}
 				break;
 			case STRING:
 				{
-				State = 249; valorString();
+				State = 234; valorString();
 				}
 				break;
 			default:
@@ -2093,100 +2000,94 @@ public partial class PenguineseParser : Parser {
 	}
 
 	public static readonly string _serializedATN =
-		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3(\xFF\x4\x2\t\x2"+
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\'\xF0\x4\x2\t\x2"+
 		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
 		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
 		"\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
-		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x4\x1B"+
-		"\t\x1B\x4\x1C\t\x1C\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3"+
-		"\x3\x6\x3\x42\n\x3\r\x3\xE\x3\x43\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4"+
-		"\x5\x4L\n\x4\x3\x4\x3\x4\x3\x5\x3\x5\x5\x5R\n\x5\x3\x6\x3\x6\x3\x6\x3"+
-		"\x6\x3\x6\x3\x6\x3\x6\x3\x6\x5\x6\\\n\x6\x3\a\x3\a\x3\a\x3\a\a\a\x62\n"+
-		"\a\f\a\xE\a\x65\v\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bn\n\b\x3\t"+
-		"\x3\t\x3\n\x3\n\x3\v\x3\v\x3\v\x3\v\x3\v\x5\vy\n\v\x3\v\x3\v\x5\v}\n\v"+
-		"\x3\f\x3\f\x3\f\x3\f\x5\f\x83\n\f\x3\r\x3\r\x3\xE\x3\xE\x3\xE\x3\xE\x3"+
-		"\xF\x3\xF\x3\x10\x3\x10\x3\x11\x3\x11\x3\x11\x3\x11\a\x11\x93\n\x11\f"+
-		"\x11\xE\x11\x96\v\x11\x3\x11\x3\x11\x3\x11\x3\x11\a\x11\x9C\n\x11\f\x11"+
-		"\xE\x11\x9F\v\x11\x5\x11\xA1\n\x11\x3\x12\x3\x12\x3\x12\x3\x12\x5\x12"+
-		"\xA7\n\x12\x3\x13\x3\x13\x5\x13\xAB\n\x13\x3\x14\x3\x14\x3\x14\x3\x14"+
-		"\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14"+
-		"\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14"+
-		"\x3\x14\x3\x14\x5\x14\xC7\n\x14\x3\x15\x3\x15\x3\x15\x3\x15\a\x15\xCD"+
-		"\n\x15\f\x15\xE\x15\xD0\v\x15\x3\x16\x3\x16\x3\x16\x3\x16\x3\x16\x5\x16"+
-		"\xD7\n\x16\x3\x17\x3\x17\x3\x17\x3\x17\x3\x17\x3\x18\x3\x18\x3\x18\x3"+
-		"\x18\x3\x18\x3\x18\x3\x19\x3\x19\x3\x19\x3\x19\x3\x19\x3\x1A\x3\x1A\x5"+
-		"\x1A\xEB\n\x1A\x3\x1A\a\x1A\xEE\n\x1A\f\x1A\xE\x1A\xF1\v\x1A\x3\x1B\x3"+
-		"\x1B\x3\x1B\x5\x1B\xF6\n\x1B\x3\x1C\x3\x1C\x3\x1C\x3\x1C\x3\x1C\x5\x1C"+
-		"\xFD\n\x1C\x3\x1C\x2\x2\x2\x1D\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2"+
-		"\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2$\x2"+
-		"&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2\x34\x2\x36\x2\x2\x4\x4\x2\x1A\x1D\x1F"+
-		"\x1F\x4\x2$$&&\x102\x2\x38\x3\x2\x2\x2\x4\x41\x3\x2\x2\x2\x6K\x3\x2\x2"+
-		"\x2\bQ\x3\x2\x2\x2\n[\x3\x2\x2\x2\f]\x3\x2\x2\x2\xEm\x3\x2\x2\x2\x10o"+
-		"\x3\x2\x2\x2\x12q\x3\x2\x2\x2\x14|\x3\x2\x2\x2\x16\x82\x3\x2\x2\x2\x18"+
-		"\x84\x3\x2\x2\x2\x1A\x86\x3\x2\x2\x2\x1C\x8A\x3\x2\x2\x2\x1E\x8C\x3\x2"+
-		"\x2\x2 \xA0\x3\x2\x2\x2\"\xA6\x3\x2\x2\x2$\xAA\x3\x2\x2\x2&\xC6\x3\x2"+
-		"\x2\x2(\xC8\x3\x2\x2\x2*\xD6\x3\x2\x2\x2,\xD8\x3\x2\x2\x2.\xDD\x3\x2\x2"+
-		"\x2\x30\xE3\x3\x2\x2\x2\x32\xEA\x3\x2\x2\x2\x34\xF2\x3\x2\x2\x2\x36\xF7"+
-		"\x3\x2\x2\x2\x38\x39\a\x18\x2\x2\x39:\a\x19\x2\x2:;\a\n\x2\x2;<\a\v\x2"+
-		"\x2<=\a\xE\x2\x2=>\x5\x4\x3\x2>?\a\xF\x2\x2?\x3\x3\x2\x2\x2@\x42\x5\x6"+
-		"\x4\x2\x41@\x3\x2\x2\x2\x42\x43\x3\x2\x2\x2\x43\x41\x3\x2\x2\x2\x43\x44"+
-		"\x3\x2\x2\x2\x44\x5\x3\x2\x2\x2\x45L\x5\b\x5\x2\x46L\x5 \x11\x2GL\x5&"+
-		"\x14\x2HL\x5\x30\x19\x2IL\x5\x36\x1C\x2JL\a \x2\x2K\x45\x3\x2\x2\x2K\x46"+
-		"\x3\x2\x2\x2KG\x3\x2\x2\x2KH\x3\x2\x2\x2KI\x3\x2\x2\x2KJ\x3\x2\x2\x2L"+
-		"M\x3\x2\x2\x2MN\a\b\x2\x2N\a\x3\x2\x2\x2OR\x5\f\a\x2PR\x5\n\x6\x2QO\x3"+
-		"\x2\x2\x2QP\x3\x2\x2\x2R\t\x3\x2\x2\x2ST\x5\f\a\x2TU\a\x11\x2\x2UV\x5"+
-		"\x16\f\x2V\\\x3\x2\x2\x2WX\x5\f\a\x2XY\a\x11\x2\x2YZ\x5\x14\v\x2Z\\\x3"+
-		"\x2\x2\x2[S\x3\x2\x2\x2[W\x3\x2\x2\x2\\\v\x3\x2\x2\x2]^\x5\xE\b\x2^\x63"+
-		"\x5\x12\n\x2_`\a\t\x2\x2`\x62\x5\x12\n\x2\x61_\x3\x2\x2\x2\x62\x65\x3"+
-		"\x2\x2\x2\x63\x61\x3\x2\x2\x2\x63\x64\x3\x2\x2\x2\x64\r\x3\x2\x2\x2\x65"+
-		"\x63\x3\x2\x2\x2\x66g\a\x1E\x2\x2gh\x5\x10\t\x2hi\a\f\x2\x2ij\a\x3\x2"+
-		"\x2jk\a\r\x2\x2kn\x3\x2\x2\x2ln\x5\x10\t\x2m\x66\x3\x2\x2\x2ml\x3\x2\x2"+
-		"\x2n\xF\x3\x2\x2\x2op\t\x2\x2\x2p\x11\x3\x2\x2\x2qr\t\x3\x2\x2r\x13\x3"+
-		"\x2\x2\x2s}\x5\x12\n\x2tu\x5\x12\n\x2ux\a\f\x2\x2vy\x5\x12\n\x2wy\x5\x18"+
-		"\r\x2xv\x3\x2\x2\x2xw\x3\x2\x2\x2yz\x3\x2\x2\x2z{\a\r\x2\x2{}\x3\x2\x2"+
-		"\x2|s\x3\x2\x2\x2|t\x3\x2\x2\x2}\x15\x3\x2\x2\x2~\x83\x5\x18\r\x2\x7F"+
-		"\x83\x5\x1A\xE\x2\x80\x83\x5\x1C\xF\x2\x81\x83\x5\x1E\x10\x2\x82~\x3\x2"+
-		"\x2\x2\x82\x7F\x3\x2\x2\x2\x82\x80\x3\x2\x2\x2\x82\x81\x3\x2\x2\x2\x83"+
-		"\x17\x3\x2\x2\x2\x84\x85\a\x3\x2\x2\x85\x19\x3\x2\x2\x2\x86\x87\a\x3\x2"+
-		"\x2\x87\x88\a\x10\x2\x2\x88\x89\a\x3\x2\x2\x89\x1B\x3\x2\x2\x2\x8A\x8B"+
-		"\a%\x2\x2\x8B\x1D\x3\x2\x2\x2\x8C\x8D\a\'\x2\x2\x8D\x1F\x3\x2\x2\x2\x8E"+
-		"\x8F\x5\x14\v\x2\x8F\x90\a\x11\x2\x2\x90\x94\x5$\x13\x2\x91\x93\x5\"\x12"+
-		"\x2\x92\x91\x3\x2\x2\x2\x93\x96\x3\x2\x2\x2\x94\x92\x3\x2\x2\x2\x94\x95"+
-		"\x3\x2\x2\x2\x95\xA1\x3\x2\x2\x2\x96\x94\x3\x2\x2\x2\x97\x98\x5\x14\v"+
-		"\x2\x98\x99\a\x11\x2\x2\x99\x9D\x5\x14\v\x2\x9A\x9C\x5\"\x12\x2\x9B\x9A"+
-		"\x3\x2\x2\x2\x9C\x9F\x3\x2\x2\x2\x9D\x9B\x3\x2\x2\x2\x9D\x9E\x3\x2\x2"+
-		"\x2\x9E\xA1\x3\x2\x2\x2\x9F\x9D\x3\x2\x2\x2\xA0\x8E\x3\x2\x2\x2\xA0\x97"+
-		"\x3\x2\x2\x2\xA1!\x3\x2\x2\x2\xA2\xA3\a\x4\x2\x2\xA3\xA7\x5$\x13\x2\xA4"+
-		"\xA5\a\x4\x2\x2\xA5\xA7\x5\x14\v\x2\xA6\xA2\x3\x2\x2\x2\xA6\xA4\x3\x2"+
-		"\x2\x2\xA7#\x3\x2\x2\x2\xA8\xAB\x5\x18\r\x2\xA9\xAB\x5\x1A\xE\x2\xAA\xA8"+
-		"\x3\x2\x2\x2\xAA\xA9\x3\x2\x2\x2\xAB%\x3\x2\x2\x2\xAC\xAD\a\x13\x2\x2"+
-		"\xAD\xAE\a\n\x2\x2\xAE\xAF\x5(\x15\x2\xAF\xB0\a\v\x2\x2\xB0\xB1\a\x15"+
-		"\x2\x2\xB1\xB2\a\xE\x2\x2\xB2\xB3\x5\x4\x3\x2\xB3\xB4\a\xF\x2\x2\xB4\xC7"+
-		"\x3\x2\x2\x2\xB5\xB6\a\x16\x2\x2\xB6\xB7\a\n\x2\x2\xB7\xB8\x5(\x15\x2"+
-		"\xB8\xB9\a\v\x2\x2\xB9\xBA\a\x15\x2\x2\xBA\xBB\a\xE\x2\x2\xBB\xBC\x5\x4"+
-		"\x3\x2\xBC\xBD\a\xF\x2\x2\xBD\xC7\x3\x2\x2\x2\xBE\xBF\a\x17\x2\x2\xBF"+
-		"\xC0\a\n\x2\x2\xC0\xC1\x5.\x18\x2\xC1\xC2\a\v\x2\x2\xC2\xC3\a\xE\x2\x2"+
-		"\xC3\xC4\x5\x4\x3\x2\xC4\xC5\a\xF\x2\x2\xC5\xC7\x3\x2\x2\x2\xC6\xAC\x3"+
-		"\x2\x2\x2\xC6\xB5\x3\x2\x2\x2\xC6\xBE\x3\x2\x2\x2\xC7\'\x3\x2\x2\x2\xC8"+
-		"\xC9\x5*\x16\x2\xC9\xCA\a\x6\x2\x2\xCA\xCE\x5*\x16\x2\xCB\xCD\x5,\x17"+
-		"\x2\xCC\xCB\x3\x2\x2\x2\xCD\xD0\x3\x2\x2\x2\xCE\xCC\x3\x2\x2\x2\xCE\xCF"+
-		"\x3\x2\x2\x2\xCF)\x3\x2\x2\x2\xD0\xCE\x3\x2\x2\x2\xD1\xD7\x5\x14\v\x2"+
-		"\xD2\xD7\a\x3\x2\x2\xD3\xD7\x5\x1C\xF\x2\xD4\xD7\x5\x1E\x10\x2\xD5\xD7"+
-		"\x5\x1A\xE\x2\xD6\xD1\x3\x2\x2\x2\xD6\xD2\x3\x2\x2\x2\xD6\xD3\x3\x2\x2"+
-		"\x2\xD6\xD4\x3\x2\x2\x2\xD6\xD5\x3\x2\x2\x2\xD7+\x3\x2\x2\x2\xD8\xD9\a"+
-		"\a\x2\x2\xD9\xDA\x5*\x16\x2\xDA\xDB\a\x6\x2\x2\xDB\xDC\x5*\x16\x2\xDC"+
-		"-\x3\x2\x2\x2\xDD\xDE\x5\n\x6\x2\xDE\xDF\a\b\x2\x2\xDF\xE0\x5(\x15\x2"+
-		"\xE0\xE1\a\b\x2\x2\xE1\xE2\x5 \x11\x2\xE2/\x3\x2\x2\x2\xE3\xE4\a\"\x2"+
-		"\x2\xE4\xE5\a\x12\x2\x2\xE5\xE6\a\x12\x2\x2\xE6\xE7\x5\x32\x1A\x2\xE7"+
-		"\x31\x3\x2\x2\x2\xE8\xEB\x5\x14\v\x2\xE9\xEB\x5\x1E\x10\x2\xEA\xE8\x3"+
-		"\x2\x2\x2\xEA\xE9\x3\x2\x2\x2\xEB\xEF\x3\x2\x2\x2\xEC\xEE\x5\x34\x1B\x2"+
-		"\xED\xEC\x3\x2\x2\x2\xEE\xF1\x3\x2\x2\x2\xEF\xED\x3\x2\x2\x2\xEF\xF0\x3"+
-		"\x2\x2\x2\xF0\x33\x3\x2\x2\x2\xF1\xEF\x3\x2\x2\x2\xF2\xF5\a\x5\x2\x2\xF3"+
-		"\xF6\x5\x14\v\x2\xF4\xF6\x5\x1E\x10\x2\xF5\xF3\x3\x2\x2\x2\xF5\xF4\x3"+
-		"\x2\x2\x2\xF6\x35\x3\x2\x2\x2\xF7\xF8\a#\x2\x2\xF8\xF9\a\x12\x2\x2\xF9"+
-		"\xFC\a\x12\x2\x2\xFA\xFD\x5\x14\v\x2\xFB\xFD\x5\x1E\x10\x2\xFC\xFA\x3"+
-		"\x2\x2\x2\xFC\xFB\x3\x2\x2\x2\xFD\x37\x3\x2\x2\x2\x17\x43KQ[\x63mx|\x82"+
-		"\x94\x9D\xA0\xA6\xAA\xC6\xCE\xD6\xEA\xEF\xF5\xFC";
+		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x3\x2"+
+		"\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x3\x6\x3>\n\x3\r\x3\xE\x3"+
+		"?\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4H\n\x4\x3\x4\x3\x4\x3\x5\x3"+
+		"\x5\x5\x5N\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6"+
+		"\x3\x6\x5\x6Z\n\x6\x3\a\x3\a\x3\a\x3\a\a\a`\n\a\f\a\xE\a\x63\v\a\x3\b"+
+		"\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bl\n\b\x3\t\x3\t\x3\n\x3\n\x3\v\x3\v"+
+		"\x3\v\x3\v\x3\v\x5\vw\n\v\x3\v\x3\v\x5\v{\n\v\x3\f\x3\f\x3\f\x3\f\x5\f"+
+		"\x81\n\f\x3\r\x3\r\x3\xE\x3\xE\x3\xE\x3\xE\x3\xF\x3\xF\x3\x10\x3\x10\x3"+
+		"\x11\x3\x11\x3\x11\x3\x11\a\x11\x91\n\x11\f\x11\xE\x11\x94\v\x11\x3\x11"+
+		"\x3\x11\x3\x11\x3\x11\a\x11\x9A\n\x11\f\x11\xE\x11\x9D\v\x11\x5\x11\x9F"+
+		"\n\x11\x3\x12\x3\x12\x3\x12\x3\x12\x5\x12\xA5\n\x12\x3\x13\x3\x13\x5\x13"+
+		"\xA9\n\x13\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3"+
+		"\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3"+
+		"\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x5\x14\xC5\n\x14"+
+		"\x3\x15\x3\x15\x3\x15\x3\x15\a\x15\xCB\n\x15\f\x15\xE\x15\xCE\v\x15\x3"+
+		"\x16\x3\x16\x3\x16\x3\x16\x3\x16\x5\x16\xD5\n\x16\x3\x17\x3\x17\x3\x17"+
+		"\x3\x17\x3\x17\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3\x19\x3\x19"+
+		"\x3\x19\x3\x19\x3\x19\x5\x19\xE7\n\x19\x3\x1A\x3\x1A\x3\x1A\x3\x1A\x3"+
+		"\x1A\x5\x1A\xEE\n\x1A\x3\x1A\x2\x2\x2\x1B\x2\x2\x4\x2\x6\x2\b\x2\n\x2"+
+		"\f\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2"+
+		"\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2\x2\x4\x4\x2\x19\x1C\x1E\x1E"+
+		"\x4\x2##%%\xF3\x2\x34\x3\x2\x2\x2\x4=\x3\x2\x2\x2\x6G\x3\x2\x2\x2\bM\x3"+
+		"\x2\x2\x2\nY\x3\x2\x2\x2\f[\x3\x2\x2\x2\xEk\x3\x2\x2\x2\x10m\x3\x2\x2"+
+		"\x2\x12o\x3\x2\x2\x2\x14z\x3\x2\x2\x2\x16\x80\x3\x2\x2\x2\x18\x82\x3\x2"+
+		"\x2\x2\x1A\x84\x3\x2\x2\x2\x1C\x88\x3\x2\x2\x2\x1E\x8A\x3\x2\x2\x2 \x9E"+
+		"\x3\x2\x2\x2\"\xA4\x3\x2\x2\x2$\xA8\x3\x2\x2\x2&\xC4\x3\x2\x2\x2(\xC6"+
+		"\x3\x2\x2\x2*\xD4\x3\x2\x2\x2,\xD6\x3\x2\x2\x2.\xDB\x3\x2\x2\x2\x30\xE1"+
+		"\x3\x2\x2\x2\x32\xE8\x3\x2\x2\x2\x34\x35\a\x17\x2\x2\x35\x36\a\x18\x2"+
+		"\x2\x36\x37\a\n\x2\x2\x37\x38\a\v\x2\x2\x38\x39\a\xE\x2\x2\x39:\x5\x4"+
+		"\x3\x2:;\a\xF\x2\x2;\x3\x3\x2\x2\x2<>\x5\x6\x4\x2=<\x3\x2\x2\x2>?\x3\x2"+
+		"\x2\x2?=\x3\x2\x2\x2?@\x3\x2\x2\x2@\x5\x3\x2\x2\x2\x41H\x5\b\x5\x2\x42"+
+		"H\x5 \x11\x2\x43H\x5&\x14\x2\x44H\x5\x30\x19\x2\x45H\x5\x32\x1A\x2\x46"+
+		"H\a\x1F\x2\x2G\x41\x3\x2\x2\x2G\x42\x3\x2\x2\x2G\x43\x3\x2\x2\x2G\x44"+
+		"\x3\x2\x2\x2G\x45\x3\x2\x2\x2G\x46\x3\x2\x2\x2HI\x3\x2\x2\x2IJ\a\b\x2"+
+		"\x2J\a\x3\x2\x2\x2KN\x5\f\a\x2LN\x5\n\x6\x2MK\x3\x2\x2\x2ML\x3\x2\x2\x2"+
+		"N\t\x3\x2\x2\x2OP\x5\xE\b\x2PQ\x5\x12\n\x2QR\a\x11\x2\x2RS\x5\x16\f\x2"+
+		"SZ\x3\x2\x2\x2TU\x5\xE\b\x2UV\x5\x12\n\x2VW\a\x11\x2\x2WX\x5\x14\v\x2"+
+		"XZ\x3\x2\x2\x2YO\x3\x2\x2\x2YT\x3\x2\x2\x2Z\v\x3\x2\x2\x2[\\\x5\xE\b\x2"+
+		"\\\x61\x5\x12\n\x2]^\a\t\x2\x2^`\x5\x12\n\x2_]\x3\x2\x2\x2`\x63\x3\x2"+
+		"\x2\x2\x61_\x3\x2\x2\x2\x61\x62\x3\x2\x2\x2\x62\r\x3\x2\x2\x2\x63\x61"+
+		"\x3\x2\x2\x2\x64\x65\a\x1D\x2\x2\x65\x66\x5\x10\t\x2\x66g\a\f\x2\x2gh"+
+		"\a\x3\x2\x2hi\a\r\x2\x2il\x3\x2\x2\x2jl\x5\x10\t\x2k\x64\x3\x2\x2\x2k"+
+		"j\x3\x2\x2\x2l\xF\x3\x2\x2\x2mn\t\x2\x2\x2n\x11\x3\x2\x2\x2op\t\x3\x2"+
+		"\x2p\x13\x3\x2\x2\x2q{\x5\x12\n\x2rs\x5\x12\n\x2sv\a\f\x2\x2tw\x5\x12"+
+		"\n\x2uw\x5\x18\r\x2vt\x3\x2\x2\x2vu\x3\x2\x2\x2wx\x3\x2\x2\x2xy\a\r\x2"+
+		"\x2y{\x3\x2\x2\x2zq\x3\x2\x2\x2zr\x3\x2\x2\x2{\x15\x3\x2\x2\x2|\x81\x5"+
+		"\x18\r\x2}\x81\x5\x1A\xE\x2~\x81\x5\x1C\xF\x2\x7F\x81\x5\x1E\x10\x2\x80"+
+		"|\x3\x2\x2\x2\x80}\x3\x2\x2\x2\x80~\x3\x2\x2\x2\x80\x7F\x3\x2\x2\x2\x81"+
+		"\x17\x3\x2\x2\x2\x82\x83\a\x3\x2\x2\x83\x19\x3\x2\x2\x2\x84\x85\a\x3\x2"+
+		"\x2\x85\x86\a\x10\x2\x2\x86\x87\a\x3\x2\x2\x87\x1B\x3\x2\x2\x2\x88\x89"+
+		"\a$\x2\x2\x89\x1D\x3\x2\x2\x2\x8A\x8B\a&\x2\x2\x8B\x1F\x3\x2\x2\x2\x8C"+
+		"\x8D\x5\x14\v\x2\x8D\x8E\a\x11\x2\x2\x8E\x92\x5$\x13\x2\x8F\x91\x5\"\x12"+
+		"\x2\x90\x8F\x3\x2\x2\x2\x91\x94\x3\x2\x2\x2\x92\x90\x3\x2\x2\x2\x92\x93"+
+		"\x3\x2\x2\x2\x93\x9F\x3\x2\x2\x2\x94\x92\x3\x2\x2\x2\x95\x96\x5\x14\v"+
+		"\x2\x96\x97\a\x11\x2\x2\x97\x9B\x5\x14\v\x2\x98\x9A\x5\"\x12\x2\x99\x98"+
+		"\x3\x2\x2\x2\x9A\x9D\x3\x2\x2\x2\x9B\x99\x3\x2\x2\x2\x9B\x9C\x3\x2\x2"+
+		"\x2\x9C\x9F\x3\x2\x2\x2\x9D\x9B\x3\x2\x2\x2\x9E\x8C\x3\x2\x2\x2\x9E\x95"+
+		"\x3\x2\x2\x2\x9F!\x3\x2\x2\x2\xA0\xA1\a\x4\x2\x2\xA1\xA5\x5$\x13\x2\xA2"+
+		"\xA3\a\x4\x2\x2\xA3\xA5\x5\x14\v\x2\xA4\xA0\x3\x2\x2\x2\xA4\xA2\x3\x2"+
+		"\x2\x2\xA5#\x3\x2\x2\x2\xA6\xA9\x5\x18\r\x2\xA7\xA9\x5\x1A\xE\x2\xA8\xA6"+
+		"\x3\x2\x2\x2\xA8\xA7\x3\x2\x2\x2\xA9%\x3\x2\x2\x2\xAA\xAB\a\x13\x2\x2"+
+		"\xAB\xAC\a\n\x2\x2\xAC\xAD\x5(\x15\x2\xAD\xAE\a\v\x2\x2\xAE\xAF\a\x14"+
+		"\x2\x2\xAF\xB0\a\xE\x2\x2\xB0\xB1\x5\x4\x3\x2\xB1\xB2\a\xF\x2\x2\xB2\xC5"+
+		"\x3\x2\x2\x2\xB3\xB4\a\x15\x2\x2\xB4\xB5\a\n\x2\x2\xB5\xB6\x5(\x15\x2"+
+		"\xB6\xB7\a\v\x2\x2\xB7\xB8\a\x14\x2\x2\xB8\xB9\a\xE\x2\x2\xB9\xBA\x5\x4"+
+		"\x3\x2\xBA\xBB\a\xF\x2\x2\xBB\xC5\x3\x2\x2\x2\xBC\xBD\a\x16\x2\x2\xBD"+
+		"\xBE\a\n\x2\x2\xBE\xBF\x5.\x18\x2\xBF\xC0\a\v\x2\x2\xC0\xC1\a\xE\x2\x2"+
+		"\xC1\xC2\x5\x4\x3\x2\xC2\xC3\a\xF\x2\x2\xC3\xC5\x3\x2\x2\x2\xC4\xAA\x3"+
+		"\x2\x2\x2\xC4\xB3\x3\x2\x2\x2\xC4\xBC\x3\x2\x2\x2\xC5\'\x3\x2\x2\x2\xC6"+
+		"\xC7\x5*\x16\x2\xC7\xC8\a\x6\x2\x2\xC8\xCC\x5*\x16\x2\xC9\xCB\x5,\x17"+
+		"\x2\xCA\xC9\x3\x2\x2\x2\xCB\xCE\x3\x2\x2\x2\xCC\xCA\x3\x2\x2\x2\xCC\xCD"+
+		"\x3\x2\x2\x2\xCD)\x3\x2\x2\x2\xCE\xCC\x3\x2\x2\x2\xCF\xD5\x5\x14\v\x2"+
+		"\xD0\xD5\a\x3\x2\x2\xD1\xD5\x5\x1C\xF\x2\xD2\xD5\x5\x1E\x10\x2\xD3\xD5"+
+		"\x5\x1A\xE\x2\xD4\xCF\x3\x2\x2\x2\xD4\xD0\x3\x2\x2\x2\xD4\xD1\x3\x2\x2"+
+		"\x2\xD4\xD2\x3\x2\x2\x2\xD4\xD3\x3\x2\x2\x2\xD5+\x3\x2\x2\x2\xD6\xD7\a"+
+		"\a\x2\x2\xD7\xD8\x5*\x16\x2\xD8\xD9\a\x6\x2\x2\xD9\xDA\x5*\x16\x2\xDA"+
+		"-\x3\x2\x2\x2\xDB\xDC\x5\n\x6\x2\xDC\xDD\a\b\x2\x2\xDD\xDE\x5(\x15\x2"+
+		"\xDE\xDF\a\b\x2\x2\xDF\xE0\x5 \x11\x2\xE0/\x3\x2\x2\x2\xE1\xE2\a!\x2\x2"+
+		"\xE2\xE3\a\x12\x2\x2\xE3\xE6\a\x12\x2\x2\xE4\xE7\x5\x14\v\x2\xE5\xE7\x5"+
+		"\x1E\x10\x2\xE6\xE4\x3\x2\x2\x2\xE6\xE5\x3\x2\x2\x2\xE7\x31\x3\x2\x2\x2"+
+		"\xE8\xE9\a\"\x2\x2\xE9\xEA\a\x12\x2\x2\xEA\xED\a\x12\x2\x2\xEB\xEE\x5"+
+		"\x14\v\x2\xEC\xEE\x5\x1E\x10\x2\xED\xEB\x3\x2\x2\x2\xED\xEC\x3\x2\x2\x2"+
+		"\xEE\x33\x3\x2\x2\x2\x15?GMY\x61kvz\x80\x92\x9B\x9E\xA4\xA8\xC4\xCC\xD4"+
+		"\xE6\xED";
 	public static readonly ATN _ATN =
 		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
 }
