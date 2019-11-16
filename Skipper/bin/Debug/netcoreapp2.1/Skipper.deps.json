@@ -1,0 +1,80 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": "472a29925831dbf3f39a4ac8ecb73205dbc1af82"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "Skipper/1.0.0": {
+        "dependencies": {
+          "Antlr": "3.5.0.2",
+          "Antlr4": "4.6.6",
+          "Antlr4.CodeGenerator": "4.6.6",
+          "Antlr4.Runtime": "4.6.6"
+        },
+        "runtime": {
+          "Skipper.dll": {}
+        }
+      },
+      "Antlr/3.5.0.2": {
+        "runtime": {
+          "lib/Antlr3.Runtime.dll": {
+            "assemblyVersion": "3.5.0.2",
+            "fileVersion": "3.5.0.2"
+          }
+        }
+      },
+      "Antlr4/4.6.6": {
+        "dependencies": {
+          "Antlr4.CodeGenerator": "4.6.6",
+          "Antlr4.Runtime": "4.6.6"
+        }
+      },
+      "Antlr4.CodeGenerator/4.6.6": {},
+      "Antlr4.Runtime/4.6.6": {
+        "runtime": {
+          "lib/netstandard1.1/Antlr4.Runtime.dll": {
+            "assemblyVersion": "4.6.0.0",
+            "fileVersion": "4.6.6.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Skipper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Antlr/3.5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CSfrVuDVMx3OrQhT84zed+tOdM1clljyRLWWlQM22fJsmG836RVDGQlE6tzysXh8X8p9UjkHbLr6OqEIVhtdEA==",
+      "path": "antlr/3.5.0.2",
+      "hashPath": "antlr.3.5.0.2.nupkg.sha512"
+    },
+    "Antlr4/4.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mtHCpallXyZaWd2quDmR/sc7mBf18+nelxakWYpHVc9v0T0zM9SevzhUZxh2PKPsQbEKnDACfYHNJMqKkmTs1g==",
+      "path": "antlr4/4.6.6",
+      "hashPath": "antlr4.4.6.6.nupkg.sha512"
+    },
+    "Antlr4.CodeGenerator/4.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AStoC8SCdU1TUSn5Bh0xZU9rlvaERwXkrgqc1jEFON3e/xBtapCuThYIzgXL9TOignWwHjLxlHH233D+DfH9LA==",
+      "path": "antlr4.codegenerator/4.6.6",
+      "hashPath": "antlr4.codegenerator.4.6.6.nupkg.sha512"
+    },
+    "Antlr4.Runtime/4.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NlbRjkTCidRh1QeWvGfFPKq0sqpPZrAwGaSTV0X2jL8buZxTf9/aQ7PehFAmc7erXLUQ3YMZEVZU86aQwma2+w==",
+      "path": "antlr4.runtime/4.6.6",
+      "hashPath": "antlr4.runtime.4.6.6.nupkg.sha512"
+    }
+  }
+}
