@@ -24,7 +24,7 @@ namespace Skipper
         {
             try
             {
-                string text = System.IO.File.ReadAllText(@"C:\An\operTest.txt");
+                string text = System.IO.File.ReadAllText(@"C:\An\testFile.txt");
 
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
@@ -34,10 +34,13 @@ namespace Skipper
                 PenguineseParser parser = new PenguineseParser(commonTokenStream);   // crea un parser nuevo
                 parser.RemoveErrorListeners(); // no viene con error listeners, borra esto despues
                 parser.AddErrorListener(new XParser());
-                //PenguineseParser.start();
-                IParseTree tree = parser.start();
-                CompPrinter printer = new CompPrinter();
-                ParseTreeWalker.Default.Walk(printer, tree);
+                //parser.start();
+                if (parser.NumberOfSyntaxErrors == 0)
+                {
+                    IParseTree tree = parser.start();
+                    CompPrinter printer = new CompPrinter();
+                    ParseTreeWalker.Default.Walk(printer, tree);
+                }
             }
             catch (Exception ex)
             {
@@ -117,10 +120,10 @@ namespace Skipper
                 Console.WriteLine("DeclararVar " + context.GetText() + Environment.NewLine);
             }
             public override void EnterAsignarValor(PenguineseParser.AsignarValorContext context)
-            {
+            {// en asignar tambien se deberia dar de alta la variable
                 //context.children[0].GetText() tipo de variable 
                 //context.children[1].GetText() nombre de variable 
-                //context.children[3].GetText() valor a asignar; por lex rules siempre sera casteable a double
+                //context.children[3].GetText() valor a asignar
                 Console.WriteLine("AsignVar " + context.GetText() + Environment.NewLine);
             }
             public override void EnterAsignarVariable(PenguineseParser.AsignarVariableContext context)
@@ -248,7 +251,7 @@ namespace Skipper
                 Console.WriteLine("Math " + context.GetText() + Environment.NewLine);
             }
             public override void EnterOperacionVeV(PenguineseParser.OperacionVeVContext context)
-            {
+            {// muy similar a VeN
                 Console.WriteLine("OperacionVeV " + context.GetText() + Environment.NewLine);
             }
             public override void EnterOperacionVeN(PenguineseParser.OperacionVeNContext context)
@@ -261,8 +264,8 @@ namespace Skipper
                 varName variable = GetVar(context.children[0].GetText());
                 int lugarVar = variable.location;
                 double num1 = double.Parse(context.children[2].GetText());
-                double num2 = double.Parse(context.children[3].GetChild(1).GetText());
-                string operador = context.children[3].GetChild(0).GetText();
+                //double num2 = double.Parse(context.children[3].GetChild(1).GetText());  //Estos sucedera si hay un operador
+                //string operador = context.children[3].GetChild(0).GetText();
                 Console.WriteLine("OperacionVeN " + context.GetText() + Environment.NewLine);
             }
             public override void EnterMathSeq(PenguineseParser.MathSeqContext context)
@@ -286,19 +289,27 @@ namespace Skipper
                 Console.WriteLine("Ciclo " + context.GetText() + Environment.NewLine);
             }
             public override void EnterCicloWhile(PenguineseParser.CicloWhileContext context)
-            {
+            {//cosas que se hacen antes del primer ciclo
                 Console.WriteLine("CicloWhile " + context.GetText() + Environment.NewLine);
             }
             public override void ExitCicloWhile(PenguineseParser.CicloWhileContext context)
-            {// aqui es cuando deberias regresar a comienzo del while
-                Console.WriteLine("CicloWhileExit " + context.GetText() + Environment.NewLine);
+            {//cosas que se hacen al acabar ciclo
+                Console.WriteLine("CicloWhile " + context.GetText() + Environment.NewLine);
             }
             public override void EnterCicloIf(PenguineseParser.CicloIfContext context)
-            {
+            {//chequeo de bool 
+                Console.WriteLine("CicloIf " + context.GetText() + Environment.NewLine);
+            }
+            public override void ExitCicloIf(PenguineseParser.CicloIfContext context)
+            {//notar que aqui termina el if anterior 
                 Console.WriteLine("CicloIf " + context.GetText() + Environment.NewLine);
             }
             public override void EnterCicloFor(PenguineseParser.CicloForContext context)
-            {
+            {// alguien mas bigg brain que yo podra hacer esto
+                Console.WriteLine("CicloFor " + context.GetText() + Environment.NewLine);
+            }
+            public override void ExitCicloFor(PenguineseParser.CicloForContext context)
+            {// sale del ciclo aqui
                 Console.WriteLine("CicloFor " + context.GetText() + Environment.NewLine);
             }
             public override void EnterCondicional(PenguineseParser.CondicionalContext context)
@@ -314,7 +325,8 @@ namespace Skipper
                 Console.WriteLine("CondSeq " + context.GetText() + Environment.NewLine);
             }
             public override void EnterSeccionFor(PenguineseParser.SeccionForContext context)
-            {
+            {// tiene toda la carne de EnterCicloFor, preferirira usar esto para decidir las primeras acciones
+                //primero se deberia declarar y asignar la variable
                 Console.WriteLine("SeccionFor " + context.GetText() + Environment.NewLine);
             }
             public override void EnterImprimirValor(PenguineseParser.ImprimirValorContext context)
