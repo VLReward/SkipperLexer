@@ -8,6 +8,76 @@ namespace Skipper
 {
     public class Program
     {
+        #region Defines
+        public const int EFE = 0;
+        public const int RDI = 1;
+        public const int RDD = 2;
+        public const int RDS = 3;
+        public const int RDB = 4;
+        public const int RDC = 5;
+        public const int RDIV = 6;
+        public const int RDDV = 7;
+        public const int RDSV = 8;
+        public const int RDBV = 9;
+        public const int RDCV = 10;
+        public const int PRTM = 11;
+        public const int PRTI = 12;
+        public const int PRTD = 13;
+        public const int PRTS = 14;
+        public const int PRTB = 15;
+        public const int PRTC = 16;
+        public const int PRTIV = 17;
+        public const int PRTDV = 18;
+        public const int PRTSV = 19;
+        public const int PRTBV = 20;
+        public const int PRTCV = 21;
+        public const int PUSHI = 22;
+        public const int PUSHD = 23;
+        public const int PUSHS = 24;
+        public const int PUSHB = 25;
+        public const int PUSHC = 26;
+        public const int PUSHKI = 27;
+        public const int PUSHKD = 28;
+        public const int PUSHKS = 29;
+        public const int PUSHKB = 30;
+        public const int PUSHKC = 31;
+        public const int POPI = 32;
+        public const int POPD = 33;
+        public const int POPS = 34;
+        public const int POPB = 35;
+        public const int POPC = 36;
+        public const int POPIV = 37;
+        public const int POPDV = 38;
+        public const int POPSV = 39;
+        public const int POPBV = 40;
+        public const int POPCV = 41;
+        public const int SUM = 42;
+        public const int SUB = 43;
+        public const int MULT = 44;
+        public const int DIV = 45;
+        public const int MOD = 46;
+        public const int AND = 47;
+        public const int OR = 48;
+        public const int XOR = 49;
+        public const int MAX = 50;
+        public const int MIN = 51;
+        public const int INCI = 52;
+        public const int INCD = 53;
+        public const int INCC = 54;
+        public const int DECI = 55;
+        public const int DECD = 56;
+        public const int DECC = 57;
+        public const int BRANCH = 58;
+        public const int CMPLE = 59;
+        public const int CMPL = 60;
+        public const int CMPGE = 61;
+        public const int CMPG = 62;
+        public const int CMPE = 63;
+        public const int CMPNE = 64;
+        public const int IDX = 65;
+        public const int BRNCHC = 66;
+        #endregion
+
         public class varName
         {
             public string name;
@@ -24,7 +94,7 @@ namespace Skipper
         {
             try
             {
-                string text = System.IO.File.ReadAllText(@"C:\An\testFile.txt");
+                string text = File.ReadAllText(@"C:\An\OperTest.txt");
 
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo

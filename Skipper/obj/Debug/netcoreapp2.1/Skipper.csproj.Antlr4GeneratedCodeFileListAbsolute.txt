@@ -1,6 +1,6 @@
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseLexer.cs
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseParser.cs
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseListener.cs
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseBaseListener.cs
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseVisitor.cs
-C:\AMD\Skipper\Skipper\obj\Debug\netcoreapp2.1\PenguineseBaseVisitor.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseLexer.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseParser.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseListener.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseBaseListener.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseVisitor.cs
+C:\Users\Rolis\Documents\GitHub\SkipperLexer\Skipper\obj\Debug\netcoreapp2.1\PenguineseBaseVisitor.cs
