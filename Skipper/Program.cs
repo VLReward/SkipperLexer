@@ -1,8 +1,13 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using Rico;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Skipper
 {
@@ -88,19 +93,36 @@ namespace Skipper
         };
 
         public static List<varName> varList = new List<varName>();
-        public static int pcprueba = 0;
+        public static short tc = 0;
 
         private static void Main(string[] args)
         {
             try
             {
-                string text = File.ReadAllText(@"C:\An\OperTest.txt");
+                YoungWriter youngWriter = new YoungWriter();
+                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+                using (BinaryWriter file = new BinaryWriter(fileStream))
+                {
+                    //BinaryWriter file = new BinaryWriter(File.Open("zoinks.ye", FileMode.Create), Encoding.ASCII, true);
+                    youngWriter.WriteByte(file, (byte)73);//I
+                    youngWriter.WriteByte(file, (byte)67);//C
+                    youngWriter.WriteByte(file, (byte)67);//C
+                    youngWriter.WriteByte(file, (byte)50);//2
+                    youngWriter.WriteByte(file, (byte)48);//0
+                    youngWriter.WriteByte(file, (byte)50);//2
+                    youngWriter.WriteByte(file, (byte)48);//0
+                    youngWriter.WriteByte(file, (byte)0);
+                    youngWriter.WriteByte(file, (byte)25);//TC
+                    youngWriter.WriteByte(file, (byte)0);
+                    youngWriter.WriteByte(file, (byte)4);//TD
+                    file.Close();
+                    file.Dispose();
+                }
 
+                string text = File.ReadAllText(@"C:\An\OperTest.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
-
-
                 PenguineseParser parser = new PenguineseParser(commonTokenStream);   // crea un parser nuevo
                 parser.RemoveErrorListeners(); // no viene con error listeners, borra esto despues
                 parser.AddErrorListener(new XParser());
@@ -111,6 +133,18 @@ namespace Skipper
                     CompPrinter printer = new CompPrinter();
                     ParseTreeWalker.Default.Walk(printer, tree);
                 }
+                short td = (short)(varList[varList.Count - 1].location + varList[varList.Count - 1].byteSize);
+
+                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (BinaryWriter file = new BinaryWriter(fileStream))
+                {
+                    youngWriter.WriteByte(file, (byte)0);//HALT
+
+                    file.Close();
+                    file.Dispose();
+                }
+                byte[] header = (new byte[] { (byte)73, (byte)67, (byte)67, (byte)50, (byte)48, (byte)50, (byte)48 }).Concat(BitConverter.GetBytes(tc)).ToArray();
+                //YoungWriter.ReplaceData("zoinks.ye", 0, header.Concat(BitConverter.GetBytes(td)).ToArray());
             }
             catch (Exception ex)
             {
@@ -327,16 +361,86 @@ namespace Skipper
             public override void EnterOperacionVeN(PenguineseParser.OperacionVeNContext context)
             {
                 // se puede evaluar todo de un jalon
-                if (!IsVarInList(context.children[0].GetText()))
+                try
                 {
-                    Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                    if (!IsVarInList(context.children[0].GetText()))
+                    {
+                        Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                    }
+
+                    YoungWriter youngWriter = new YoungWriter();
+                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (BinaryWriter file = new BinaryWriter(fileStream))
+                    {
+                        int opCount = context.children.Count - 3;//numero de operaciones  
+                        varName variable = GetVar(context.children[0].GetText());
+                        int lugarVar = variable.location;
+                        double num1 = double.Parse(context.children[2].GetText());
+                        List<string> operators = new List<string>();
+                        List<string> values = new List<string>();
+                        for (int i = 0; i < opCount; i++)
+                        {
+                            operators.Add(context.children[i + 3].GetChild(0).GetText());
+                            values.Add(context.children[i + 3].GetChild(1).GetText());
+                        }
+                        youngWriter.WriteToFile(file, PUSHKD, new ArrayList { num1 });
+                        tc++;
+                        int j = 0;
+                        foreach (var op in operators)
+                        {
+                            if (int.TryParse(values[j], out int val))
+                            {
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { val });
+                                tc += 5;
+                            }
+                            else if (double.TryParse(values[j], out double val2))
+                            {
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { val2 });
+                                tc += 9;
+                            }
+                            else if (GetVar(values[j]).type == "double")
+                            {
+                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)GetVar(values[j]).location });
+                                tc += 3;
+                            }
+                            else if (GetVar(values[j]).type == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(values[j]).location });
+                                tc += 3;
+                            }
+                            else
+                                Console.WriteLine("Context Error: < " + values[j] + " > no es un numero" + Environment.NewLine);
+                            tc++;
+                            if (op == "+")
+                            {
+                                youngWriter.WriteByte(file, (byte)SUM);
+                            }
+                            else if (op == "-")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                youngWriter.WriteByte(file, (byte)SUB);
+                            }
+                            else if (op == "*")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                youngWriter.WriteByte(file, (byte)MULT);
+                            }
+                            else if (op == "/")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                youngWriter.WriteByte(file, (byte)DIV);
+                            }
+                            j++;
+                        }
+                        //double num2 = double.Parse(context.children[3].GetChild(1).GetText());  //Estos sucedera si hay un operador
+                        //string operador = context.children[3].GetChild(0).GetText();
+                        Console.WriteLine("OperacionVeN " + context.GetText() + Environment.NewLine);
+                        file.Close();
+                        file.Dispose();
+                    }
                 }
-                varName variable = GetVar(context.children[0].GetText());
-                int lugarVar = variable.location;
-                double num1 = double.Parse(context.children[2].GetText());
-                //double num2 = double.Parse(context.children[3].GetChild(1).GetText());  //Estos sucedera si hay un operador
-                //string operador = context.children[3].GetChild(0).GetText();
-                Console.WriteLine("OperacionVeN " + context.GetText() + Environment.NewLine);
+                catch (Exception ex)
+                { }
             }
             public override void EnterMathSeq(PenguineseParser.MathSeqContext context)
             {
