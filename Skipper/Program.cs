@@ -14,73 +14,73 @@ namespace Skipper
     public class Program
     {
         #region Defines
-        public const int EFE = 0;
-        public const int RDI = 1;
-        public const int RDD = 2;
-        public const int RDS = 3;
-        public const int RDB = 4;
-        public const int RDC = 5;
-        public const int RDIV = 6;
-        public const int RDDV = 7;
-        public const int RDSV = 8;
-        public const int RDBV = 9;
-        public const int RDCV = 10;
-        public const int PRTM = 11;
-        public const int PRTI = 12;
-        public const int PRTD = 13;
-        public const int PRTS = 14;
-        public const int PRTB = 15;
-        public const int PRTC = 16;
-        public const int PRTIV = 17;
-        public const int PRTDV = 18;
-        public const int PRTSV = 19;
-        public const int PRTBV = 20;
-        public const int PRTCV = 21;
-        public const int PUSHI = 22;
-        public const int PUSHD = 23;
-        public const int PUSHS = 24;
-        public const int PUSHB = 25;
-        public const int PUSHC = 26;
-        public const int PUSHKI = 27;
-        public const int PUSHKD = 28;
-        public const int PUSHKS = 29;
-        public const int PUSHKB = 30;
-        public const int PUSHKC = 31;
-        public const int POPI = 32;
-        public const int POPD = 33;
-        public const int POPS = 34;
-        public const int POPB = 35;
-        public const int POPC = 36;
-        public const int POPIV = 37;
-        public const int POPDV = 38;
-        public const int POPSV = 39;
-        public const int POPBV = 40;
-        public const int POPCV = 41;
-        public const int SUM = 42;
-        public const int SUB = 43;
-        public const int MULT = 44;
-        public const int DIV = 45;
-        public const int MOD = 46;
-        public const int AND = 47;
-        public const int OR = 48;
-        public const int XOR = 49;
-        public const int MAX = 50;
-        public const int MIN = 51;
-        public const int INCI = 52;
-        public const int INCD = 53;
-        public const int INCC = 54;
-        public const int DECI = 55;
-        public const int DECD = 56;
-        public const int DECC = 57;
-        public const int BRANCH = 58;
-        public const int CMPLE = 59;
-        public const int CMPL = 60;
-        public const int CMPGE = 61;
-        public const int CMPG = 62;
-        public const int CMPE = 63;
-        public const int CMPNE = 64;
-        public const int IDX = 65;
-        public const int BRNCHC = 66;
+        public const byte EFE = 0;
+        public const byte RDI = 1;
+        public const byte RDD = 2;
+        public const byte RDS = 3;
+        public const byte RDB = 4;
+        public const byte RDC = 5;
+        public const byte RDIV = 6;
+        public const byte RDDV = 7;
+        public const byte RDSV = 8;
+        public const byte RDBV = 9;
+        public const byte RDCV = 10;
+        public const byte PRTM = 11;
+        public const byte PRTI = 12;
+        public const byte PRTD = 13;
+        public const byte PRTS = 14;
+        public const byte PRTB = 15;
+        public const byte PRTC = 16;
+        public const byte PRTIV = 17;
+        public const byte PRTDV = 18;
+        public const byte PRTSV = 19;
+        public const byte PRTBV = 20;
+        public const byte PRTCV = 21;
+        public const byte PUSHI = 22;
+        public const byte PUSHD = 23;
+        public const byte PUSHS = 24;
+        public const byte PUSHB = 25;
+        public const byte PUSHC = 26;
+        public const byte PUSHKI = 27;
+        public const byte PUSHKD = 28;
+        public const byte PUSHKS = 29;
+        public const byte PUSHKB = 30;
+        public const byte PUSHKC = 31;
+        public const byte POPI = 32;
+        public const byte POPD = 33;
+        public const byte POPS = 34;
+        public const byte POPB = 35;
+        public const byte POPC = 36;
+        public const byte POPIV = 37;
+        public const byte POPDV = 38;
+        public const byte POPSV = 39;
+        public const byte POPBV = 40;
+        public const byte POPCV = 41;
+        public const byte SUM = 42;
+        public const byte SUB = 43;
+        public const byte MULT = 44;
+        public const byte DIV = 45;
+        public const byte MOD = 46;
+        public const byte AND = 47;
+        public const byte OR = 48;
+        public const byte XOR = 49;
+        public const byte MAX = 50;
+        public const byte MIN = 51;
+        public const byte INCI = 52;
+        public const byte INCD = 53;
+        public const byte INCC = 54;
+        public const byte DECI = 55;
+        public const byte DECD = 56;
+        public const byte DECC = 57;
+        public const byte BRANCH = 58;
+        public const byte CMPLE = 59;
+        public const byte CMPL = 60;
+        public const byte CMPGE = 61;
+        public const byte CMPG = 62;
+        public const byte CMPE = 63;
+        public const byte CMPNE = 64;
+        public const byte IDX = 65;
+        public const byte BRNCHC = 66;
         #endregion
 
         public class varName
@@ -119,7 +119,7 @@ namespace Skipper
                     file.Dispose();
                 }
 
-                string text = File.ReadAllText(@"C:\An\OperTest.txt");
+                string text = File.ReadAllText(@"C:\AMD\testfile.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
@@ -139,12 +139,13 @@ namespace Skipper
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     youngWriter.WriteByte(file, (byte)0);//HALT
-
+                    tc++;
                     file.Close();
                     file.Dispose();
                 }
                 byte[] header = (new byte[] { (byte)73, (byte)67, (byte)67, (byte)50, (byte)48, (byte)50, (byte)48 }).Concat(BitConverter.GetBytes(tc)).ToArray();
-                //YoungWriter.ReplaceData("zoinks.ye", 0, header.Concat(BitConverter.GetBytes(td)).ToArray());
+                //header = header.Concat(BitConverter.GetBytes(td)).ToArray();
+                YoungWriter.ReplaceData("zoinks.ye", 0, header.Concat(BitConverter.GetBytes(td)).ToArray());
             }
             catch (Exception ex)
             {
@@ -299,7 +300,7 @@ namespace Skipper
                                 var item = 0;
                                 if (varList.Count > 0)
                                     item = varList[varList.Count - 1].location + varList[varList.Count - 1].byteSize;
-                                varList.Add(new varName { name = name, type = type, byteSize = size, IsArray = isArray, location = item + 1 });
+                                varList.Add(new varName { name = name, type = type, byteSize = size, IsArray = isArray, location = (item == 0 ? item : item + 1) }); //deberia ser +1, era antes location = item + 1 todo el tiempo
                             }
                         }
                     }
@@ -384,7 +385,7 @@ namespace Skipper
                             values.Add(context.children[i + 3].GetChild(1).GetText());
                         }
                         youngWriter.WriteToFile(file, PUSHKD, new ArrayList { num1 });
-                        tc++;
+                        tc += 9;
                         int j = 0;
                         foreach (var op in operators)
                         {
