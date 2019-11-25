@@ -13,8 +13,8 @@ start			: FUNC MAIN OP CP OCB bloqueCodigo CCB ;	//func main() { <codigo> }
 bloqueCodigo	: ( expresion )+ ;	//	por ahora requiere por lo menos una expresion
 expresion		: ( declararVar | math | ciclo | imprimirValor | escribirValor |HALT ) TERM ;	// ciclos terminan con ';' tambien
 declararVar		: ( decVar | asignVar ) ;
-asignVar		: tipoVar nombreVar EQUALS valorVar #asignarValor
-				| tipoVar nombreVar EQUALS variable #asignarVariable; 
+asignVar		: tipoVarS nombreVar EQUALS valorVar #asignarValor
+				| tipoVarS nombreVar EQUALS variable #asignarVariable; 
 
 //	definicion de variables
 decVar			: tipoVar nombreVar ( COM nombreVar)* ;	//	number x , y , z, ..... n
@@ -26,11 +26,12 @@ variable		: nombreVar #nombreSimple
 				| nombreVar OBR (nombreVar | valorEntero) CBR #nombreArreglo ;
 
 //	inicializacion variables
-valorVar		: ( valorEntero | valorDec | valorChar | valorString ) ;
+valorVar		: ( valorEntero | valorDec | valorChar | valorString |valorBool ) ;
 valorEntero		: NUMERAL ;
 valorDec		: NUMERAL DEC NUMERAL ;
 valorChar		: CHAR ;
 valorString		: STRING ;
+valorBool		: (TRUE | FALSE) ;
 
 //	operaciones matematicas
 math			: variable EQUALS valorNum (mathSeq)* #operacionVeN
@@ -52,7 +53,7 @@ seccionFor		: asignVar TERM condicional TERM math ;
 imprimirValor	: READ COL COL ( variable | valorString ) ;
 //nombreValores	: ( variable | valorString ) ( imprimirSeq )* ;
 //imprimirSeq		: PLUS ( variable | valorString ) ;
-escribirValor	: WRITE COL COL ( variable | valorString ) ;
+escribirValor	: WRITE COL COL ( variable ) ;
 
 /*
  * Lexer Rules
@@ -75,6 +76,8 @@ CCB					: '}' ;
 DEC					: '.' ;
 EQUALS				: '=' ;
 COL					: ':' ;
+TRUE				: 'true' ;
+FALSE				: 'false' ;
 IF					: 'if' ;
 THEN				: 'then' ;
 WHILE				: 'while' ;
@@ -96,3 +99,13 @@ CHAR				: '"' LETTER '"' ;
 WORD                : (LOWERCASE | UPPERCASE | NUMERAL)* ;
 STRING				: '"' .*? '"' ;//	anything betwixt '"'s
 WHITESPACE          : (' '|'\t'|'\r'? '\n' | '\r')+ -> skip ;
+
+
+//math			: variable EQUALS valorNum (mathSeqMD)* (mathSeqPM)* #operacionVeN
+//				| variable EQUALS variable (mathSeqMD)* (mathSeqPM)* #operacionVeV ;
+//mathSeqMD		: OPERATORMD valorNum #seqNum
+//				| OPERATORMD variable #seqVar ;
+//mathSeqMD		: OPERATORPM valorNum 
+//				| OPERATORPM variable ;
+//OPERATORMD			: ( '*' | '/' ) ;
+//OPERATORPM			: ( '+' | '-' ) ;

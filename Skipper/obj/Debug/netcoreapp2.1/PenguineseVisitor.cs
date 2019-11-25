@@ -226,6 +226,13 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitValorString([NotNull] PenguineseParser.ValorStringContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.valorBool"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitValorBool([NotNull] PenguineseParser.ValorBoolContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

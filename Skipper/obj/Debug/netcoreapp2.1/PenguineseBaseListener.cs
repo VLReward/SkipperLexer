@@ -396,6 +396,19 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	public virtual void ExitValorString([NotNull] PenguineseParser.ValorStringContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.valorBool"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterValorBool([NotNull] PenguineseParser.ValorBoolContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.valorBool"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitValorBool([NotNull] PenguineseParser.ValorBoolContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

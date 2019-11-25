@@ -19,2411 +19,2125 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-namespace Skipper
-{
-    using Antlr4.Runtime;
-    using Antlr4.Runtime.Atn;
-    using Antlr4.Runtime.Misc;
-    using Antlr4.Runtime.Tree;
-    using System.Collections.Generic;
-    using DFA = Antlr4.Runtime.Dfa.DFA;
-
-    [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.6.6")]
-    [System.CLSCompliant(false)]
-    public partial class PenguineseParser : Parser
-    {
-        public const int
-            NUMERAL = 1, OPERATOR = 2, PLUS = 3, COND = 4, SepCOND = 5, TERM = 6, COM = 7, OP = 8,
-            CP = 9, OBR = 10, CBR = 11, OCB = 12, CCB = 13, DEC = 14, EQUALS = 15, COL = 16, IF = 17,
-            THEN = 18, WHILE = 19, FOR = 20, FUNC = 21, MAIN = 22, DOUBLE = 23, CHARACTER = 24,
-            TEXT = 25, NUMBER = 26, ARRAYOF = 27, BOOLEAN = 28, HALT = 29, RETURN = 30, READ = 31,
-            WRITE = 32, LETTER = 33, CHAR = 34, WORD = 35, STRING = 36, WHITESPACE = 37;
-        public const int
-            RULE_start = 0, RULE_bloqueCodigo = 1, RULE_expresion = 2, RULE_declararVar = 3,
-            RULE_asignVar = 4, RULE_decVar = 5, RULE_tipoVar = 6, RULE_tipoVarS = 7,
-            RULE_nombreVar = 8, RULE_variable = 9, RULE_valorVar = 10, RULE_valorEntero = 11,
-            RULE_valorDec = 12, RULE_valorChar = 13, RULE_valorString = 14, RULE_math = 15,
-            RULE_mathSeq = 16, RULE_valorNum = 17, RULE_ciclo = 18, RULE_condicional = 19,
-            RULE_valorCond = 20, RULE_condSeq = 21, RULE_seccionFor = 22, RULE_imprimirValor = 23,
-            RULE_escribirValor = 24;
-        public static readonly string[] ruleNames = {
-        "start", "bloqueCodigo", "expresion", "declararVar", "asignVar", "decVar",
-        "tipoVar", "tipoVarS", "nombreVar", "variable", "valorVar", "valorEntero",
-        "valorDec", "valorChar", "valorString", "math", "mathSeq", "valorNum",
-        "ciclo", "condicional", "valorCond", "condSeq", "seccionFor", "imprimirValor",
-        "escribirValor"
-    };
-
-        private static readonly string[] _LiteralNames = {
-        null, null, null, "'+'", null, null, "';'", "','", "'('", "')'", "'['",
-        "']'", "'{'", "'}'", "'.'", "'='", "':'", "'if'", "'then'", "'while'",
-        "'for'", "'func'", "'main'", "'double'", "'character'", "'text'", "'number'",
-        "'arrayof'", "'boolean'", "'NOOT NOOT'", "'regresar'", "'imprimirVar'",
-        "'escribirVar'"
-    };
-        private static readonly string[] _SymbolicNames = {
-        null, "NUMERAL", "OPERATOR", "PLUS", "COND", "SepCOND", "TERM", "COM",
-        "OP", "CP", "OBR", "CBR", "OCB", "CCB", "DEC", "EQUALS", "COL", "IF",
-        "THEN", "WHILE", "FOR", "FUNC", "MAIN", "DOUBLE", "CHARACTER", "TEXT",
-        "NUMBER", "ARRAYOF", "BOOLEAN", "HALT", "RETURN", "READ", "WRITE", "LETTER",
-        "CHAR", "WORD", "STRING", "WHITESPACE"
-    };
-        public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
-
-        [System.Obsolete("Use Vocabulary instead.")]
-        public static readonly string[] tokenNames = GenerateTokenNames(DefaultVocabulary, _SymbolicNames.Length);
-
-        private static string[] GenerateTokenNames(IVocabulary vocabulary, int length)
-        {
-            string[] tokenNames = new string[length];
-            for (int i = 0; i < tokenNames.Length; i++)
-            {
-                tokenNames[i] = vocabulary.GetLiteralName(i);
-                if (tokenNames[i] == null)
-                {
-                    tokenNames[i] = vocabulary.GetSymbolicName(i);
-                }
-
-                if (tokenNames[i] == null)
-                {
-                    tokenNames[i] = "<INVALID>";
-                }
-            }
-
-            return tokenNames;
-        }
-
-        [System.Obsolete("Use IRecognizer.Vocabulary instead.")]
-        public override string[] TokenNames
-        {
-            get
-            {
-                return tokenNames;
-            }
-        }
-
-        [NotNull]
-        public override IVocabulary Vocabulary
-        {
-            get
-            {
-                return DefaultVocabulary;
-            }
-        }
-
-        public override string GrammarFileName { get { return "Penguinese.g4"; } }
-
-        public override string[] RuleNames { get { return ruleNames; } }
-
-        public override string SerializedAtn { get { return _serializedATN; } }
-
-        public PenguineseParser(ITokenStream input)
-            : base(input)
-        {
-            _interp = new ParserATNSimulator(this, _ATN);
-        }
-        public partial class StartContext : ParserRuleContext
-        {
-            public ITerminalNode FUNC() { return GetToken(PenguineseParser.FUNC, 0); }
-            public ITerminalNode MAIN() { return GetToken(PenguineseParser.MAIN, 0); }
-            public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
-            public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
-            public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
-            public BloqueCodigoContext bloqueCodigo()
-            {
-                return GetRuleContext<BloqueCodigoContext>(0);
-            }
-            public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
-            public StartContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_start; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterStart(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitStart(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitStart(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public StartContext start()
-        {
-            StartContext _localctx = new StartContext(_ctx, State);
-            EnterRule(_localctx, 0, RULE_start);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 50; Match(FUNC);
-                    State = 51; Match(MAIN);
-                    State = 52; Match(OP);
-                    State = 53; Match(CP);
-                    State = 54; Match(OCB);
-                    State = 55; bloqueCodigo();
-                    State = 56; Match(CCB);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class BloqueCodigoContext : ParserRuleContext
-        {
-            public ExpresionContext[] expresion()
-            {
-                return GetRuleContexts<ExpresionContext>();
-            }
-            public ExpresionContext expresion(int i)
-            {
-                return GetRuleContext<ExpresionContext>(i);
-            }
-            public BloqueCodigoContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_bloqueCodigo; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterBloqueCodigo(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitBloqueCodigo(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitBloqueCodigo(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public BloqueCodigoContext bloqueCodigo()
-        {
-            BloqueCodigoContext _localctx = new BloqueCodigoContext(_ctx, State);
-            EnterRule(_localctx, 2, RULE_bloqueCodigo);
-            int _la;
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 59;
-                    _errHandler.Sync(this);
-                    _la = _input.La(1);
-                    do
-                    {
-                        {
-                            {
-                                State = 58; expresion();
-                            }
-                        }
-                        State = 61;
-                        _errHandler.Sync(this);
-                        _la = _input.La(1);
-                    } while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << WHILE) | (1L << FOR) | (1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << ARRAYOF) | (1L << BOOLEAN) | (1L << HALT) | (1L << READ) | (1L << WRITE) | (1L << LETTER) | (1L << WORD))) != 0));
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ExpresionContext : ParserRuleContext
-        {
-            public ITerminalNode TERM() { return GetToken(PenguineseParser.TERM, 0); }
-            public DeclararVarContext declararVar()
-            {
-                return GetRuleContext<DeclararVarContext>(0);
-            }
-            public MathContext math()
-            {
-                return GetRuleContext<MathContext>(0);
-            }
-            public CicloContext ciclo()
-            {
-                return GetRuleContext<CicloContext>(0);
-            }
-            public ImprimirValorContext imprimirValor()
-            {
-                return GetRuleContext<ImprimirValorContext>(0);
-            }
-            public EscribirValorContext escribirValor()
-            {
-                return GetRuleContext<EscribirValorContext>(0);
-            }
-            public ITerminalNode HALT() { return GetToken(PenguineseParser.HALT, 0); }
-            public ExpresionContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_expresion; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterExpresion(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitExpresion(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitExpresion(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ExpresionContext expresion()
-        {
-            ExpresionContext _localctx = new ExpresionContext(_ctx, State);
-            EnterRule(_localctx, 4, RULE_expresion);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 69;
-                    _errHandler.Sync(this);
-                    switch (_input.La(1))
-                    {
-                        case DOUBLE:
-                        case CHARACTER:
-                        case TEXT:
-                        case NUMBER:
-                        case ARRAYOF:
-                        case BOOLEAN:
-                            {
-                                State = 63; declararVar();
-                            }
-                            break;
-                        case LETTER:
-                        case WORD:
-                            {
-                                State = 64; math();
-                            }
-                            break;
-                        case IF:
-                        case WHILE:
-                        case FOR:
-                            {
-                                State = 65; ciclo();
-                            }
-                            break;
-                        case READ:
-                            {
-                                State = 66; imprimirValor();
-                            }
-                            break;
-                        case WRITE:
-                            {
-                                State = 67; escribirValor();
-                            }
-                            break;
-                        case HALT:
-                            {
-                                State = 68; Match(HALT);
-                            }
-                            break;
-                        default:
-                            throw new NoViableAltException(this);
-                    }
-                    State = 71; Match(TERM);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class DeclararVarContext : ParserRuleContext
-        {
-            public DecVarContext decVar()
-            {
-                return GetRuleContext<DecVarContext>(0);
-            }
-            public AsignVarContext asignVar()
-            {
-                return GetRuleContext<AsignVarContext>(0);
-            }
-            public DeclararVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_declararVar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterDeclararVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitDeclararVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitDeclararVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public DeclararVarContext declararVar()
-        {
-            DeclararVarContext _localctx = new DeclararVarContext(_ctx, State);
-            EnterRule(_localctx, 6, RULE_declararVar);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 75;
-                    _errHandler.Sync(this);
-                    switch (Interpreter.AdaptivePredict(_input, 2, _ctx))
-                    {
-                        case 1:
-                            {
-                                State = 73; decVar();
-                            }
-                            break;
-
-                        case 2:
-                            {
-                                State = 74; asignVar();
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class AsignVarContext : ParserRuleContext
-        {
-            public AsignVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_asignVar; } }
-
-            public AsignVarContext() { }
-            public virtual void CopyFrom(AsignVarContext context)
-            {
-                base.CopyFrom(context);
-            }
-        }
-        public partial class AsignarValorContext : AsignVarContext
-        {
-            public TipoVarContext tipoVar()
-            {
-                return GetRuleContext<TipoVarContext>(0);
-            }
-            public NombreVarContext nombreVar()
-            {
-                return GetRuleContext<NombreVarContext>(0);
-            }
-            public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
-            public ValorVarContext valorVar()
-            {
-                return GetRuleContext<ValorVarContext>(0);
-            }
-            public AsignarValorContext(AsignVarContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterAsignarValor(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitAsignarValor(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitAsignarValor(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class AsignarVariableContext : AsignVarContext
-        {
-            public TipoVarContext tipoVar()
-            {
-                return GetRuleContext<TipoVarContext>(0);
-            }
-            public NombreVarContext nombreVar()
-            {
-                return GetRuleContext<NombreVarContext>(0);
-            }
-            public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public AsignarVariableContext(AsignVarContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterAsignarVariable(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitAsignarVariable(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitAsignarVariable(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public AsignVarContext asignVar()
-        {
-            AsignVarContext _localctx = new AsignVarContext(_ctx, State);
-            EnterRule(_localctx, 8, RULE_asignVar);
-            try
-            {
-                State = 87;
-                _errHandler.Sync(this);
-                switch (Interpreter.AdaptivePredict(_input, 3, _ctx))
-                {
-                    case 1:
-                        _localctx = new AsignarValorContext(_localctx);
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 77; tipoVar();
-                            State = 78; nombreVar();
-                            State = 79; Match(EQUALS);
-                            State = 80; valorVar();
-                        }
-                        break;
-
-                    case 2:
-                        _localctx = new AsignarVariableContext(_localctx);
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 82; tipoVar();
-                            State = 83; nombreVar();
-                            State = 84; Match(EQUALS);
-                            State = 85; variable();
-                        }
-                        break;
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class DecVarContext : ParserRuleContext
-        {
-            public TipoVarContext tipoVar()
-            {
-                return GetRuleContext<TipoVarContext>(0);
-            }
-            public NombreVarContext[] nombreVar()
-            {
-                return GetRuleContexts<NombreVarContext>();
-            }
-            public NombreVarContext nombreVar(int i)
-            {
-                return GetRuleContext<NombreVarContext>(i);
-            }
-            public ITerminalNode[] COM() { return GetTokens(PenguineseParser.COM); }
-            public ITerminalNode COM(int i)
-            {
-                return GetToken(PenguineseParser.COM, i);
-            }
-            public DecVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_decVar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterDecVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitDecVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitDecVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public DecVarContext decVar()
-        {
-            DecVarContext _localctx = new DecVarContext(_ctx, State);
-            EnterRule(_localctx, 10, RULE_decVar);
-            int _la;
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 89; tipoVar();
-                    State = 90; nombreVar();
-                    State = 95;
-                    _errHandler.Sync(this);
-                    _la = _input.La(1);
-                    while (_la == COM)
-                    {
-                        {
-                            {
-                                State = 91; Match(COM);
-                                State = 92; nombreVar();
-                            }
-                        }
-                        State = 97;
-                        _errHandler.Sync(this);
-                        _la = _input.La(1);
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class TipoVarContext : ParserRuleContext
-        {
-            public ITerminalNode ARRAYOF() { return GetToken(PenguineseParser.ARRAYOF, 0); }
-            public TipoVarSContext tipoVarS()
-            {
-                return GetRuleContext<TipoVarSContext>(0);
-            }
-            public ITerminalNode OBR() { return GetToken(PenguineseParser.OBR, 0); }
-            public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
-            public ITerminalNode CBR() { return GetToken(PenguineseParser.CBR, 0); }
-            public TipoVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_tipoVar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterTipoVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitTipoVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitTipoVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public TipoVarContext tipoVar()
-        {
-            TipoVarContext _localctx = new TipoVarContext(_ctx, State);
-            EnterRule(_localctx, 12, RULE_tipoVar);
-            try
-            {
-                State = 105;
-                _errHandler.Sync(this);
-                switch (_input.La(1))
-                {
-                    case ARRAYOF:
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 98; Match(ARRAYOF);
-                            State = 99; tipoVarS();
-                            State = 100; Match(OBR);
-                            State = 101; Match(NUMERAL);
-                            State = 102; Match(CBR);
-                        }
-                        break;
-                    case DOUBLE:
-                    case CHARACTER:
-                    case TEXT:
-                    case NUMBER:
-                    case BOOLEAN:
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 104; tipoVarS();
-                        }
-                        break;
-                    default:
-                        throw new NoViableAltException(this);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class TipoVarSContext : ParserRuleContext
-        {
-            public ITerminalNode CHARACTER() { return GetToken(PenguineseParser.CHARACTER, 0); }
-            public ITerminalNode DOUBLE() { return GetToken(PenguineseParser.DOUBLE, 0); }
-            public ITerminalNode BOOLEAN() { return GetToken(PenguineseParser.BOOLEAN, 0); }
-            public ITerminalNode NUMBER() { return GetToken(PenguineseParser.NUMBER, 0); }
-            public ITerminalNode TEXT() { return GetToken(PenguineseParser.TEXT, 0); }
-            public TipoVarSContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_tipoVarS; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterTipoVarS(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitTipoVarS(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitTipoVarS(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public TipoVarSContext tipoVarS()
-        {
-            TipoVarSContext _localctx = new TipoVarSContext(_ctx, State);
-            EnterRule(_localctx, 14, RULE_tipoVarS);
-            int _la;
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 107;
-                    _la = _input.La(1);
-                    if (!((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << BOOLEAN))) != 0)))
-                    {
-                        _errHandler.RecoverInline(this);
-                    }
-                    else
-                    {
-                        if (_input.La(1) == TokenConstants.Eof)
-                        {
-                            matchedEOF = true;
-                        }
-
-                        _errHandler.ReportMatch(this);
-                        Consume();
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class NombreVarContext : ParserRuleContext
-        {
-            public ITerminalNode WORD() { return GetToken(PenguineseParser.WORD, 0); }
-            public ITerminalNode LETTER() { return GetToken(PenguineseParser.LETTER, 0); }
-            public NombreVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_nombreVar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterNombreVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitNombreVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitNombreVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public NombreVarContext nombreVar()
-        {
-            NombreVarContext _localctx = new NombreVarContext(_ctx, State);
-            EnterRule(_localctx, 16, RULE_nombreVar);
-            int _la;
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 109;
-                    _la = _input.La(1);
-                    if (!(_la == LETTER || _la == WORD))
-                    {
-                        _errHandler.RecoverInline(this);
-                    }
-                    else
-                    {
-                        if (_input.La(1) == TokenConstants.Eof)
-                        {
-                            matchedEOF = true;
-                        }
-
-                        _errHandler.ReportMatch(this);
-                        Consume();
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class VariableContext : ParserRuleContext
-        {
-            public VariableContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_variable; } }
-
-            public VariableContext() { }
-            public virtual void CopyFrom(VariableContext context)
-            {
-                base.CopyFrom(context);
-            }
-        }
-        public partial class NombreSimpleContext : VariableContext
-        {
-            public NombreVarContext nombreVar()
-            {
-                return GetRuleContext<NombreVarContext>(0);
-            }
-            public NombreSimpleContext(VariableContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterNombreSimple(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitNombreSimple(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitNombreSimple(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class NombreArregloContext : VariableContext
-        {
-            public NombreVarContext[] nombreVar()
-            {
-                return GetRuleContexts<NombreVarContext>();
-            }
-            public NombreVarContext nombreVar(int i)
-            {
-                return GetRuleContext<NombreVarContext>(i);
-            }
-            public ITerminalNode OBR() { return GetToken(PenguineseParser.OBR, 0); }
-            public ITerminalNode CBR() { return GetToken(PenguineseParser.CBR, 0); }
-            public ValorEnteroContext valorEntero()
-            {
-                return GetRuleContext<ValorEnteroContext>(0);
-            }
-            public NombreArregloContext(VariableContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterNombreArreglo(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitNombreArreglo(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitNombreArreglo(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public VariableContext variable()
-        {
-            VariableContext _localctx = new VariableContext(_ctx, State);
-            EnterRule(_localctx, 18, RULE_variable);
-            try
-            {
-                State = 120;
-                _errHandler.Sync(this);
-                switch (Interpreter.AdaptivePredict(_input, 7, _ctx))
-                {
-                    case 1:
-                        _localctx = new NombreSimpleContext(_localctx);
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 111; nombreVar();
-                        }
-                        break;
-
-                    case 2:
-                        _localctx = new NombreArregloContext(_localctx);
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 112; nombreVar();
-                            State = 113; Match(OBR);
-                            State = 116;
-                            _errHandler.Sync(this);
-                            switch (_input.La(1))
-                            {
-                                case LETTER:
-                                case WORD:
-                                    {
-                                        State = 114; nombreVar();
-                                    }
-                                    break;
-                                case NUMERAL:
-                                    {
-                                        State = 115; valorEntero();
-                                    }
-                                    break;
-                                default:
-                                    throw new NoViableAltException(this);
-                            }
-                            State = 118; Match(CBR);
-                        }
-                        break;
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorVarContext : ParserRuleContext
-        {
-            public ValorEnteroContext valorEntero()
-            {
-                return GetRuleContext<ValorEnteroContext>(0);
-            }
-            public ValorDecContext valorDec()
-            {
-                return GetRuleContext<ValorDecContext>(0);
-            }
-            public ValorCharContext valorChar()
-            {
-                return GetRuleContext<ValorCharContext>(0);
-            }
-            public ValorStringContext valorString()
-            {
-                return GetRuleContext<ValorStringContext>(0);
-            }
-            public ValorVarContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorVar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorVarContext valorVar()
-        {
-            ValorVarContext _localctx = new ValorVarContext(_ctx, State);
-            EnterRule(_localctx, 20, RULE_valorVar);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 126;
-                    _errHandler.Sync(this);
-                    switch (Interpreter.AdaptivePredict(_input, 8, _ctx))
-                    {
-                        case 1:
-                            {
-                                State = 122; valorEntero();
-                            }
-                            break;
-
-                        case 2:
-                            {
-                                State = 123; valorDec();
-                            }
-                            break;
-
-                        case 3:
-                            {
-                                State = 124; valorChar();
-                            }
-                            break;
-
-                        case 4:
-                            {
-                                State = 125; valorString();
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorEnteroContext : ParserRuleContext
-        {
-            public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
-            public ValorEnteroContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorEntero; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorEntero(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorEntero(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorEntero(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorEnteroContext valorEntero()
-        {
-            ValorEnteroContext _localctx = new ValorEnteroContext(_ctx, State);
-            EnterRule(_localctx, 22, RULE_valorEntero);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 128; Match(NUMERAL);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorDecContext : ParserRuleContext
-        {
-            public ITerminalNode[] NUMERAL() { return GetTokens(PenguineseParser.NUMERAL); }
-            public ITerminalNode NUMERAL(int i)
-            {
-                return GetToken(PenguineseParser.NUMERAL, i);
-            }
-            public ITerminalNode DEC() { return GetToken(PenguineseParser.DEC, 0); }
-            public ValorDecContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorDec; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorDec(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorDec(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorDec(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorDecContext valorDec()
-        {
-            ValorDecContext _localctx = new ValorDecContext(_ctx, State);
-            EnterRule(_localctx, 24, RULE_valorDec);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 130; Match(NUMERAL);
-                    State = 131; Match(DEC);
-                    State = 132; Match(NUMERAL);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorCharContext : ParserRuleContext
-        {
-            public ITerminalNode CHAR() { return GetToken(PenguineseParser.CHAR, 0); }
-            public ValorCharContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorChar; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorChar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorChar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorChar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorCharContext valorChar()
-        {
-            ValorCharContext _localctx = new ValorCharContext(_ctx, State);
-            EnterRule(_localctx, 26, RULE_valorChar);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 134; Match(CHAR);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorStringContext : ParserRuleContext
-        {
-            public ITerminalNode STRING() { return GetToken(PenguineseParser.STRING, 0); }
-            public ValorStringContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorString; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorString(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorString(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorString(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorStringContext valorString()
-        {
-            ValorStringContext _localctx = new ValorStringContext(_ctx, State);
-            EnterRule(_localctx, 28, RULE_valorString);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 136; Match(STRING);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class MathContext : ParserRuleContext
-        {
-            public MathContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_math; } }
-
-            public MathContext() { }
-            public virtual void CopyFrom(MathContext context)
-            {
-                base.CopyFrom(context);
-            }
-        }
-        public partial class OperacionVeVContext : MathContext
-        {
-            public VariableContext[] variable()
-            {
-                return GetRuleContexts<VariableContext>();
-            }
-            public VariableContext variable(int i)
-            {
-                return GetRuleContext<VariableContext>(i);
-            }
-            public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
-            public MathSeqContext[] mathSeq()
-            {
-                return GetRuleContexts<MathSeqContext>();
-            }
-            public MathSeqContext mathSeq(int i)
-            {
-                return GetRuleContext<MathSeqContext>(i);
-            }
-            public OperacionVeVContext(MathContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterOperacionVeV(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitOperacionVeV(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitOperacionVeV(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class OperacionVeNContext : MathContext
-        {
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
-            public ValorNumContext valorNum()
-            {
-                return GetRuleContext<ValorNumContext>(0);
-            }
-            public MathSeqContext[] mathSeq()
-            {
-                return GetRuleContexts<MathSeqContext>();
-            }
-            public MathSeqContext mathSeq(int i)
-            {
-                return GetRuleContext<MathSeqContext>(i);
-            }
-            public OperacionVeNContext(MathContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterOperacionVeN(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitOperacionVeN(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitOperacionVeN(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public MathContext math()
-        {
-            MathContext _localctx = new MathContext(_ctx, State);
-            EnterRule(_localctx, 30, RULE_math);
-            int _la;
-            try
-            {
-                State = 156;
-                _errHandler.Sync(this);
-                switch (Interpreter.AdaptivePredict(_input, 11, _ctx))
-                {
-                    case 1:
-                        _localctx = new OperacionVeNContext(_localctx);
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 138; variable();
-                            State = 139; Match(EQUALS);
-                            State = 140; valorNum();
-                            State = 144;
-                            _errHandler.Sync(this);
-                            _la = _input.La(1);
-                            while (_la == OPERATOR)
-                            {
-                                {
-                                    {
-                                        State = 141; mathSeq();
-                                    }
-                                }
-                                State = 146;
-                                _errHandler.Sync(this);
-                                _la = _input.La(1);
-                            }
-                        }
-                        break;
-
-                    case 2:
-                        _localctx = new OperacionVeVContext(_localctx);
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 147; variable();
-                            State = 148; Match(EQUALS);
-                            State = 149; variable();
-                            State = 153;
-                            _errHandler.Sync(this);
-                            _la = _input.La(1);
-                            while (_la == OPERATOR)
-                            {
-                                {
-                                    {
-                                        State = 150; mathSeq();
-                                    }
-                                }
-                                State = 155;
-                                _errHandler.Sync(this);
-                                _la = _input.La(1);
-                            }
-                        }
-                        break;
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class MathSeqContext : ParserRuleContext
-        {
-            public MathSeqContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_mathSeq; } }
-
-            public MathSeqContext() { }
-            public virtual void CopyFrom(MathSeqContext context)
-            {
-                base.CopyFrom(context);
-            }
-        }
-        public partial class SeqNumContext : MathSeqContext
-        {
-            public ITerminalNode OPERATOR() { return GetToken(PenguineseParser.OPERATOR, 0); }
-            public ValorNumContext valorNum()
-            {
-                return GetRuleContext<ValorNumContext>(0);
-            }
-            public SeqNumContext(MathSeqContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterSeqNum(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitSeqNum(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitSeqNum(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class SeqVarContext : MathSeqContext
-        {
-            public ITerminalNode OPERATOR() { return GetToken(PenguineseParser.OPERATOR, 0); }
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public SeqVarContext(MathSeqContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterSeqVar(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitSeqVar(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitSeqVar(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public MathSeqContext mathSeq()
-        {
-            MathSeqContext _localctx = new MathSeqContext(_ctx, State);
-            EnterRule(_localctx, 32, RULE_mathSeq);
-            try
-            {
-                State = 162;
-                _errHandler.Sync(this);
-                switch (Interpreter.AdaptivePredict(_input, 12, _ctx))
-                {
-                    case 1:
-                        _localctx = new SeqNumContext(_localctx);
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 158; Match(OPERATOR);
-                            State = 159; valorNum();
-                        }
-                        break;
-
-                    case 2:
-                        _localctx = new SeqVarContext(_localctx);
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 160; Match(OPERATOR);
-                            State = 161; variable();
-                        }
-                        break;
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorNumContext : ParserRuleContext
-        {
-            public ValorEnteroContext valorEntero()
-            {
-                return GetRuleContext<ValorEnteroContext>(0);
-            }
-            public ValorDecContext valorDec()
-            {
-                return GetRuleContext<ValorDecContext>(0);
-            }
-            public ValorNumContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorNum; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorNum(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorNum(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorNum(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorNumContext valorNum()
-        {
-            ValorNumContext _localctx = new ValorNumContext(_ctx, State);
-            EnterRule(_localctx, 34, RULE_valorNum);
-            try
-            {
-                State = 166;
-                _errHandler.Sync(this);
-                switch (Interpreter.AdaptivePredict(_input, 13, _ctx))
-                {
-                    case 1:
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 164; valorEntero();
-                        }
-                        break;
-
-                    case 2:
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 165; valorDec();
-                        }
-                        break;
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class CicloContext : ParserRuleContext
-        {
-            public CicloContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_ciclo; } }
-
-            public CicloContext() { }
-            public virtual void CopyFrom(CicloContext context)
-            {
-                base.CopyFrom(context);
-            }
-        }
-        public partial class CicloWhileContext : CicloContext
-        {
-            public ITerminalNode WHILE() { return GetToken(PenguineseParser.WHILE, 0); }
-            public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
-            public CondicionalContext condicional()
-            {
-                return GetRuleContext<CondicionalContext>(0);
-            }
-            public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
-            public ITerminalNode THEN() { return GetToken(PenguineseParser.THEN, 0); }
-            public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
-            public BloqueCodigoContext bloqueCodigo()
-            {
-                return GetRuleContext<BloqueCodigoContext>(0);
-            }
-            public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
-            public CicloWhileContext(CicloContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterCicloWhile(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitCicloWhile(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitCicloWhile(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class CicloIfContext : CicloContext
-        {
-            public ITerminalNode IF() { return GetToken(PenguineseParser.IF, 0); }
-            public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
-            public CondicionalContext condicional()
-            {
-                return GetRuleContext<CondicionalContext>(0);
-            }
-            public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
-            public ITerminalNode THEN() { return GetToken(PenguineseParser.THEN, 0); }
-            public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
-            public BloqueCodigoContext bloqueCodigo()
-            {
-                return GetRuleContext<BloqueCodigoContext>(0);
-            }
-            public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
-            public CicloIfContext(CicloContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterCicloIf(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitCicloIf(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitCicloIf(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-        public partial class CicloForContext : CicloContext
-        {
-            public ITerminalNode FOR() { return GetToken(PenguineseParser.FOR, 0); }
-            public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
-            public SeccionForContext seccionFor()
-            {
-                return GetRuleContext<SeccionForContext>(0);
-            }
-            public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
-            public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
-            public BloqueCodigoContext bloqueCodigo()
-            {
-                return GetRuleContext<BloqueCodigoContext>(0);
-            }
-            public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
-            public CicloForContext(CicloContext context) { CopyFrom(context); }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterCicloFor(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitCicloFor(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitCicloFor(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public CicloContext ciclo()
-        {
-            CicloContext _localctx = new CicloContext(_ctx, State);
-            EnterRule(_localctx, 36, RULE_ciclo);
-            try
-            {
-                State = 194;
-                _errHandler.Sync(this);
-                switch (_input.La(1))
-                {
-                    case IF:
-                        _localctx = new CicloIfContext(_localctx);
-                        EnterOuterAlt(_localctx, 1);
-                        {
-                            State = 168; Match(IF);
-                            State = 169; Match(OP);
-                            State = 170; condicional();
-                            State = 171; Match(CP);
-                            State = 172; Match(THEN);
-                            State = 173; Match(OCB);
-                            State = 174; bloqueCodigo();
-                            State = 175; Match(CCB);
-                        }
-                        break;
-                    case WHILE:
-                        _localctx = new CicloWhileContext(_localctx);
-                        EnterOuterAlt(_localctx, 2);
-                        {
-                            State = 177; Match(WHILE);
-                            State = 178; Match(OP);
-                            State = 179; condicional();
-                            State = 180; Match(CP);
-                            State = 181; Match(THEN);
-                            State = 182; Match(OCB);
-                            State = 183; bloqueCodigo();
-                            State = 184; Match(CCB);
-                        }
-                        break;
-                    case FOR:
-                        _localctx = new CicloForContext(_localctx);
-                        EnterOuterAlt(_localctx, 3);
-                        {
-                            State = 186; Match(FOR);
-                            State = 187; Match(OP);
-                            State = 188; seccionFor();
-                            State = 189; Match(CP);
-                            State = 190; Match(OCB);
-                            State = 191; bloqueCodigo();
-                            State = 192; Match(CCB);
-                        }
-                        break;
-                    default:
-                        throw new NoViableAltException(this);
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class CondicionalContext : ParserRuleContext
-        {
-            public ValorCondContext[] valorCond()
-            {
-                return GetRuleContexts<ValorCondContext>();
-            }
-            public ValorCondContext valorCond(int i)
-            {
-                return GetRuleContext<ValorCondContext>(i);
-            }
-            public ITerminalNode COND() { return GetToken(PenguineseParser.COND, 0); }
-            public CondSeqContext[] condSeq()
-            {
-                return GetRuleContexts<CondSeqContext>();
-            }
-            public CondSeqContext condSeq(int i)
-            {
-                return GetRuleContext<CondSeqContext>(i);
-            }
-            public CondicionalContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_condicional; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterCondicional(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitCondicional(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitCondicional(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public CondicionalContext condicional()
-        {
-            CondicionalContext _localctx = new CondicionalContext(_ctx, State);
-            EnterRule(_localctx, 38, RULE_condicional);
-            int _la;
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 196; valorCond();
-                    State = 197; Match(COND);
-                    State = 198; valorCond();
-                    State = 202;
-                    _errHandler.Sync(this);
-                    _la = _input.La(1);
-                    while (_la == SepCOND)
-                    {
-                        {
-                            {
-                                State = 199; condSeq();
-                            }
-                        }
-                        State = 204;
-                        _errHandler.Sync(this);
-                        _la = _input.La(1);
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ValorCondContext : ParserRuleContext
-        {
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
-            public ValorCharContext valorChar()
-            {
-                return GetRuleContext<ValorCharContext>(0);
-            }
-            public ValorStringContext valorString()
-            {
-                return GetRuleContext<ValorStringContext>(0);
-            }
-            public ValorDecContext valorDec()
-            {
-                return GetRuleContext<ValorDecContext>(0);
-            }
-            public ValorCondContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_valorCond; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterValorCond(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitValorCond(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitValorCond(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ValorCondContext valorCond()
-        {
-            ValorCondContext _localctx = new ValorCondContext(_ctx, State);
-            EnterRule(_localctx, 40, RULE_valorCond);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 210;
-                    _errHandler.Sync(this);
-                    switch (Interpreter.AdaptivePredict(_input, 16, _ctx))
-                    {
-                        case 1:
-                            {
-                                State = 205; variable();
-                            }
-                            break;
-
-                        case 2:
-                            {
-                                State = 206; Match(NUMERAL);
-                            }
-                            break;
-
-                        case 3:
-                            {
-                                State = 207; valorChar();
-                            }
-                            break;
-
-                        case 4:
-                            {
-                                State = 208; valorString();
-                            }
-                            break;
-
-                        case 5:
-                            {
-                                State = 209; valorDec();
-                            }
-                            break;
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class CondSeqContext : ParserRuleContext
-        {
-            public ITerminalNode SepCOND() { return GetToken(PenguineseParser.SepCOND, 0); }
-            public ValorCondContext[] valorCond()
-            {
-                return GetRuleContexts<ValorCondContext>();
-            }
-            public ValorCondContext valorCond(int i)
-            {
-                return GetRuleContext<ValorCondContext>(i);
-            }
-            public ITerminalNode COND() { return GetToken(PenguineseParser.COND, 0); }
-            public CondSeqContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_condSeq; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterCondSeq(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitCondSeq(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitCondSeq(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public CondSeqContext condSeq()
-        {
-            CondSeqContext _localctx = new CondSeqContext(_ctx, State);
-            EnterRule(_localctx, 42, RULE_condSeq);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 212; Match(SepCOND);
-                    State = 213; valorCond();
-                    State = 214; Match(COND);
-                    State = 215; valorCond();
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class SeccionForContext : ParserRuleContext
-        {
-            public AsignVarContext asignVar()
-            {
-                return GetRuleContext<AsignVarContext>(0);
-            }
-            public ITerminalNode[] TERM() { return GetTokens(PenguineseParser.TERM); }
-            public ITerminalNode TERM(int i)
-            {
-                return GetToken(PenguineseParser.TERM, i);
-            }
-            public CondicionalContext condicional()
-            {
-                return GetRuleContext<CondicionalContext>(0);
-            }
-            public MathContext math()
-            {
-                return GetRuleContext<MathContext>(0);
-            }
-            public SeccionForContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_seccionFor; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterSeccionFor(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitSeccionFor(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitSeccionFor(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public SeccionForContext seccionFor()
-        {
-            SeccionForContext _localctx = new SeccionForContext(_ctx, State);
-            EnterRule(_localctx, 44, RULE_seccionFor);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 217; asignVar();
-                    State = 218; Match(TERM);
-                    State = 219; condicional();
-                    State = 220; Match(TERM);
-                    State = 221; math();
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class ImprimirValorContext : ParserRuleContext
-        {
-            public ITerminalNode READ() { return GetToken(PenguineseParser.READ, 0); }
-            public ITerminalNode[] COL() { return GetTokens(PenguineseParser.COL); }
-            public ITerminalNode COL(int i)
-            {
-                return GetToken(PenguineseParser.COL, i);
-            }
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public ValorStringContext valorString()
-            {
-                return GetRuleContext<ValorStringContext>(0);
-            }
-            public ImprimirValorContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_imprimirValor; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterImprimirValor(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitImprimirValor(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitImprimirValor(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public ImprimirValorContext imprimirValor()
-        {
-            ImprimirValorContext _localctx = new ImprimirValorContext(_ctx, State);
-            EnterRule(_localctx, 46, RULE_imprimirValor);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 223; Match(READ);
-                    State = 224; Match(COL);
-                    State = 225; Match(COL);
-                    State = 228;
-                    _errHandler.Sync(this);
-                    switch (_input.La(1))
-                    {
-                        case LETTER:
-                        case WORD:
-                            {
-                                State = 226; variable();
-                            }
-                            break;
-                        case STRING:
-                            {
-                                State = 227; valorString();
-                            }
-                            break;
-                        default:
-                            throw new NoViableAltException(this);
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public partial class EscribirValorContext : ParserRuleContext
-        {
-            public ITerminalNode WRITE() { return GetToken(PenguineseParser.WRITE, 0); }
-            public ITerminalNode[] COL() { return GetTokens(PenguineseParser.COL); }
-            public ITerminalNode COL(int i)
-            {
-                return GetToken(PenguineseParser.COL, i);
-            }
-            public VariableContext variable()
-            {
-                return GetRuleContext<VariableContext>(0);
-            }
-            public ValorStringContext valorString()
-            {
-                return GetRuleContext<ValorStringContext>(0);
-            }
-            public EscribirValorContext(ParserRuleContext parent, int invokingState)
-                : base(parent, invokingState)
-            {
-            }
-            public override int RuleIndex { get { return RULE_escribirValor; } }
-            public override void EnterRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.EnterEscribirValor(this);
-            }
-            public override void ExitRule(IParseTreeListener listener)
-            {
-                IPenguineseListener typedListener = listener as IPenguineseListener;
-                if (typedListener != null) typedListener.ExitEscribirValor(this);
-            }
-            public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor)
-            {
-                IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
-                if (typedVisitor != null) return typedVisitor.VisitEscribirValor(this);
-                else return visitor.VisitChildren(this);
-            }
-        }
-
-        [RuleVersion(0)]
-        public EscribirValorContext escribirValor()
-        {
-            EscribirValorContext _localctx = new EscribirValorContext(_ctx, State);
-            EnterRule(_localctx, 48, RULE_escribirValor);
-            try
-            {
-                EnterOuterAlt(_localctx, 1);
-                {
-                    State = 230; Match(WRITE);
-                    State = 231; Match(COL);
-                    State = 232; Match(COL);
-                    State = 235;
-                    _errHandler.Sync(this);
-                    switch (_input.La(1))
-                    {
-                        case LETTER:
-                        case WORD:
-                            {
-                                State = 233; variable();
-                            }
-                            break;
-                        case STRING:
-                            {
-                                State = 234; valorString();
-                            }
-                            break;
-                        default:
-                            throw new NoViableAltException(this);
-                    }
-                }
-            }
-            catch (RecognitionException re)
-            {
-                _localctx.exception = re;
-                _errHandler.ReportError(this, re);
-                _errHandler.Recover(this, re);
-            }
-            finally
-            {
-                ExitRule();
-            }
-            return _localctx;
-        }
-
-        public static readonly string _serializedATN =
-            "\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3\'\xF0\x4\x2\t\x2" +
-            "\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t" +
-            "\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t" +
-            "\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15" +
-            "\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x3\x2" +
-            "\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x3\x6\x3>\n\x3\r\x3\xE\x3" +
-            "?\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4H\n\x4\x3\x4\x3\x4\x3\x5\x3" +
-            "\x5\x5\x5N\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6" +
-            "\x3\x6\x5\x6Z\n\x6\x3\a\x3\a\x3\a\x3\a\a\a`\n\a\f\a\xE\a\x63\v\a\x3\b" +
-            "\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bl\n\b\x3\t\x3\t\x3\n\x3\n\x3\v\x3\v" +
-            "\x3\v\x3\v\x3\v\x5\vw\n\v\x3\v\x3\v\x5\v{\n\v\x3\f\x3\f\x3\f\x3\f\x5\f" +
-            "\x81\n\f\x3\r\x3\r\x3\xE\x3\xE\x3\xE\x3\xE\x3\xF\x3\xF\x3\x10\x3\x10\x3" +
-            "\x11\x3\x11\x3\x11\x3\x11\a\x11\x91\n\x11\f\x11\xE\x11\x94\v\x11\x3\x11" +
-            "\x3\x11\x3\x11\x3\x11\a\x11\x9A\n\x11\f\x11\xE\x11\x9D\v\x11\x5\x11\x9F" +
-            "\n\x11\x3\x12\x3\x12\x3\x12\x3\x12\x5\x12\xA5\n\x12\x3\x13\x3\x13\x5\x13" +
-            "\xA9\n\x13\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3" +
-            "\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3" +
-            "\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x3\x14\x5\x14\xC5\n\x14" +
-            "\x3\x15\x3\x15\x3\x15\x3\x15\a\x15\xCB\n\x15\f\x15\xE\x15\xCE\v\x15\x3" +
-            "\x16\x3\x16\x3\x16\x3\x16\x3\x16\x5\x16\xD5\n\x16\x3\x17\x3\x17\x3\x17" +
-            "\x3\x17\x3\x17\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3\x19\x3\x19" +
-            "\x3\x19\x3\x19\x3\x19\x5\x19\xE7\n\x19\x3\x1A\x3\x1A\x3\x1A\x3\x1A\x3" +
-            "\x1A\x5\x1A\xEE\n\x1A\x3\x1A\x2\x2\x2\x1B\x2\x2\x4\x2\x6\x2\b\x2\n\x2" +
-            "\f\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18\x2\x1A\x2\x1C\x2\x1E\x2 \x2" +
-            "\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2\x2\x4\x4\x2\x19\x1C\x1E\x1E" +
-            "\x4\x2##%%\xF3\x2\x34\x3\x2\x2\x2\x4=\x3\x2\x2\x2\x6G\x3\x2\x2\x2\bM\x3" +
-            "\x2\x2\x2\nY\x3\x2\x2\x2\f[\x3\x2\x2\x2\xEk\x3\x2\x2\x2\x10m\x3\x2\x2" +
-            "\x2\x12o\x3\x2\x2\x2\x14z\x3\x2\x2\x2\x16\x80\x3\x2\x2\x2\x18\x82\x3\x2" +
-            "\x2\x2\x1A\x84\x3\x2\x2\x2\x1C\x88\x3\x2\x2\x2\x1E\x8A\x3\x2\x2\x2 \x9E" +
-            "\x3\x2\x2\x2\"\xA4\x3\x2\x2\x2$\xA8\x3\x2\x2\x2&\xC4\x3\x2\x2\x2(\xC6" +
-            "\x3\x2\x2\x2*\xD4\x3\x2\x2\x2,\xD6\x3\x2\x2\x2.\xDB\x3\x2\x2\x2\x30\xE1" +
-            "\x3\x2\x2\x2\x32\xE8\x3\x2\x2\x2\x34\x35\a\x17\x2\x2\x35\x36\a\x18\x2" +
-            "\x2\x36\x37\a\n\x2\x2\x37\x38\a\v\x2\x2\x38\x39\a\xE\x2\x2\x39:\x5\x4" +
-            "\x3\x2:;\a\xF\x2\x2;\x3\x3\x2\x2\x2<>\x5\x6\x4\x2=<\x3\x2\x2\x2>?\x3\x2" +
-            "\x2\x2?=\x3\x2\x2\x2?@\x3\x2\x2\x2@\x5\x3\x2\x2\x2\x41H\x5\b\x5\x2\x42" +
-            "H\x5 \x11\x2\x43H\x5&\x14\x2\x44H\x5\x30\x19\x2\x45H\x5\x32\x1A\x2\x46" +
-            "H\a\x1F\x2\x2G\x41\x3\x2\x2\x2G\x42\x3\x2\x2\x2G\x43\x3\x2\x2\x2G\x44" +
-            "\x3\x2\x2\x2G\x45\x3\x2\x2\x2G\x46\x3\x2\x2\x2HI\x3\x2\x2\x2IJ\a\b\x2" +
-            "\x2J\a\x3\x2\x2\x2KN\x5\f\a\x2LN\x5\n\x6\x2MK\x3\x2\x2\x2ML\x3\x2\x2\x2" +
-            "N\t\x3\x2\x2\x2OP\x5\xE\b\x2PQ\x5\x12\n\x2QR\a\x11\x2\x2RS\x5\x16\f\x2" +
-            "SZ\x3\x2\x2\x2TU\x5\xE\b\x2UV\x5\x12\n\x2VW\a\x11\x2\x2WX\x5\x14\v\x2" +
-            "XZ\x3\x2\x2\x2YO\x3\x2\x2\x2YT\x3\x2\x2\x2Z\v\x3\x2\x2\x2[\\\x5\xE\b\x2" +
-            "\\\x61\x5\x12\n\x2]^\a\t\x2\x2^`\x5\x12\n\x2_]\x3\x2\x2\x2`\x63\x3\x2" +
-            "\x2\x2\x61_\x3\x2\x2\x2\x61\x62\x3\x2\x2\x2\x62\r\x3\x2\x2\x2\x63\x61" +
-            "\x3\x2\x2\x2\x64\x65\a\x1D\x2\x2\x65\x66\x5\x10\t\x2\x66g\a\f\x2\x2gh" +
-            "\a\x3\x2\x2hi\a\r\x2\x2il\x3\x2\x2\x2jl\x5\x10\t\x2k\x64\x3\x2\x2\x2k" +
-            "j\x3\x2\x2\x2l\xF\x3\x2\x2\x2mn\t\x2\x2\x2n\x11\x3\x2\x2\x2op\t\x3\x2" +
-            "\x2p\x13\x3\x2\x2\x2q{\x5\x12\n\x2rs\x5\x12\n\x2sv\a\f\x2\x2tw\x5\x12" +
-            "\n\x2uw\x5\x18\r\x2vt\x3\x2\x2\x2vu\x3\x2\x2\x2wx\x3\x2\x2\x2xy\a\r\x2" +
-            "\x2y{\x3\x2\x2\x2zq\x3\x2\x2\x2zr\x3\x2\x2\x2{\x15\x3\x2\x2\x2|\x81\x5" +
-            "\x18\r\x2}\x81\x5\x1A\xE\x2~\x81\x5\x1C\xF\x2\x7F\x81\x5\x1E\x10\x2\x80" +
-            "|\x3\x2\x2\x2\x80}\x3\x2\x2\x2\x80~\x3\x2\x2\x2\x80\x7F\x3\x2\x2\x2\x81" +
-            "\x17\x3\x2\x2\x2\x82\x83\a\x3\x2\x2\x83\x19\x3\x2\x2\x2\x84\x85\a\x3\x2" +
-            "\x2\x85\x86\a\x10\x2\x2\x86\x87\a\x3\x2\x2\x87\x1B\x3\x2\x2\x2\x88\x89" +
-            "\a$\x2\x2\x89\x1D\x3\x2\x2\x2\x8A\x8B\a&\x2\x2\x8B\x1F\x3\x2\x2\x2\x8C" +
-            "\x8D\x5\x14\v\x2\x8D\x8E\a\x11\x2\x2\x8E\x92\x5$\x13\x2\x8F\x91\x5\"\x12" +
-            "\x2\x90\x8F\x3\x2\x2\x2\x91\x94\x3\x2\x2\x2\x92\x90\x3\x2\x2\x2\x92\x93" +
-            "\x3\x2\x2\x2\x93\x9F\x3\x2\x2\x2\x94\x92\x3\x2\x2\x2\x95\x96\x5\x14\v" +
-            "\x2\x96\x97\a\x11\x2\x2\x97\x9B\x5\x14\v\x2\x98\x9A\x5\"\x12\x2\x99\x98" +
-            "\x3\x2\x2\x2\x9A\x9D\x3\x2\x2\x2\x9B\x99\x3\x2\x2\x2\x9B\x9C\x3\x2\x2" +
-            "\x2\x9C\x9F\x3\x2\x2\x2\x9D\x9B\x3\x2\x2\x2\x9E\x8C\x3\x2\x2\x2\x9E\x95" +
-            "\x3\x2\x2\x2\x9F!\x3\x2\x2\x2\xA0\xA1\a\x4\x2\x2\xA1\xA5\x5$\x13\x2\xA2" +
-            "\xA3\a\x4\x2\x2\xA3\xA5\x5\x14\v\x2\xA4\xA0\x3\x2\x2\x2\xA4\xA2\x3\x2" +
-            "\x2\x2\xA5#\x3\x2\x2\x2\xA6\xA9\x5\x18\r\x2\xA7\xA9\x5\x1A\xE\x2\xA8\xA6" +
-            "\x3\x2\x2\x2\xA8\xA7\x3\x2\x2\x2\xA9%\x3\x2\x2\x2\xAA\xAB\a\x13\x2\x2" +
-            "\xAB\xAC\a\n\x2\x2\xAC\xAD\x5(\x15\x2\xAD\xAE\a\v\x2\x2\xAE\xAF\a\x14" +
-            "\x2\x2\xAF\xB0\a\xE\x2\x2\xB0\xB1\x5\x4\x3\x2\xB1\xB2\a\xF\x2\x2\xB2\xC5" +
-            "\x3\x2\x2\x2\xB3\xB4\a\x15\x2\x2\xB4\xB5\a\n\x2\x2\xB5\xB6\x5(\x15\x2" +
-            "\xB6\xB7\a\v\x2\x2\xB7\xB8\a\x14\x2\x2\xB8\xB9\a\xE\x2\x2\xB9\xBA\x5\x4" +
-            "\x3\x2\xBA\xBB\a\xF\x2\x2\xBB\xC5\x3\x2\x2\x2\xBC\xBD\a\x16\x2\x2\xBD" +
-            "\xBE\a\n\x2\x2\xBE\xBF\x5.\x18\x2\xBF\xC0\a\v\x2\x2\xC0\xC1\a\xE\x2\x2" +
-            "\xC1\xC2\x5\x4\x3\x2\xC2\xC3\a\xF\x2\x2\xC3\xC5\x3\x2\x2\x2\xC4\xAA\x3" +
-            "\x2\x2\x2\xC4\xB3\x3\x2\x2\x2\xC4\xBC\x3\x2\x2\x2\xC5\'\x3\x2\x2\x2\xC6" +
-            "\xC7\x5*\x16\x2\xC7\xC8\a\x6\x2\x2\xC8\xCC\x5*\x16\x2\xC9\xCB\x5,\x17" +
-            "\x2\xCA\xC9\x3\x2\x2\x2\xCB\xCE\x3\x2\x2\x2\xCC\xCA\x3\x2\x2\x2\xCC\xCD" +
-            "\x3\x2\x2\x2\xCD)\x3\x2\x2\x2\xCE\xCC\x3\x2\x2\x2\xCF\xD5\x5\x14\v\x2" +
-            "\xD0\xD5\a\x3\x2\x2\xD1\xD5\x5\x1C\xF\x2\xD2\xD5\x5\x1E\x10\x2\xD3\xD5" +
-            "\x5\x1A\xE\x2\xD4\xCF\x3\x2\x2\x2\xD4\xD0\x3\x2\x2\x2\xD4\xD1\x3\x2\x2" +
-            "\x2\xD4\xD2\x3\x2\x2\x2\xD4\xD3\x3\x2\x2\x2\xD5+\x3\x2\x2\x2\xD6\xD7\a" +
-            "\a\x2\x2\xD7\xD8\x5*\x16\x2\xD8\xD9\a\x6\x2\x2\xD9\xDA\x5*\x16\x2\xDA" +
-            "-\x3\x2\x2\x2\xDB\xDC\x5\n\x6\x2\xDC\xDD\a\b\x2\x2\xDD\xDE\x5(\x15\x2" +
-            "\xDE\xDF\a\b\x2\x2\xDF\xE0\x5 \x11\x2\xE0/\x3\x2\x2\x2\xE1\xE2\a!\x2\x2" +
-            "\xE2\xE3\a\x12\x2\x2\xE3\xE6\a\x12\x2\x2\xE4\xE7\x5\x14\v\x2\xE5\xE7\x5" +
-            "\x1E\x10\x2\xE6\xE4\x3\x2\x2\x2\xE6\xE5\x3\x2\x2\x2\xE7\x31\x3\x2\x2\x2" +
-            "\xE8\xE9\a\"\x2\x2\xE9\xEA\a\x12\x2\x2\xEA\xED\a\x12\x2\x2\xEB\xEE\x5" +
-            "\x14\v\x2\xEC\xEE\x5\x1E\x10\x2\xED\xEB\x3\x2\x2\x2\xED\xEC\x3\x2\x2\x2" +
-            "\xEE\x33\x3\x2\x2\x2\x15?GMY\x61kvz\x80\x92\x9B\x9E\xA4\xA8\xC4\xCC\xD4" +
-            "\xE6\xED";
-        public static readonly ATN _ATN =
-            new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
-    }
+namespace Skipper {
+using Antlr4.Runtime;
+using Antlr4.Runtime.Atn;
+using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
+using System.Collections.Generic;
+using DFA = Antlr4.Runtime.Dfa.DFA;
+
+[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.6.6")]
+[System.CLSCompliant(false)]
+public partial class PenguineseParser : Parser {
+	public const int
+		NUMERAL=1, OPERATOR=2, PLUS=3, COND=4, SepCOND=5, TERM=6, COM=7, OP=8, 
+		CP=9, OBR=10, CBR=11, OCB=12, CCB=13, DEC=14, EQUALS=15, COL=16, TRUE=17, 
+		FALSE=18, IF=19, THEN=20, WHILE=21, FOR=22, FUNC=23, MAIN=24, DOUBLE=25, 
+		CHARACTER=26, TEXT=27, NUMBER=28, ARRAYOF=29, BOOLEAN=30, HALT=31, RETURN=32, 
+		READ=33, WRITE=34, LETTER=35, CHAR=36, WORD=37, STRING=38, WHITESPACE=39;
+	public const int
+		RULE_start = 0, RULE_bloqueCodigo = 1, RULE_expresion = 2, RULE_declararVar = 3, 
+		RULE_asignVar = 4, RULE_decVar = 5, RULE_tipoVar = 6, RULE_tipoVarS = 7, 
+		RULE_nombreVar = 8, RULE_variable = 9, RULE_valorVar = 10, RULE_valorEntero = 11, 
+		RULE_valorDec = 12, RULE_valorChar = 13, RULE_valorString = 14, RULE_valorBool = 15, 
+		RULE_math = 16, RULE_mathSeq = 17, RULE_valorNum = 18, RULE_ciclo = 19, 
+		RULE_condicional = 20, RULE_valorCond = 21, RULE_condSeq = 22, RULE_seccionFor = 23, 
+		RULE_imprimirValor = 24, RULE_escribirValor = 25;
+	public static readonly string[] ruleNames = {
+		"start", "bloqueCodigo", "expresion", "declararVar", "asignVar", "decVar", 
+		"tipoVar", "tipoVarS", "nombreVar", "variable", "valorVar", "valorEntero", 
+		"valorDec", "valorChar", "valorString", "valorBool", "math", "mathSeq", 
+		"valorNum", "ciclo", "condicional", "valorCond", "condSeq", "seccionFor", 
+		"imprimirValor", "escribirValor"
+	};
+
+	private static readonly string[] _LiteralNames = {
+		null, null, null, "'+'", null, null, "';'", "','", "'('", "')'", "'['", 
+		"']'", "'{'", "'}'", "'.'", "'='", "':'", "'true'", "'false'", "'if'", 
+		"'then'", "'while'", "'for'", "'func'", "'main'", "'double'", "'character'", 
+		"'text'", "'number'", "'arrayof'", "'boolean'", "'NOOT NOOT'", "'regresar'", 
+		"'imprimirVar'", "'escribirVar'"
+	};
+	private static readonly string[] _SymbolicNames = {
+		null, "NUMERAL", "OPERATOR", "PLUS", "COND", "SepCOND", "TERM", "COM", 
+		"OP", "CP", "OBR", "CBR", "OCB", "CCB", "DEC", "EQUALS", "COL", "TRUE", 
+		"FALSE", "IF", "THEN", "WHILE", "FOR", "FUNC", "MAIN", "DOUBLE", "CHARACTER", 
+		"TEXT", "NUMBER", "ARRAYOF", "BOOLEAN", "HALT", "RETURN", "READ", "WRITE", 
+		"LETTER", "CHAR", "WORD", "STRING", "WHITESPACE"
+	};
+	public static readonly IVocabulary DefaultVocabulary = new Vocabulary(_LiteralNames, _SymbolicNames);
+
+	[System.Obsolete("Use Vocabulary instead.")]
+	public static readonly string[] tokenNames = GenerateTokenNames(DefaultVocabulary, _SymbolicNames.Length);
+
+	private static string[] GenerateTokenNames(IVocabulary vocabulary, int length) {
+		string[] tokenNames = new string[length];
+		for (int i = 0; i < tokenNames.Length; i++) {
+			tokenNames[i] = vocabulary.GetLiteralName(i);
+			if (tokenNames[i] == null) {
+				tokenNames[i] = vocabulary.GetSymbolicName(i);
+			}
+
+			if (tokenNames[i] == null) {
+				tokenNames[i] = "<INVALID>";
+			}
+		}
+
+		return tokenNames;
+	}
+
+	[System.Obsolete("Use IRecognizer.Vocabulary instead.")]
+	public override string[] TokenNames
+	{
+		get
+		{
+			return tokenNames;
+		}
+	}
+
+	[NotNull]
+	public override IVocabulary Vocabulary
+	{
+		get
+		{
+			return DefaultVocabulary;
+		}
+	}
+
+	public override string GrammarFileName { get { return "Penguinese.g4"; } }
+
+	public override string[] RuleNames { get { return ruleNames; } }
+
+	public override string SerializedAtn { get { return _serializedATN; } }
+
+	public PenguineseParser(ITokenStream input)
+		: base(input)
+	{
+		_interp = new ParserATNSimulator(this,_ATN);
+	}
+	public partial class StartContext : ParserRuleContext {
+		public ITerminalNode FUNC() { return GetToken(PenguineseParser.FUNC, 0); }
+		public ITerminalNode MAIN() { return GetToken(PenguineseParser.MAIN, 0); }
+		public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
+		public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
+		public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
+		public BloqueCodigoContext bloqueCodigo() {
+			return GetRuleContext<BloqueCodigoContext>(0);
+		}
+		public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
+		public StartContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_start; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterStart(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitStart(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitStart(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public StartContext start() {
+		StartContext _localctx = new StartContext(_ctx, State);
+		EnterRule(_localctx, 0, RULE_start);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 52; Match(FUNC);
+			State = 53; Match(MAIN);
+			State = 54; Match(OP);
+			State = 55; Match(CP);
+			State = 56; Match(OCB);
+			State = 57; bloqueCodigo();
+			State = 58; Match(CCB);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class BloqueCodigoContext : ParserRuleContext {
+		public ExpresionContext[] expresion() {
+			return GetRuleContexts<ExpresionContext>();
+		}
+		public ExpresionContext expresion(int i) {
+			return GetRuleContext<ExpresionContext>(i);
+		}
+		public BloqueCodigoContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_bloqueCodigo; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterBloqueCodigo(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitBloqueCodigo(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitBloqueCodigo(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public BloqueCodigoContext bloqueCodigo() {
+		BloqueCodigoContext _localctx = new BloqueCodigoContext(_ctx, State);
+		EnterRule(_localctx, 2, RULE_bloqueCodigo);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 61;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			do {
+				{
+				{
+				State = 60; expresion();
+				}
+				}
+				State = 63;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IF) | (1L << WHILE) | (1L << FOR) | (1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << ARRAYOF) | (1L << BOOLEAN) | (1L << HALT) | (1L << READ) | (1L << WRITE) | (1L << LETTER) | (1L << WORD))) != 0) );
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ExpresionContext : ParserRuleContext {
+		public ITerminalNode TERM() { return GetToken(PenguineseParser.TERM, 0); }
+		public DeclararVarContext declararVar() {
+			return GetRuleContext<DeclararVarContext>(0);
+		}
+		public MathContext math() {
+			return GetRuleContext<MathContext>(0);
+		}
+		public CicloContext ciclo() {
+			return GetRuleContext<CicloContext>(0);
+		}
+		public ImprimirValorContext imprimirValor() {
+			return GetRuleContext<ImprimirValorContext>(0);
+		}
+		public EscribirValorContext escribirValor() {
+			return GetRuleContext<EscribirValorContext>(0);
+		}
+		public ITerminalNode HALT() { return GetToken(PenguineseParser.HALT, 0); }
+		public ExpresionContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_expresion; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterExpresion(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitExpresion(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitExpresion(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ExpresionContext expresion() {
+		ExpresionContext _localctx = new ExpresionContext(_ctx, State);
+		EnterRule(_localctx, 4, RULE_expresion);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 71;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case DOUBLE:
+			case CHARACTER:
+			case TEXT:
+			case NUMBER:
+			case ARRAYOF:
+			case BOOLEAN:
+				{
+				State = 65; declararVar();
+				}
+				break;
+			case LETTER:
+			case WORD:
+				{
+				State = 66; math();
+				}
+				break;
+			case IF:
+			case WHILE:
+			case FOR:
+				{
+				State = 67; ciclo();
+				}
+				break;
+			case READ:
+				{
+				State = 68; imprimirValor();
+				}
+				break;
+			case WRITE:
+				{
+				State = 69; escribirValor();
+				}
+				break;
+			case HALT:
+				{
+				State = 70; Match(HALT);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			State = 73; Match(TERM);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DeclararVarContext : ParserRuleContext {
+		public DecVarContext decVar() {
+			return GetRuleContext<DecVarContext>(0);
+		}
+		public AsignVarContext asignVar() {
+			return GetRuleContext<AsignVarContext>(0);
+		}
+		public DeclararVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_declararVar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterDeclararVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitDeclararVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDeclararVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DeclararVarContext declararVar() {
+		DeclararVarContext _localctx = new DeclararVarContext(_ctx, State);
+		EnterRule(_localctx, 6, RULE_declararVar);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 77;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				{
+				State = 75; decVar();
+				}
+				break;
+
+			case 2:
+				{
+				State = 76; asignVar();
+				}
+				break;
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class AsignVarContext : ParserRuleContext {
+		public AsignVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_asignVar; } }
+	 
+		public AsignVarContext() { }
+		public virtual void CopyFrom(AsignVarContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class AsignarValorContext : AsignVarContext {
+		public TipoVarSContext tipoVarS() {
+			return GetRuleContext<TipoVarSContext>(0);
+		}
+		public NombreVarContext nombreVar() {
+			return GetRuleContext<NombreVarContext>(0);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public ValorVarContext valorVar() {
+			return GetRuleContext<ValorVarContext>(0);
+		}
+		public AsignarValorContext(AsignVarContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterAsignarValor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitAsignarValor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAsignarValor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class AsignarVariableContext : AsignVarContext {
+		public TipoVarSContext tipoVarS() {
+			return GetRuleContext<TipoVarSContext>(0);
+		}
+		public NombreVarContext nombreVar() {
+			return GetRuleContext<NombreVarContext>(0);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public AsignarVariableContext(AsignVarContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterAsignarVariable(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitAsignarVariable(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitAsignarVariable(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public AsignVarContext asignVar() {
+		AsignVarContext _localctx = new AsignVarContext(_ctx, State);
+		EnterRule(_localctx, 8, RULE_asignVar);
+		try {
+			State = 89;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,3,_ctx) ) {
+			case 1:
+				_localctx = new AsignarValorContext(_localctx);
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 79; tipoVarS();
+				State = 80; nombreVar();
+				State = 81; Match(EQUALS);
+				State = 82; valorVar();
+				}
+				break;
+
+			case 2:
+				_localctx = new AsignarVariableContext(_localctx);
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 84; tipoVarS();
+				State = 85; nombreVar();
+				State = 86; Match(EQUALS);
+				State = 87; variable();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class DecVarContext : ParserRuleContext {
+		public TipoVarContext tipoVar() {
+			return GetRuleContext<TipoVarContext>(0);
+		}
+		public NombreVarContext[] nombreVar() {
+			return GetRuleContexts<NombreVarContext>();
+		}
+		public NombreVarContext nombreVar(int i) {
+			return GetRuleContext<NombreVarContext>(i);
+		}
+		public ITerminalNode[] COM() { return GetTokens(PenguineseParser.COM); }
+		public ITerminalNode COM(int i) {
+			return GetToken(PenguineseParser.COM, i);
+		}
+		public DecVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_decVar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterDecVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitDecVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDecVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public DecVarContext decVar() {
+		DecVarContext _localctx = new DecVarContext(_ctx, State);
+		EnterRule(_localctx, 10, RULE_decVar);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 91; tipoVar();
+			State = 92; nombreVar();
+			State = 97;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			while (_la==COM) {
+				{
+				{
+				State = 93; Match(COM);
+				State = 94; nombreVar();
+				}
+				}
+				State = 99;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class TipoVarContext : ParserRuleContext {
+		public ITerminalNode ARRAYOF() { return GetToken(PenguineseParser.ARRAYOF, 0); }
+		public TipoVarSContext tipoVarS() {
+			return GetRuleContext<TipoVarSContext>(0);
+		}
+		public ITerminalNode OBR() { return GetToken(PenguineseParser.OBR, 0); }
+		public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
+		public ITerminalNode CBR() { return GetToken(PenguineseParser.CBR, 0); }
+		public TipoVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_tipoVar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterTipoVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitTipoVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTipoVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public TipoVarContext tipoVar() {
+		TipoVarContext _localctx = new TipoVarContext(_ctx, State);
+		EnterRule(_localctx, 12, RULE_tipoVar);
+		try {
+			State = 107;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case ARRAYOF:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 100; Match(ARRAYOF);
+				State = 101; tipoVarS();
+				State = 102; Match(OBR);
+				State = 103; Match(NUMERAL);
+				State = 104; Match(CBR);
+				}
+				break;
+			case DOUBLE:
+			case CHARACTER:
+			case TEXT:
+			case NUMBER:
+			case BOOLEAN:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 106; tipoVarS();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class TipoVarSContext : ParserRuleContext {
+		public ITerminalNode CHARACTER() { return GetToken(PenguineseParser.CHARACTER, 0); }
+		public ITerminalNode DOUBLE() { return GetToken(PenguineseParser.DOUBLE, 0); }
+		public ITerminalNode BOOLEAN() { return GetToken(PenguineseParser.BOOLEAN, 0); }
+		public ITerminalNode NUMBER() { return GetToken(PenguineseParser.NUMBER, 0); }
+		public ITerminalNode TEXT() { return GetToken(PenguineseParser.TEXT, 0); }
+		public TipoVarSContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_tipoVarS; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterTipoVarS(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitTipoVarS(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTipoVarS(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public TipoVarSContext tipoVarS() {
+		TipoVarSContext _localctx = new TipoVarSContext(_ctx, State);
+		EnterRule(_localctx, 14, RULE_tipoVarS);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 109;
+			_la = _input.La(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << DOUBLE) | (1L << CHARACTER) | (1L << TEXT) | (1L << NUMBER) | (1L << BOOLEAN))) != 0)) ) {
+			_errHandler.RecoverInline(this);
+			} else {
+				if (_input.La(1) == TokenConstants.Eof) {
+					matchedEOF = true;
+				}
+
+				_errHandler.ReportMatch(this);
+				Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class NombreVarContext : ParserRuleContext {
+		public ITerminalNode WORD() { return GetToken(PenguineseParser.WORD, 0); }
+		public ITerminalNode LETTER() { return GetToken(PenguineseParser.LETTER, 0); }
+		public NombreVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_nombreVar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterNombreVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitNombreVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNombreVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public NombreVarContext nombreVar() {
+		NombreVarContext _localctx = new NombreVarContext(_ctx, State);
+		EnterRule(_localctx, 16, RULE_nombreVar);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 111;
+			_la = _input.La(1);
+			if ( !(_la==LETTER || _la==WORD) ) {
+			_errHandler.RecoverInline(this);
+			} else {
+				if (_input.La(1) == TokenConstants.Eof) {
+					matchedEOF = true;
+				}
+
+				_errHandler.ReportMatch(this);
+				Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class VariableContext : ParserRuleContext {
+		public VariableContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_variable; } }
+	 
+		public VariableContext() { }
+		public virtual void CopyFrom(VariableContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class NombreSimpleContext : VariableContext {
+		public NombreVarContext nombreVar() {
+			return GetRuleContext<NombreVarContext>(0);
+		}
+		public NombreSimpleContext(VariableContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterNombreSimple(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitNombreSimple(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNombreSimple(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class NombreArregloContext : VariableContext {
+		public NombreVarContext[] nombreVar() {
+			return GetRuleContexts<NombreVarContext>();
+		}
+		public NombreVarContext nombreVar(int i) {
+			return GetRuleContext<NombreVarContext>(i);
+		}
+		public ITerminalNode OBR() { return GetToken(PenguineseParser.OBR, 0); }
+		public ITerminalNode CBR() { return GetToken(PenguineseParser.CBR, 0); }
+		public ValorEnteroContext valorEntero() {
+			return GetRuleContext<ValorEnteroContext>(0);
+		}
+		public NombreArregloContext(VariableContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterNombreArreglo(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitNombreArreglo(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitNombreArreglo(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public VariableContext variable() {
+		VariableContext _localctx = new VariableContext(_ctx, State);
+		EnterRule(_localctx, 18, RULE_variable);
+		try {
+			State = 122;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,7,_ctx) ) {
+			case 1:
+				_localctx = new NombreSimpleContext(_localctx);
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 113; nombreVar();
+				}
+				break;
+
+			case 2:
+				_localctx = new NombreArregloContext(_localctx);
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 114; nombreVar();
+				State = 115; Match(OBR);
+				State = 118;
+				_errHandler.Sync(this);
+				switch (_input.La(1)) {
+				case LETTER:
+				case WORD:
+					{
+					State = 116; nombreVar();
+					}
+					break;
+				case NUMERAL:
+					{
+					State = 117; valorEntero();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				State = 120; Match(CBR);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorVarContext : ParserRuleContext {
+		public ValorEnteroContext valorEntero() {
+			return GetRuleContext<ValorEnteroContext>(0);
+		}
+		public ValorDecContext valorDec() {
+			return GetRuleContext<ValorDecContext>(0);
+		}
+		public ValorCharContext valorChar() {
+			return GetRuleContext<ValorCharContext>(0);
+		}
+		public ValorStringContext valorString() {
+			return GetRuleContext<ValorStringContext>(0);
+		}
+		public ValorBoolContext valorBool() {
+			return GetRuleContext<ValorBoolContext>(0);
+		}
+		public ValorVarContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorVar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorVarContext valorVar() {
+		ValorVarContext _localctx = new ValorVarContext(_ctx, State);
+		EnterRule(_localctx, 20, RULE_valorVar);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 129;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,8,_ctx) ) {
+			case 1:
+				{
+				State = 124; valorEntero();
+				}
+				break;
+
+			case 2:
+				{
+				State = 125; valorDec();
+				}
+				break;
+
+			case 3:
+				{
+				State = 126; valorChar();
+				}
+				break;
+
+			case 4:
+				{
+				State = 127; valorString();
+				}
+				break;
+
+			case 5:
+				{
+				State = 128; valorBool();
+				}
+				break;
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorEnteroContext : ParserRuleContext {
+		public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
+		public ValorEnteroContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorEntero; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorEntero(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorEntero(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorEntero(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorEnteroContext valorEntero() {
+		ValorEnteroContext _localctx = new ValorEnteroContext(_ctx, State);
+		EnterRule(_localctx, 22, RULE_valorEntero);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 131; Match(NUMERAL);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorDecContext : ParserRuleContext {
+		public ITerminalNode[] NUMERAL() { return GetTokens(PenguineseParser.NUMERAL); }
+		public ITerminalNode NUMERAL(int i) {
+			return GetToken(PenguineseParser.NUMERAL, i);
+		}
+		public ITerminalNode DEC() { return GetToken(PenguineseParser.DEC, 0); }
+		public ValorDecContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorDec; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorDec(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorDec(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorDec(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorDecContext valorDec() {
+		ValorDecContext _localctx = new ValorDecContext(_ctx, State);
+		EnterRule(_localctx, 24, RULE_valorDec);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 133; Match(NUMERAL);
+			State = 134; Match(DEC);
+			State = 135; Match(NUMERAL);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorCharContext : ParserRuleContext {
+		public ITerminalNode CHAR() { return GetToken(PenguineseParser.CHAR, 0); }
+		public ValorCharContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorChar; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorChar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorChar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorChar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorCharContext valorChar() {
+		ValorCharContext _localctx = new ValorCharContext(_ctx, State);
+		EnterRule(_localctx, 26, RULE_valorChar);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 137; Match(CHAR);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorStringContext : ParserRuleContext {
+		public ITerminalNode STRING() { return GetToken(PenguineseParser.STRING, 0); }
+		public ValorStringContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorString; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorString(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorString(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorString(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorStringContext valorString() {
+		ValorStringContext _localctx = new ValorStringContext(_ctx, State);
+		EnterRule(_localctx, 28, RULE_valorString);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 139; Match(STRING);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorBoolContext : ParserRuleContext {
+		public ITerminalNode TRUE() { return GetToken(PenguineseParser.TRUE, 0); }
+		public ITerminalNode FALSE() { return GetToken(PenguineseParser.FALSE, 0); }
+		public ValorBoolContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorBool; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorBool(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorBool(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorBool(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorBoolContext valorBool() {
+		ValorBoolContext _localctx = new ValorBoolContext(_ctx, State);
+		EnterRule(_localctx, 30, RULE_valorBool);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 141;
+			_la = _input.La(1);
+			if ( !(_la==TRUE || _la==FALSE) ) {
+			_errHandler.RecoverInline(this);
+			} else {
+				if (_input.La(1) == TokenConstants.Eof) {
+					matchedEOF = true;
+				}
+
+				_errHandler.ReportMatch(this);
+				Consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class MathContext : ParserRuleContext {
+		public MathContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_math; } }
+	 
+		public MathContext() { }
+		public virtual void CopyFrom(MathContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class OperacionVeVContext : MathContext {
+		public VariableContext[] variable() {
+			return GetRuleContexts<VariableContext>();
+		}
+		public VariableContext variable(int i) {
+			return GetRuleContext<VariableContext>(i);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public MathSeqContext[] mathSeq() {
+			return GetRuleContexts<MathSeqContext>();
+		}
+		public MathSeqContext mathSeq(int i) {
+			return GetRuleContext<MathSeqContext>(i);
+		}
+		public OperacionVeVContext(MathContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterOperacionVeV(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitOperacionVeV(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperacionVeV(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class OperacionVeNContext : MathContext {
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public ITerminalNode EQUALS() { return GetToken(PenguineseParser.EQUALS, 0); }
+		public ValorNumContext valorNum() {
+			return GetRuleContext<ValorNumContext>(0);
+		}
+		public MathSeqContext[] mathSeq() {
+			return GetRuleContexts<MathSeqContext>();
+		}
+		public MathSeqContext mathSeq(int i) {
+			return GetRuleContext<MathSeqContext>(i);
+		}
+		public OperacionVeNContext(MathContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterOperacionVeN(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitOperacionVeN(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitOperacionVeN(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public MathContext math() {
+		MathContext _localctx = new MathContext(_ctx, State);
+		EnterRule(_localctx, 32, RULE_math);
+		int _la;
+		try {
+			State = 161;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,11,_ctx) ) {
+			case 1:
+				_localctx = new OperacionVeNContext(_localctx);
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 143; variable();
+				State = 144; Match(EQUALS);
+				State = 145; valorNum();
+				State = 149;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+				while (_la==OPERATOR) {
+					{
+					{
+					State = 146; mathSeq();
+					}
+					}
+					State = 151;
+					_errHandler.Sync(this);
+					_la = _input.La(1);
+				}
+				}
+				break;
+
+			case 2:
+				_localctx = new OperacionVeVContext(_localctx);
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 152; variable();
+				State = 153; Match(EQUALS);
+				State = 154; variable();
+				State = 158;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+				while (_la==OPERATOR) {
+					{
+					{
+					State = 155; mathSeq();
+					}
+					}
+					State = 160;
+					_errHandler.Sync(this);
+					_la = _input.La(1);
+				}
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class MathSeqContext : ParserRuleContext {
+		public MathSeqContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_mathSeq; } }
+	 
+		public MathSeqContext() { }
+		public virtual void CopyFrom(MathSeqContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class SeqNumContext : MathSeqContext {
+		public ITerminalNode OPERATOR() { return GetToken(PenguineseParser.OPERATOR, 0); }
+		public ValorNumContext valorNum() {
+			return GetRuleContext<ValorNumContext>(0);
+		}
+		public SeqNumContext(MathSeqContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterSeqNum(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitSeqNum(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeqNum(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class SeqVarContext : MathSeqContext {
+		public ITerminalNode OPERATOR() { return GetToken(PenguineseParser.OPERATOR, 0); }
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public SeqVarContext(MathSeqContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterSeqVar(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitSeqVar(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeqVar(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public MathSeqContext mathSeq() {
+		MathSeqContext _localctx = new MathSeqContext(_ctx, State);
+		EnterRule(_localctx, 34, RULE_mathSeq);
+		try {
+			State = 167;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,12,_ctx) ) {
+			case 1:
+				_localctx = new SeqNumContext(_localctx);
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 163; Match(OPERATOR);
+				State = 164; valorNum();
+				}
+				break;
+
+			case 2:
+				_localctx = new SeqVarContext(_localctx);
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 165; Match(OPERATOR);
+				State = 166; variable();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorNumContext : ParserRuleContext {
+		public ValorEnteroContext valorEntero() {
+			return GetRuleContext<ValorEnteroContext>(0);
+		}
+		public ValorDecContext valorDec() {
+			return GetRuleContext<ValorDecContext>(0);
+		}
+		public ValorNumContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorNum; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorNum(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorNum(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorNum(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorNumContext valorNum() {
+		ValorNumContext _localctx = new ValorNumContext(_ctx, State);
+		EnterRule(_localctx, 36, RULE_valorNum);
+		try {
+			State = 171;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,13,_ctx) ) {
+			case 1:
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 169; valorEntero();
+				}
+				break;
+
+			case 2:
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 170; valorDec();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class CicloContext : ParserRuleContext {
+		public CicloContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_ciclo; } }
+	 
+		public CicloContext() { }
+		public virtual void CopyFrom(CicloContext context) {
+			base.CopyFrom(context);
+		}
+	}
+	public partial class CicloWhileContext : CicloContext {
+		public ITerminalNode WHILE() { return GetToken(PenguineseParser.WHILE, 0); }
+		public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
+		public CondicionalContext condicional() {
+			return GetRuleContext<CondicionalContext>(0);
+		}
+		public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
+		public ITerminalNode THEN() { return GetToken(PenguineseParser.THEN, 0); }
+		public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
+		public BloqueCodigoContext bloqueCodigo() {
+			return GetRuleContext<BloqueCodigoContext>(0);
+		}
+		public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
+		public CicloWhileContext(CicloContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterCicloWhile(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitCicloWhile(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCicloWhile(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class CicloIfContext : CicloContext {
+		public ITerminalNode IF() { return GetToken(PenguineseParser.IF, 0); }
+		public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
+		public CondicionalContext condicional() {
+			return GetRuleContext<CondicionalContext>(0);
+		}
+		public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
+		public ITerminalNode THEN() { return GetToken(PenguineseParser.THEN, 0); }
+		public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
+		public BloqueCodigoContext bloqueCodigo() {
+			return GetRuleContext<BloqueCodigoContext>(0);
+		}
+		public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
+		public CicloIfContext(CicloContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterCicloIf(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitCicloIf(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCicloIf(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class CicloForContext : CicloContext {
+		public ITerminalNode FOR() { return GetToken(PenguineseParser.FOR, 0); }
+		public ITerminalNode OP() { return GetToken(PenguineseParser.OP, 0); }
+		public SeccionForContext seccionFor() {
+			return GetRuleContext<SeccionForContext>(0);
+		}
+		public ITerminalNode CP() { return GetToken(PenguineseParser.CP, 0); }
+		public ITerminalNode OCB() { return GetToken(PenguineseParser.OCB, 0); }
+		public BloqueCodigoContext bloqueCodigo() {
+			return GetRuleContext<BloqueCodigoContext>(0);
+		}
+		public ITerminalNode CCB() { return GetToken(PenguineseParser.CCB, 0); }
+		public CicloForContext(CicloContext context) { CopyFrom(context); }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterCicloFor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitCicloFor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCicloFor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public CicloContext ciclo() {
+		CicloContext _localctx = new CicloContext(_ctx, State);
+		EnterRule(_localctx, 38, RULE_ciclo);
+		try {
+			State = 199;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case IF:
+				_localctx = new CicloIfContext(_localctx);
+				EnterOuterAlt(_localctx, 1);
+				{
+				State = 173; Match(IF);
+				State = 174; Match(OP);
+				State = 175; condicional();
+				State = 176; Match(CP);
+				State = 177; Match(THEN);
+				State = 178; Match(OCB);
+				State = 179; bloqueCodigo();
+				State = 180; Match(CCB);
+				}
+				break;
+			case WHILE:
+				_localctx = new CicloWhileContext(_localctx);
+				EnterOuterAlt(_localctx, 2);
+				{
+				State = 182; Match(WHILE);
+				State = 183; Match(OP);
+				State = 184; condicional();
+				State = 185; Match(CP);
+				State = 186; Match(THEN);
+				State = 187; Match(OCB);
+				State = 188; bloqueCodigo();
+				State = 189; Match(CCB);
+				}
+				break;
+			case FOR:
+				_localctx = new CicloForContext(_localctx);
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 191; Match(FOR);
+				State = 192; Match(OP);
+				State = 193; seccionFor();
+				State = 194; Match(CP);
+				State = 195; Match(OCB);
+				State = 196; bloqueCodigo();
+				State = 197; Match(CCB);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class CondicionalContext : ParserRuleContext {
+		public ValorCondContext[] valorCond() {
+			return GetRuleContexts<ValorCondContext>();
+		}
+		public ValorCondContext valorCond(int i) {
+			return GetRuleContext<ValorCondContext>(i);
+		}
+		public ITerminalNode COND() { return GetToken(PenguineseParser.COND, 0); }
+		public CondSeqContext[] condSeq() {
+			return GetRuleContexts<CondSeqContext>();
+		}
+		public CondSeqContext condSeq(int i) {
+			return GetRuleContext<CondSeqContext>(i);
+		}
+		public CondicionalContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_condicional; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterCondicional(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitCondicional(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCondicional(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public CondicionalContext condicional() {
+		CondicionalContext _localctx = new CondicionalContext(_ctx, State);
+		EnterRule(_localctx, 40, RULE_condicional);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 201; valorCond();
+			State = 202; Match(COND);
+			State = 203; valorCond();
+			State = 207;
+			_errHandler.Sync(this);
+			_la = _input.La(1);
+			while (_la==SepCOND) {
+				{
+				{
+				State = 204; condSeq();
+				}
+				}
+				State = 209;
+				_errHandler.Sync(this);
+				_la = _input.La(1);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ValorCondContext : ParserRuleContext {
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public ITerminalNode NUMERAL() { return GetToken(PenguineseParser.NUMERAL, 0); }
+		public ValorCharContext valorChar() {
+			return GetRuleContext<ValorCharContext>(0);
+		}
+		public ValorStringContext valorString() {
+			return GetRuleContext<ValorStringContext>(0);
+		}
+		public ValorDecContext valorDec() {
+			return GetRuleContext<ValorDecContext>(0);
+		}
+		public ValorCondContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_valorCond; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterValorCond(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitValorCond(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitValorCond(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ValorCondContext valorCond() {
+		ValorCondContext _localctx = new ValorCondContext(_ctx, State);
+		EnterRule(_localctx, 42, RULE_valorCond);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 215;
+			_errHandler.Sync(this);
+			switch ( Interpreter.AdaptivePredict(_input,16,_ctx) ) {
+			case 1:
+				{
+				State = 210; variable();
+				}
+				break;
+
+			case 2:
+				{
+				State = 211; Match(NUMERAL);
+				}
+				break;
+
+			case 3:
+				{
+				State = 212; valorChar();
+				}
+				break;
+
+			case 4:
+				{
+				State = 213; valorString();
+				}
+				break;
+
+			case 5:
+				{
+				State = 214; valorDec();
+				}
+				break;
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class CondSeqContext : ParserRuleContext {
+		public ITerminalNode SepCOND() { return GetToken(PenguineseParser.SepCOND, 0); }
+		public ValorCondContext[] valorCond() {
+			return GetRuleContexts<ValorCondContext>();
+		}
+		public ValorCondContext valorCond(int i) {
+			return GetRuleContext<ValorCondContext>(i);
+		}
+		public ITerminalNode COND() { return GetToken(PenguineseParser.COND, 0); }
+		public CondSeqContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_condSeq; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterCondSeq(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitCondSeq(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitCondSeq(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public CondSeqContext condSeq() {
+		CondSeqContext _localctx = new CondSeqContext(_ctx, State);
+		EnterRule(_localctx, 44, RULE_condSeq);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 217; Match(SepCOND);
+			State = 218; valorCond();
+			State = 219; Match(COND);
+			State = 220; valorCond();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class SeccionForContext : ParserRuleContext {
+		public AsignVarContext asignVar() {
+			return GetRuleContext<AsignVarContext>(0);
+		}
+		public ITerminalNode[] TERM() { return GetTokens(PenguineseParser.TERM); }
+		public ITerminalNode TERM(int i) {
+			return GetToken(PenguineseParser.TERM, i);
+		}
+		public CondicionalContext condicional() {
+			return GetRuleContext<CondicionalContext>(0);
+		}
+		public MathContext math() {
+			return GetRuleContext<MathContext>(0);
+		}
+		public SeccionForContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_seccionFor; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterSeccionFor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitSeccionFor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitSeccionFor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public SeccionForContext seccionFor() {
+		SeccionForContext _localctx = new SeccionForContext(_ctx, State);
+		EnterRule(_localctx, 46, RULE_seccionFor);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 222; asignVar();
+			State = 223; Match(TERM);
+			State = 224; condicional();
+			State = 225; Match(TERM);
+			State = 226; math();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class ImprimirValorContext : ParserRuleContext {
+		public ITerminalNode READ() { return GetToken(PenguineseParser.READ, 0); }
+		public ITerminalNode[] COL() { return GetTokens(PenguineseParser.COL); }
+		public ITerminalNode COL(int i) {
+			return GetToken(PenguineseParser.COL, i);
+		}
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public ValorStringContext valorString() {
+			return GetRuleContext<ValorStringContext>(0);
+		}
+		public ImprimirValorContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_imprimirValor; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterImprimirValor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitImprimirValor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitImprimirValor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public ImprimirValorContext imprimirValor() {
+		ImprimirValorContext _localctx = new ImprimirValorContext(_ctx, State);
+		EnterRule(_localctx, 48, RULE_imprimirValor);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 228; Match(READ);
+			State = 229; Match(COL);
+			State = 230; Match(COL);
+			State = 233;
+			_errHandler.Sync(this);
+			switch (_input.La(1)) {
+			case LETTER:
+			case WORD:
+				{
+				State = 231; variable();
+				}
+				break;
+			case STRING:
+				{
+				State = 232; valorString();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class EscribirValorContext : ParserRuleContext {
+		public ITerminalNode WRITE() { return GetToken(PenguineseParser.WRITE, 0); }
+		public ITerminalNode[] COL() { return GetTokens(PenguineseParser.COL); }
+		public ITerminalNode COL(int i) {
+			return GetToken(PenguineseParser.COL, i);
+		}
+		public VariableContext variable() {
+			return GetRuleContext<VariableContext>(0);
+		}
+		public EscribirValorContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_escribirValor; } }
+		public override void EnterRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.EnterEscribirValor(this);
+		}
+		public override void ExitRule(IParseTreeListener listener) {
+			IPenguineseListener typedListener = listener as IPenguineseListener;
+			if (typedListener != null) typedListener.ExitEscribirValor(this);
+		}
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IPenguineseVisitor<TResult> typedVisitor = visitor as IPenguineseVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitEscribirValor(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public EscribirValorContext escribirValor() {
+		EscribirValorContext _localctx = new EscribirValorContext(_ctx, State);
+		EnterRule(_localctx, 50, RULE_escribirValor);
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 235; Match(WRITE);
+			State = 236; Match(COL);
+			State = 237; Match(COL);
+			{
+			State = 238; variable();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.ReportError(this, re);
+			_errHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public static readonly string _serializedATN =
+		"\x3\xAF6F\x8320\x479D\xB75C\x4880\x1605\x191C\xAB37\x3)\xF3\x4\x2\t\x2"+
+		"\x4\x3\t\x3\x4\x4\t\x4\x4\x5\t\x5\x4\x6\t\x6\x4\a\t\a\x4\b\t\b\x4\t\t"+
+		"\t\x4\n\t\n\x4\v\t\v\x4\f\t\f\x4\r\t\r\x4\xE\t\xE\x4\xF\t\xF\x4\x10\t"+
+		"\x10\x4\x11\t\x11\x4\x12\t\x12\x4\x13\t\x13\x4\x14\t\x14\x4\x15\t\x15"+
+		"\x4\x16\t\x16\x4\x17\t\x17\x4\x18\t\x18\x4\x19\t\x19\x4\x1A\t\x1A\x4\x1B"+
+		"\t\x1B\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x2\x3\x3\x6\x3@\n"+
+		"\x3\r\x3\xE\x3\x41\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x3\x4\x5\x4J\n\x4\x3"+
+		"\x4\x3\x4\x3\x5\x3\x5\x5\x5P\n\x5\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6\x3\x6"+
+		"\x3\x6\x3\x6\x3\x6\x3\x6\x5\x6\\\n\x6\x3\a\x3\a\x3\a\x3\a\a\a\x62\n\a"+
+		"\f\a\xE\a\x65\v\a\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x3\b\x5\bn\n\b\x3\t\x3"+
+		"\t\x3\n\x3\n\x3\v\x3\v\x3\v\x3\v\x3\v\x5\vy\n\v\x3\v\x3\v\x5\v}\n\v\x3"+
+		"\f\x3\f\x3\f\x3\f\x3\f\x5\f\x84\n\f\x3\r\x3\r\x3\xE\x3\xE\x3\xE\x3\xE"+
+		"\x3\xF\x3\xF\x3\x10\x3\x10\x3\x11\x3\x11\x3\x12\x3\x12\x3\x12\x3\x12\a"+
+		"\x12\x96\n\x12\f\x12\xE\x12\x99\v\x12\x3\x12\x3\x12\x3\x12\x3\x12\a\x12"+
+		"\x9F\n\x12\f\x12\xE\x12\xA2\v\x12\x5\x12\xA4\n\x12\x3\x13\x3\x13\x3\x13"+
+		"\x3\x13\x5\x13\xAA\n\x13\x3\x14\x3\x14\x5\x14\xAE\n\x14\x3\x15\x3\x15"+
+		"\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15"+
+		"\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15\x3\x15"+
+		"\x3\x15\x3\x15\x3\x15\x3\x15\x5\x15\xCA\n\x15\x3\x16\x3\x16\x3\x16\x3"+
+		"\x16\a\x16\xD0\n\x16\f\x16\xE\x16\xD3\v\x16\x3\x17\x3\x17\x3\x17\x3\x17"+
+		"\x3\x17\x5\x17\xDA\n\x17\x3\x18\x3\x18\x3\x18\x3\x18\x3\x18\x3\x19\x3"+
+		"\x19\x3\x19\x3\x19\x3\x19\x3\x19\x3\x1A\x3\x1A\x3\x1A\x3\x1A\x3\x1A\x5"+
+		"\x1A\xEC\n\x1A\x3\x1B\x3\x1B\x3\x1B\x3\x1B\x3\x1B\x3\x1B\x2\x2\x2\x1C"+
+		"\x2\x2\x4\x2\x6\x2\b\x2\n\x2\f\x2\xE\x2\x10\x2\x12\x2\x14\x2\x16\x2\x18"+
+		"\x2\x1A\x2\x1C\x2\x1E\x2 \x2\"\x2$\x2&\x2(\x2*\x2,\x2.\x2\x30\x2\x32\x2"+
+		"\x34\x2\x2\x5\x4\x2\x1B\x1E  \x4\x2%%\'\'\x3\x2\x13\x14\xF5\x2\x36\x3"+
+		"\x2\x2\x2\x4?\x3\x2\x2\x2\x6I\x3\x2\x2\x2\bO\x3\x2\x2\x2\n[\x3\x2\x2\x2"+
+		"\f]\x3\x2\x2\x2\xEm\x3\x2\x2\x2\x10o\x3\x2\x2\x2\x12q\x3\x2\x2\x2\x14"+
+		"|\x3\x2\x2\x2\x16\x83\x3\x2\x2\x2\x18\x85\x3\x2\x2\x2\x1A\x87\x3\x2\x2"+
+		"\x2\x1C\x8B\x3\x2\x2\x2\x1E\x8D\x3\x2\x2\x2 \x8F\x3\x2\x2\x2\"\xA3\x3"+
+		"\x2\x2\x2$\xA9\x3\x2\x2\x2&\xAD\x3\x2\x2\x2(\xC9\x3\x2\x2\x2*\xCB\x3\x2"+
+		"\x2\x2,\xD9\x3\x2\x2\x2.\xDB\x3\x2\x2\x2\x30\xE0\x3\x2\x2\x2\x32\xE6\x3"+
+		"\x2\x2\x2\x34\xED\x3\x2\x2\x2\x36\x37\a\x19\x2\x2\x37\x38\a\x1A\x2\x2"+
+		"\x38\x39\a\n\x2\x2\x39:\a\v\x2\x2:;\a\xE\x2\x2;<\x5\x4\x3\x2<=\a\xF\x2"+
+		"\x2=\x3\x3\x2\x2\x2>@\x5\x6\x4\x2?>\x3\x2\x2\x2@\x41\x3\x2\x2\x2\x41?"+
+		"\x3\x2\x2\x2\x41\x42\x3\x2\x2\x2\x42\x5\x3\x2\x2\x2\x43J\x5\b\x5\x2\x44"+
+		"J\x5\"\x12\x2\x45J\x5(\x15\x2\x46J\x5\x32\x1A\x2GJ\x5\x34\x1B\x2HJ\a!"+
+		"\x2\x2I\x43\x3\x2\x2\x2I\x44\x3\x2\x2\x2I\x45\x3\x2\x2\x2I\x46\x3\x2\x2"+
+		"\x2IG\x3\x2\x2\x2IH\x3\x2\x2\x2JK\x3\x2\x2\x2KL\a\b\x2\x2L\a\x3\x2\x2"+
+		"\x2MP\x5\f\a\x2NP\x5\n\x6\x2OM\x3\x2\x2\x2ON\x3\x2\x2\x2P\t\x3\x2\x2\x2"+
+		"QR\x5\x10\t\x2RS\x5\x12\n\x2ST\a\x11\x2\x2TU\x5\x16\f\x2U\\\x3\x2\x2\x2"+
+		"VW\x5\x10\t\x2WX\x5\x12\n\x2XY\a\x11\x2\x2YZ\x5\x14\v\x2Z\\\x3\x2\x2\x2"+
+		"[Q\x3\x2\x2\x2[V\x3\x2\x2\x2\\\v\x3\x2\x2\x2]^\x5\xE\b\x2^\x63\x5\x12"+
+		"\n\x2_`\a\t\x2\x2`\x62\x5\x12\n\x2\x61_\x3\x2\x2\x2\x62\x65\x3\x2\x2\x2"+
+		"\x63\x61\x3\x2\x2\x2\x63\x64\x3\x2\x2\x2\x64\r\x3\x2\x2\x2\x65\x63\x3"+
+		"\x2\x2\x2\x66g\a\x1F\x2\x2gh\x5\x10\t\x2hi\a\f\x2\x2ij\a\x3\x2\x2jk\a"+
+		"\r\x2\x2kn\x3\x2\x2\x2ln\x5\x10\t\x2m\x66\x3\x2\x2\x2ml\x3\x2\x2\x2n\xF"+
+		"\x3\x2\x2\x2op\t\x2\x2\x2p\x11\x3\x2\x2\x2qr\t\x3\x2\x2r\x13\x3\x2\x2"+
+		"\x2s}\x5\x12\n\x2tu\x5\x12\n\x2ux\a\f\x2\x2vy\x5\x12\n\x2wy\x5\x18\r\x2"+
+		"xv\x3\x2\x2\x2xw\x3\x2\x2\x2yz\x3\x2\x2\x2z{\a\r\x2\x2{}\x3\x2\x2\x2|"+
+		"s\x3\x2\x2\x2|t\x3\x2\x2\x2}\x15\x3\x2\x2\x2~\x84\x5\x18\r\x2\x7F\x84"+
+		"\x5\x1A\xE\x2\x80\x84\x5\x1C\xF\x2\x81\x84\x5\x1E\x10\x2\x82\x84\x5 \x11"+
+		"\x2\x83~\x3\x2\x2\x2\x83\x7F\x3\x2\x2\x2\x83\x80\x3\x2\x2\x2\x83\x81\x3"+
+		"\x2\x2\x2\x83\x82\x3\x2\x2\x2\x84\x17\x3\x2\x2\x2\x85\x86\a\x3\x2\x2\x86"+
+		"\x19\x3\x2\x2\x2\x87\x88\a\x3\x2\x2\x88\x89\a\x10\x2\x2\x89\x8A\a\x3\x2"+
+		"\x2\x8A\x1B\x3\x2\x2\x2\x8B\x8C\a&\x2\x2\x8C\x1D\x3\x2\x2\x2\x8D\x8E\a"+
+		"(\x2\x2\x8E\x1F\x3\x2\x2\x2\x8F\x90\t\x4\x2\x2\x90!\x3\x2\x2\x2\x91\x92"+
+		"\x5\x14\v\x2\x92\x93\a\x11\x2\x2\x93\x97\x5&\x14\x2\x94\x96\x5$\x13\x2"+
+		"\x95\x94\x3\x2\x2\x2\x96\x99\x3\x2\x2\x2\x97\x95\x3\x2\x2\x2\x97\x98\x3"+
+		"\x2\x2\x2\x98\xA4\x3\x2\x2\x2\x99\x97\x3\x2\x2\x2\x9A\x9B\x5\x14\v\x2"+
+		"\x9B\x9C\a\x11\x2\x2\x9C\xA0\x5\x14\v\x2\x9D\x9F\x5$\x13\x2\x9E\x9D\x3"+
+		"\x2\x2\x2\x9F\xA2\x3\x2\x2\x2\xA0\x9E\x3\x2\x2\x2\xA0\xA1\x3\x2\x2\x2"+
+		"\xA1\xA4\x3\x2\x2\x2\xA2\xA0\x3\x2\x2\x2\xA3\x91\x3\x2\x2\x2\xA3\x9A\x3"+
+		"\x2\x2\x2\xA4#\x3\x2\x2\x2\xA5\xA6\a\x4\x2\x2\xA6\xAA\x5&\x14\x2\xA7\xA8"+
+		"\a\x4\x2\x2\xA8\xAA\x5\x14\v\x2\xA9\xA5\x3\x2\x2\x2\xA9\xA7\x3\x2\x2\x2"+
+		"\xAA%\x3\x2\x2\x2\xAB\xAE\x5\x18\r\x2\xAC\xAE\x5\x1A\xE\x2\xAD\xAB\x3"+
+		"\x2\x2\x2\xAD\xAC\x3\x2\x2\x2\xAE\'\x3\x2\x2\x2\xAF\xB0\a\x15\x2\x2\xB0"+
+		"\xB1\a\n\x2\x2\xB1\xB2\x5*\x16\x2\xB2\xB3\a\v\x2\x2\xB3\xB4\a\x16\x2\x2"+
+		"\xB4\xB5\a\xE\x2\x2\xB5\xB6\x5\x4\x3\x2\xB6\xB7\a\xF\x2\x2\xB7\xCA\x3"+
+		"\x2\x2\x2\xB8\xB9\a\x17\x2\x2\xB9\xBA\a\n\x2\x2\xBA\xBB\x5*\x16\x2\xBB"+
+		"\xBC\a\v\x2\x2\xBC\xBD\a\x16\x2\x2\xBD\xBE\a\xE\x2\x2\xBE\xBF\x5\x4\x3"+
+		"\x2\xBF\xC0\a\xF\x2\x2\xC0\xCA\x3\x2\x2\x2\xC1\xC2\a\x18\x2\x2\xC2\xC3"+
+		"\a\n\x2\x2\xC3\xC4\x5\x30\x19\x2\xC4\xC5\a\v\x2\x2\xC5\xC6\a\xE\x2\x2"+
+		"\xC6\xC7\x5\x4\x3\x2\xC7\xC8\a\xF\x2\x2\xC8\xCA\x3\x2\x2\x2\xC9\xAF\x3"+
+		"\x2\x2\x2\xC9\xB8\x3\x2\x2\x2\xC9\xC1\x3\x2\x2\x2\xCA)\x3\x2\x2\x2\xCB"+
+		"\xCC\x5,\x17\x2\xCC\xCD\a\x6\x2\x2\xCD\xD1\x5,\x17\x2\xCE\xD0\x5.\x18"+
+		"\x2\xCF\xCE\x3\x2\x2\x2\xD0\xD3\x3\x2\x2\x2\xD1\xCF\x3\x2\x2\x2\xD1\xD2"+
+		"\x3\x2\x2\x2\xD2+\x3\x2\x2\x2\xD3\xD1\x3\x2\x2\x2\xD4\xDA\x5\x14\v\x2"+
+		"\xD5\xDA\a\x3\x2\x2\xD6\xDA\x5\x1C\xF\x2\xD7\xDA\x5\x1E\x10\x2\xD8\xDA"+
+		"\x5\x1A\xE\x2\xD9\xD4\x3\x2\x2\x2\xD9\xD5\x3\x2\x2\x2\xD9\xD6\x3\x2\x2"+
+		"\x2\xD9\xD7\x3\x2\x2\x2\xD9\xD8\x3\x2\x2\x2\xDA-\x3\x2\x2\x2\xDB\xDC\a"+
+		"\a\x2\x2\xDC\xDD\x5,\x17\x2\xDD\xDE\a\x6\x2\x2\xDE\xDF\x5,\x17\x2\xDF"+
+		"/\x3\x2\x2\x2\xE0\xE1\x5\n\x6\x2\xE1\xE2\a\b\x2\x2\xE2\xE3\x5*\x16\x2"+
+		"\xE3\xE4\a\b\x2\x2\xE4\xE5\x5\"\x12\x2\xE5\x31\x3\x2\x2\x2\xE6\xE7\a#"+
+		"\x2\x2\xE7\xE8\a\x12\x2\x2\xE8\xEB\a\x12\x2\x2\xE9\xEC\x5\x14\v\x2\xEA"+
+		"\xEC\x5\x1E\x10\x2\xEB\xE9\x3\x2\x2\x2\xEB\xEA\x3\x2\x2\x2\xEC\x33\x3"+
+		"\x2\x2\x2\xED\xEE\a$\x2\x2\xEE\xEF\a\x12\x2\x2\xEF\xF0\a\x12\x2\x2\xF0"+
+		"\xF1\x5\x14\v\x2\xF1\x35\x3\x2\x2\x2\x14\x41IO[\x63mx|\x83\x97\xA0\xA3"+
+		"\xA9\xAD\xC9\xD1\xD9\xEB";
+	public static readonly ATN _ATN =
+		new ATNDeserializer().Deserialize(_serializedATN.ToCharArray());
+}
 } // namespace Skipper

@@ -340,6 +340,17 @@ public interface IPenguineseListener : IParseTreeListener {
 	void ExitValorString([NotNull] PenguineseParser.ValorStringContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.valorBool"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterValorBool([NotNull] PenguineseParser.ValorBoolContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.valorBool"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitValorBool([NotNull] PenguineseParser.ValorBoolContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
