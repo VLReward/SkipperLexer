@@ -149,32 +149,6 @@ public interface IPenguineseListener : IParseTreeListener {
 	void ExitNombreArreglo([NotNull] PenguineseParser.NombreArregloContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>operacionVeV</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOperacionVeV([NotNull] PenguineseParser.OperacionVeVContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>operacionVeV</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOperacionVeV([NotNull] PenguineseParser.OperacionVeVContext context);
-
-	/// <summary>
-	/// Enter a parse tree produced by the <c>operacionVeN</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterOperacionVeN([NotNull] PenguineseParser.OperacionVeNContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>operacionVeN</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitOperacionVeN([NotNull] PenguineseParser.OperacionVeNContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.start"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -228,6 +202,17 @@ public interface IPenguineseListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitAsignVar([NotNull] PenguineseParser.AsignVarContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.asignSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAsignSimple([NotNull] PenguineseParser.AsignSimpleContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.asignSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAsignSimple([NotNull] PenguineseParser.AsignSimpleContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.decVar"/>.

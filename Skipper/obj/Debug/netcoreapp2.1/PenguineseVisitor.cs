@@ -105,22 +105,6 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitNombreArreglo([NotNull] PenguineseParser.NombreArregloContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>operacionVeV</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitOperacionVeV([NotNull] PenguineseParser.OperacionVeVContext context);
-
-	/// <summary>
-	/// Visit a parse tree produced by the <c>operacionVeN</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitOperacionVeN([NotNull] PenguineseParser.OperacionVeNContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.start"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -154,6 +138,13 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitAsignVar([NotNull] PenguineseParser.AsignVarContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.asignSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsignSimple([NotNull] PenguineseParser.AsignSimpleContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.decVar"/>.

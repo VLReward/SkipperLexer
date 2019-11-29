@@ -15,6 +15,7 @@ expresion		: ( declararVar | math | ciclo | imprimirValor | escribirValor |HALT 
 declararVar		: ( decVar | asignVar ) ;
 asignVar		: tipoVarS nombreVar EQUALS valorVar #asignarValor
 				| tipoVarS nombreVar EQUALS variable #asignarVariable; 
+asignSimple		: variable EQUALS (valorNum | variable ) ;
 
 //	definicion de variables
 decVar			: tipoVar nombreVar ( COM nombreVar)* ;	//	number x , y , z, ..... n
@@ -34,8 +35,8 @@ valorString		: STRING ;
 valorBool		: (TRUE | FALSE) ;
 
 //	operaciones matematicas
-math			: variable EQUALS valorNum (mathSeq)* #operacionVeN
-				| variable EQUALS variable (mathSeq)*  #operacionVeV ;
+math			: variable EQUALS valorNum (mathSeq)+
+				| variable EQUALS variable (mathSeq)+ ;
 mathSeq			: OPERATOR valorNum #seqNum
 				| OPERATOR variable #seqVar ;
 valorNum		: valorEntero | valorDec ;

@@ -171,36 +171,6 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	public virtual void ExitNombreArreglo([NotNull] PenguineseParser.NombreArregloContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by the <c>operacionVeV</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOperacionVeV([NotNull] PenguineseParser.OperacionVeVContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>operacionVeV</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOperacionVeV([NotNull] PenguineseParser.OperacionVeVContext context) { }
-
-	/// <summary>
-	/// Enter a parse tree produced by the <c>operacionVeN</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterOperacionVeN([NotNull] PenguineseParser.OperacionVeNContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>operacionVeN</c>
-	/// labeled alternative in <see cref="PenguineseParser.math"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitOperacionVeN([NotNull] PenguineseParser.OperacionVeNContext context) { }
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.start"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -264,6 +234,19 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitAsignVar([NotNull] PenguineseParser.AsignVarContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.asignSimple"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsignSimple([NotNull] PenguineseParser.AsignSimpleContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.asignSimple"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsignSimple([NotNull] PenguineseParser.AsignSimpleContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.decVar"/>.

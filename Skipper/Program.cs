@@ -296,10 +296,6 @@ namespace Skipper
                 //context.children[0].GetText() tipo de variable 
                 //context.children[1].GetText() nombre de variable 
                 //context.children[3].GetText() variable a asignar
-                if (!IsVarInList(context.children[3].GetText()))
-                {
-                    Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
-                }
                 string name = context.children[1].GetText();
                 int size = 0;
                 int isArray = 0;
@@ -320,8 +316,13 @@ namespace Skipper
                 varList.Add(new varName { name = name, type = type, byteSize = size, IsArray = isArray, location = (item == 0 ? item : item + 1) }); //deberia ser +1, era antes location = item + 1 todo el tiempo
 
                 varName variable = GetVar(name);
-                if (type == "variable")
+                var asignType = GetInputType(context.children[3].GetText());
+                if (asignType == "variable")
                 {
+                    if (!IsVarInList(context.children[3].GetText()))
+                    {
+                        Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                    }
                     varName porAsignar = GetVar(context.children[3].GetText());
                     YoungWriter youngWriter = new YoungWriter();
                     using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
@@ -370,8 +371,72 @@ namespace Skipper
                         file.Dispose();
                     }
                 }
-                else if (type == "array")
-                { }
+                else if (asignType == "array")
+                {
+                    string nombreArray = context.children[3].GetChild(0).GetText();
+                    string indVal = context.children[3].GetChild(2).GetText();
+                    varName porAsignar = GetVar(nombreArray);
+                    YoungWriter youngWriter = new YoungWriter();
+                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (BinaryWriter file = new BinaryWriter(fileStream))
+                    {
+                        var tipoindex = GetInputType(context.children[3].GetChild(2).GetText());
+                        if (tipoindex == "variable")
+                        {
+                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(indVal).location });
+                            youngWriter.WriteByte(file, (byte)IDX);
+                            tc += 4;
+                        }
+                        else
+                        {
+                            //numero
+                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(indVal) });
+                            youngWriter.WriteByte(file, (byte)IDX);
+                            tc += 6;
+                        }
+                        if (porAsignar.type != variable.type)
+                            Console.WriteLine("Error: El tipo de < " + nombreArray + " > no concuerda con la variable < " + name + " >" + Environment.NewLine);
+                        else if (IsVarInList(porAsignar.name))
+                        {
+                            if (variable.type == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                tc += 6;
+                            }
+                            else if (variable.type == "double")
+                            {
+                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                tc += 6;
+                            }
+                            else if (variable.type == "character")
+                            {
+                                youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                tc += 6;
+                            }
+                            else if (variable.type == "text")
+                            {
+                                youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                tc += 6;
+                            }
+                            else if (variable.type == "boolean")
+                            {
+                                youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                tc += 6;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Context Error: < " + context.children[3].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                        }
+                        file.Close();
+                        file.Dispose();
+                    }
+                }
             }
             /*
              * EnterDecVar detecta el tipo de variable basado en los tokens dentro de la misma linea,
@@ -437,14 +502,11 @@ namespace Skipper
                     }
                 }
             }
+
             public override void EnterMath(PenguineseParser.MathContext context)
             {
                 try
                 {
-                    if (!IsVarInList(context.children[0].GetText()))
-                    {
-                        Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
-                    }
 
                     YoungWriter youngWriter = new YoungWriter();
                     using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
@@ -477,7 +539,37 @@ namespace Skipper
                             else
                                 Console.WriteLine("Error: < " + temp.name + " > no es una variable numerica" + Environment.NewLine);
                         }
-                        double num1 = double.Parse(context.children[2].GetText());
+                        else if (GetInputType(context.children[2].GetText()) == "array")
+                        {
+                            // primero checar si existe
+                            varName temp = GetVar(context.children[2].GetChild(0).GetText());
+
+                            var idxType = GetInputType(context.children[2].GetChild(2).GetText());
+                            if (idxType == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(context.children[2].GetChild(2).GetText()) });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 6;
+                            }
+                            else if (idxType == "variable")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(context.children[2].GetChild(2).GetText()).location });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 4;
+                            }
+                            if (temp.type == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)temp.location });
+                                tc += 3;
+                            }
+                            else if (temp.type == "double")
+                            {
+                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)temp.location });
+                                tc += 3;
+                            }
+                            else
+                                Console.WriteLine("Error: < " + temp.name + " > no es una variable numerica" + Environment.NewLine);
+                        }
                         List<string> operators = new List<string>();
                         List<string> values = new List<string>();
                         for (int i = 0; i < opCount; i++)
@@ -485,6 +577,7 @@ namespace Skipper
                             operators.Add(context.children[i + 3].GetChild(0).GetText());
                             values.Add(context.children[i + 3].GetChild(1).GetText());
                         }
+                        double num1 = double.Parse(context.children[2].GetText());// agregar posibilidad de variables
                         youngWriter.WriteToFile(file, PUSHKD, new ArrayList { num1 });
                         tc += 9;
                         int j = 0;
@@ -510,8 +603,60 @@ namespace Skipper
                                 youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(values[j]).location });
                                 tc += 3;
                             }
+                            else if (GetInputType(values[j]) == "array")
+                            {
+                                var nombreArray = context.children[j + 3].GetChild(1).GetChild(0).GetText();
+                                var indVal = context.children[j + 3].GetChild(1).GetChild(2).GetText();
+                                varName varArray = GetVar(nombreArray);
+                                var tipoindex = GetInputType(context.children[3].GetChild(2).GetText());
+                                if (tipoindex == "variable")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(indVal).location });
+                                    youngWriter.WriteByte(file, (byte)IDX);
+                                    tc += 4;
+                                }
+                                else
+                                {
+                                    //numero
+                                    youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(indVal) });
+                                    youngWriter.WriteByte(file, (byte)IDX);
+                                    tc += 6;
+                                }
+                                if (IsVarInList(varArray.name))
+                                {
+                                    if (varArray.type == "number")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)varArray.location });
+                                        tc += 3;
+                                    }
+                                    else if (varArray.type == "double")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)varArray.location });
+                                        tc += 3;
+                                    }
+                                    else if (varArray.type == "character")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)varArray.location });
+                                        tc += 3;
+                                    }
+                                    else if (varArray.type == "text")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)varArray.location });
+                                        tc += 3;
+                                    }
+                                    else if (varArray.type == "boolean")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)varArray.location });
+                                        tc += 3;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Context Error: < " + context.children[3].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                                }
+                            }
                             else
-                                Console.WriteLine("Context Error: < " + values[j] + " > no es un numero" + Environment.NewLine);
+                                Console.WriteLine("Context Error: < " + values[j] + " > no es un numero valido" + Environment.NewLine);
                             tc++;
                             if (op == "+")
                             {
@@ -519,34 +664,66 @@ namespace Skipper
                             }
                             else if (op == "-")
                             {
-                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                //youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
                                 youngWriter.WriteByte(file, (byte)SUB);
                             }
                             else if (op == "*")
                             {
-                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                //youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
                                 youngWriter.WriteByte(file, (byte)MULT);
                             }
                             else if (op == "/")
                             {
-                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
+                                //youngWriter.WriteToFile(file, PUSHKD, new ArrayList { values[j] });
                                 youngWriter.WriteByte(file, (byte)DIV);
                             }
                             j++;
                         }
-                        if (GetInputType(context.children[0].GetText()) == "variable")
+                        if (GetInputType(context.children[0].GetText()) == "variable")//    si se metera a una variable
                         {
-                            varName variable = GetVar(context.children[0].GetText());
-                            tc += 3;
+                            if (!IsVarInList(context.children[0].GetText()))
+                            {
+                                Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                            }
+                            else
+                            {
+                                varName variable = GetVar(context.children[0].GetText());
+                                tc += 3;
+                                if (variable.type == "number")
+                                    youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                else if (variable.type == "double")
+                                    youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                else
+                                    Console.WriteLine("Context Error: < " + variable.name + " > no es un numero" + Environment.NewLine);
+                            }
+                        }
+                        else if (GetInputType(context.children[0].GetText()) == "array")//  si se metera a un array
+                        {
+                            varName variable = GetVar(context.children[0].GetChild(0).GetText());
+
+                            var idxType = GetInputType(context.children[0].GetChild(2).GetText());
+                            if (idxType == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(context.children[0].GetChild(2).GetText()) });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 6;
+                            }
+                            else if (idxType == "variable")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(context.children[0].GetChild(2).GetText()).location });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 4;
+                            }
+                            else
+                                Console.WriteLine("Error: < " + context.children[0].GetChild(2).GetText() + " > no es un numero" + Environment.NewLine);
+
                             if (variable.type == "number")
-                                youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
                             else if (variable.type == "double")
-                                youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
                             else
                                 Console.WriteLine("Context Error: < " + variable.name + " > no es un numero" + Environment.NewLine);
                         }
-                        else if (GetInputType(context.children[0].GetText()) == "array")
-                        { }
                         Console.WriteLine("OperacionVeN " + context.GetText() + Environment.NewLine);
                         file.Close();
                         file.Dispose();
@@ -607,24 +784,103 @@ namespace Skipper
             }
             public override void EnterImprimirValor(PenguineseParser.ImprimirValorContext context)
             {
-                //context.children[3].GetText()  El contenido; Si comienza con '\"' es string, else es nombre de variable
-                if ((!IsVarInList(context.children[3].GetText())) && context.children[3].GetText()[0] != '"')
+                YoungWriter youngWriter = new YoungWriter();
+                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
-                    Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                    var x = GetInputType(context.children[3].GetText());
+                    switch (x)
+                    {
+                        case "text":
+                            youngWriter.WriteToFile(file, PRTM, new ArrayList { context.children[3].GetText().Replace("\"", "").Length });
+                            tc += 3;
+                            file.Write(context.children[3].GetText().Replace("\"", ""));
+                            tc += (short)context.children[3].GetText().Replace("\"", "").Length;
+                            break;
+                        case "array":
+                            //context.children[3].GetChild(2).GetText() = index
+                            //context.children[3].GetChild(0).GetText() = nombre
+                            var tipoindex = GetInputType(context.children[3].GetChild(2).GetText());
+                            if (tipoindex == "variable")
+                            {
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(context.children[3].GetChild(2).GetText()).location });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 4;
+                            }
+                            else
+                            {
+                                //numero
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(context.children[3].GetChild(2).GetText()) });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 6;
+                            }
+                            var nombrevar = context.children[3].GetChild(0).GetText();
+                            var variable = GetVar(nombrevar);
+                            switch (variable.type)
+                            {
+                                case "number":
+                                    youngWriter.WriteToFile(file, PRTIV, new ArrayList { (short)variable.location });
+                                    break;
+                                case "double":
+                                    youngWriter.WriteToFile(file, PRTDV, new ArrayList { (short)variable.location });
+                                    break;
+                                case "boolean":
+                                    youngWriter.WriteToFile(file, PRTBV, new ArrayList { (short)variable.location });
+                                    break;
+                                case "char":
+                                    youngWriter.WriteToFile(file, PRTCV, new ArrayList { (short)variable.location });
+                                    break;
+                                case "text":
+                                    youngWriter.WriteToFile(file, PRTSV, new ArrayList { (short)variable.location });
+                                    break;
+                                default:
+                                    Console.WriteLine("Error: unexpected input");
+                                    break;
+                            }
+                            tc += 3;
+                            break;
+                        case "variable":
+                            if ((!IsVarInList(context.children[3].GetText())) && context.children[3].GetText()[0] != '"')
+                            {
+                                Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                            }
+                            else
+                            {
+                                var vari = GetVar(context.children[3].GetText());
+                                switch (vari.type)
+                                {
+                                    case "number":
+                                        youngWriter.WriteToFile(file, PRTI, new ArrayList { (short)vari.location });
+                                        break;
+                                    case "double":
+                                        youngWriter.WriteToFile(file, PRTD, new ArrayList { (short)vari.location });
+                                        break;
+                                    case "boolean":
+                                        youngWriter.WriteToFile(file, PRTB, new ArrayList { (short)vari.location });
+                                        break;
+                                    case "char":
+                                        youngWriter.WriteToFile(file, PRTC, new ArrayList { (short)vari.location });
+                                        break;
+                                    case "text":
+                                        youngWriter.WriteToFile(file, PRTS, new ArrayList { (short)vari.location });
+                                        break;
+                                    default:
+                                        Console.WriteLine("Error: unexpected input");
+                                        break;
+                                }
+                                tc += 3;
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Error: unexpected input");
+                            break;
+                    }
+                    file.Close();
+                    file.Dispose();
                 }
-                Console.WriteLine("ImprimirValor " + context.GetText() + Environment.NewLine);
             }
-            //public override void EnterNombreValores(PenguineseParser.NombreValoresContext context)
-            //{
-            //    Console.WriteLine("NombreValores " + context.GetText() + Environment.NewLine);
-            //}
-            //public override void EnterImprimirSeq(PenguineseParser.ImprimirSeqContext context)
-            //{
-            //    Console.WriteLine("ImprimirSeq " + context.GetText() + Environment.NewLine);
-            //}
             public override void EnterEscribirValor(PenguineseParser.EscribirValorContext context)
             {
-                //context.children[3].GetText() nombre de variable
                 string tipoStr = GetInputType(context.children[3].GetText());
                 if (tipoStr == "variable")
                 {
@@ -639,29 +895,25 @@ namespace Skipper
                         {
                             if (variable.type == "number")
                             {
-                                youngWriter.WriteToFile(file, RDI, new ArrayList { variable.location });
-                                tc += 3;
+                                youngWriter.WriteToFile(file, RDI, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "character")
                             {
-                                youngWriter.WriteToFile(file, RDC, new ArrayList { variable.location });
-                                tc += 3;
+                                youngWriter.WriteToFile(file, RDC, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "double")
                             {
-                                youngWriter.WriteToFile(file, RDD, new ArrayList { variable.location });
-                                tc += 3;
+                                youngWriter.WriteToFile(file, RDD, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "boolean")
                             {
-                                youngWriter.WriteToFile(file, RDB, new ArrayList { variable.location });
-                                tc += 3;
+                                youngWriter.WriteToFile(file, RDB, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "text")
                             {
-                                youngWriter.WriteToFile(file, RDS, new ArrayList { variable.location });
-                                tc += 3;
+                                youngWriter.WriteToFile(file, RDS, new ArrayList { (short)variable.location });
                             }
+                            tc += 3;
                             file.Close();
                             file.Dispose();
                         }
@@ -683,36 +935,39 @@ namespace Skipper
                             var idxType = GetInputType(context.children[3].GetChild(2).GetText());
                             if (idxType == "number")
                             {
-                                youngWriter.WriteToFile(file, IDX, new ArrayList { int.Parse(context.children[3].GetChild(2).GetText()) });
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(context.children[3].GetChild(2).GetText()) });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 6;
                             }
                             else if (idxType == "variable")
                             {
-                                var idxVar = GetVar(context.children[3].GetChild(2).GetText());
-                                if (idxVar.type != "number")
-                                    Console.WriteLine("Error: < " + idxVar.name + " > no es una variable number" + Environment.NewLine);
-                                else
-                                    youngWriter.WriteToFile(file, IDX, new ArrayList { idxVar.location });
+                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(context.children[3].GetChild(2).GetText()).location });
+                                youngWriter.WriteByte(file, (byte)IDX);
+                                tc += 4;
                             }
+                            else
+                                Console.WriteLine("Error: < " + context.children[3].GetChild(2).GetText() + " > no es numero ni variable tipo number" + Environment.NewLine);
                             if (variable.type == "text")
                             {
-                                youngWriter.WriteToFile(file, RDSV, new ArrayList { variable.location });
+                                youngWriter.WriteToFile(file, RDSV, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "character")
                             {
-                                youngWriter.WriteToFile(file, RDCV, new ArrayList { variable.location });
+                                youngWriter.WriteToFile(file, RDCV, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "number")
                             {
-                                youngWriter.WriteToFile(file, RDIV, new ArrayList { variable.location });
+                                youngWriter.WriteToFile(file, RDIV, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "double")
                             {
-                                youngWriter.WriteToFile(file, RDDV, new ArrayList { variable.location });
+                                youngWriter.WriteToFile(file, RDDV, new ArrayList { (short)variable.location });
                             }
                             else if (variable.type == "boolean")
                             {
-                                youngWriter.WriteToFile(file, RDBV, new ArrayList { variable.location });
+                                youngWriter.WriteToFile(file, RDBV, new ArrayList { (short)variable.location });
                             }
+                            tc += 3;
                             file.Close();
                             file.Dispose();
                         }
@@ -720,7 +975,6 @@ namespace Skipper
                 }
                 else
                 { }
-                Console.WriteLine("EscribirValor " + context.GetText() + Environment.NewLine);
             }
         }
     }
