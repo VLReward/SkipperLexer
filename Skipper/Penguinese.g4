@@ -11,7 +11,7 @@ start			: FUNC MAIN OP CP OCB bloqueCodigo CCB ;	//func main() { <codigo> }
 
 //	bloque de codigo
 bloqueCodigo	: ( expresion )+ ;	//	por ahora requiere por lo menos una expresion
-expresion		: ( declararVar | math | ciclo | imprimirValor | escribirValor |HALT ) TERM ;	// ciclos terminan con ';' tambien
+expresion		: ( declararVar | asignSimple | math | ciclo | imprimirValor | escribirValor |HALT ) TERM ;	// ciclos terminan con ';' tambien
 declararVar		: ( decVar | asignVar ) ;
 asignVar		: tipoVarS nombreVar EQUALS valorVar #asignarValor
 				| tipoVarS nombreVar EQUALS variable #asignarVariable; 

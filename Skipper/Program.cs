@@ -181,10 +181,10 @@ namespace Skipper
                 return "character";
             if (suspect.Contains("["))
                 return "array";
-            else if (int.TryParse(suspect, out int x))
-                return "number";
             else if (double.TryParse(suspect, out double y))
                 return "double";
+            else if (int.TryParse(suspect, out int x))
+                return "number";
             else if (suspect == "true" || suspect == "false")
                 return "boolean";
             else
@@ -259,33 +259,38 @@ namespace Skipper
                 YoungWriter youngWriter = new YoungWriter();
                 using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
-                {
+                { // faltan los tcs aqui
                     if (valType != variable.type)
                         Console.WriteLine("Error: El tipo de < " + context.children[3].GetText() + " > no concuerda con la variable < " + name + " >" + Environment.NewLine);
                     else if (valType == "number")
                     {
                         youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(porAsignar) });
                         youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                        tc += 8;
                     }
                     else if (valType == "character")
                     {
                         youngWriter.WriteToFile(file, PUSHKC, new ArrayList { porAsignar[1] });
                         youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                        tc += 5;
                     }
                     else if (valType == "double")
                     {
                         youngWriter.WriteToFile(file, PUSHKD, new ArrayList { double.Parse(porAsignar) });
                         youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                        tc += 12;
                     }
                     else if (valType == "boolean")
                     {
                         youngWriter.WriteToFile(file, PUSHKB, new ArrayList { porAsignar == "true" ? true : false });
                         youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                        tc += 5;
                     }
                     else if (valType == "text")
                     {
                         youngWriter.WriteToFile(file, PUSHKS, new ArrayList { porAsignar.Replace("\"", "") });
                         youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                        tc += (short)(porAsignar.Replace("\"", "").Length + 4);
                     }
                     file.Close();
                     file.Dispose();
@@ -436,6 +441,104 @@ namespace Skipper
                         file.Close();
                         file.Dispose();
                     }
+                }
+            }
+
+            public override void EnterAsignSimple(PenguineseParser.AsignSimpleContext context)
+            {
+                var nombreVar = context.children[0].GetText();
+                var porAsignar = context.children[2].GetText();
+                YoungWriter youngWriter = new YoungWriter();
+                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (BinaryWriter file = new BinaryWriter(fileStream))
+                {
+                    if (!IsVarInList(nombreVar))
+                    {
+                        Console.WriteLine("Context Error: < " + nombreVar + " > se usa sin declararse" + Environment.NewLine);
+                    }
+                    else
+                    {
+                        var variable = GetVar(nombreVar);
+                        var tipoPorAsignar = GetInputType(porAsignar);
+                        switch(tipoPorAsignar)
+                        {
+                            case "text":
+                                youngWriter.WriteToFile(file, PUSHKS, new ArrayList { porAsignar.Replace("\"", "") });
+                                youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                tc += (short)(porAsignar.Replace("\"", "").Length + 4);
+                                break;
+                            case "character":
+                                youngWriter.WriteToFile(file, PUSHKC, new ArrayList { porAsignar[1] });
+                                youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                tc += 5;
+                                break;
+                            case "number":
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(porAsignar) });
+                                youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                tc += 8;
+                                break;
+                            case "double":
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { double.Parse(porAsignar) });
+                                youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                tc += 12;
+                                break;
+                            case "boolean":
+                                youngWriter.WriteToFile(file, PUSHKB, new ArrayList { porAsignar == "true" ? true : false });
+                                youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                tc += 5;
+                                break;
+                            case "variable":
+                                if (!IsVarInList(porAsignar))
+                                {
+                                    Console.WriteLine("Context Error: < " + context.children[0].GetText() + " > se usa sin declararse" + Environment.NewLine);
+                                }
+                                else
+                                {
+                                    var varPorAsignar = GetVar(porAsignar);
+                                    if(varPorAsignar.type!= variable.type)
+                                    {
+                                        Console.WriteLine("Error: El tipo de < " + porAsignar + " > no concuerda con la variable < " + variable.name + " >" + Environment.NewLine);
+                                    }
+                                    else if (variable.type == "number")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)varPorAsignar.location });
+                                        youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                        tc += 6;
+                                    }
+                                    else if (variable.type == "double")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)varPorAsignar.location });
+                                        youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                        tc += 6;
+                                    }
+                                    else if (variable.type == "character")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)varPorAsignar.location });
+                                        youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                        tc += 6;
+                                    }
+                                    else if (variable.type == "text")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)varPorAsignar.location });
+                                        youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                        tc += 6;
+                                    }
+                                    else if (variable.type == "boolean")
+                                    {
+                                        youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)varPorAsignar.location });
+                                        youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                        tc += 6;
+                                    }
+                                }
+                                break;
+                            case "array":
+                                string nombreArray = context.children[2].GetChild(0).GetText();// checa queesto sea verdad
+                                string indVal = context.children[2].GetChild(2).GetText();
+                                break;
+                        }
+                    }
+                    file.Close();
+                    file.Dispose();
                 }
             }
             /*
