@@ -46,7 +46,7 @@ ciclo			: IF OP condicional CP THEN OCB bloqueCodigo CCB #cicloIf
 				| WHILE OP condicional CP THEN OCB bloqueCodigo CCB  #cicloWhile
 				| FOR OP seccionFor CP OCB bloqueCodigo CCB	#cicloFor ;
 condicional		: valorCond COND valorCond (condSeq)* ;
-valorCond		: ( variable | NUMERAL | valorChar | valorString | valorDec ) ;
+valorCond		: ( variable | valorEntero | valorDec | valorChar | valorString | valorBool ) ;
 condSeq			: SepCOND valorCond COND valorCond ;
 seccionFor		: asignVar TERM condicional TERM math ;
 
@@ -64,7 +64,7 @@ fragment UPPERCASE  : [A-Z] ;
 NUMERAL				: [0-9]+ ;	//	any number of digits
 OPERATOR			: ( '+' | '-' | '*' | '/' ) ;
 PLUS				: '+' ;
-COND				: ( '=>' | '==' | '<=' | '<' | '>=' | '>' | '!=' );
+COND				: ( '>=' | '==' | '<=' | '<' | '>' | '!=' );
 SepCOND				: ( '&&' | '||' );
 TERM				: ';' ;
 COM					: ',' ;
