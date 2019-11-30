@@ -452,39 +452,75 @@ namespace Skipper
                 using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
-                    if (!IsVarInList(nombreVar))
+                    varName variable;
+                    string ogidx = "";
+                    if (GetInputType(nombreVar) == "variable")
+                        variable = GetVar(nombreVar);
+                    else
+                    {
+                        variable = GetVar(context.children[0].GetChild(0).GetText());
+                        ogidx = context.children[0].GetChild(2).GetText();
+                        var idxType = GetInputType(ogidx);
+                        if (idxType == "number")
+                        {
+                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                            youngWriter.WriteByte(file, (byte)IDX);
+                            tc += 6;
+                        }
+                        else if (idxType == "variable")
+                        {
+                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                            youngWriter.WriteByte(file, (byte)IDX);
+                            tc += 4;
+                        }
+                    }
+                    if (!IsVarInList(variable.name))
                     {
                         Console.WriteLine("Context Error: < " + nombreVar + " > se usa sin declararse" + Environment.NewLine);
                     }
                     else
                     {
-                        var variable = GetVar(nombreVar);
                         var tipoPorAsignar = GetInputType(porAsignar);
-                        switch(tipoPorAsignar)
+                        switch (tipoPorAsignar)
                         {
                             case "text":
                                 youngWriter.WriteToFile(file, PUSHKS, new ArrayList { porAsignar.Replace("\"", "") });
-                                youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPSV, new ArrayList { (short)variable.location });
                                 tc += (short)(porAsignar.Replace("\"", "").Length + 4);
                                 break;
                             case "character":
                                 youngWriter.WriteToFile(file, PUSHKC, new ArrayList { porAsignar[1] });
-                                youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPCV, new ArrayList { (short)variable.location });
                                 tc += 5;
                                 break;
                             case "number":
                                 youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(porAsignar) });
-                                youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
                                 tc += 8;
                                 break;
                             case "double":
                                 youngWriter.WriteToFile(file, PUSHKD, new ArrayList { double.Parse(porAsignar) });
-                                youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
                                 tc += 12;
                                 break;
                             case "boolean":
                                 youngWriter.WriteToFile(file, PUSHKB, new ArrayList { porAsignar == "true" ? true : false });
-                                youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPBV, new ArrayList { (short)variable.location });
                                 tc += 5;
                                 break;
                             case "variable":
@@ -495,38 +531,53 @@ namespace Skipper
                                 else
                                 {
                                     var varPorAsignar = GetVar(porAsignar);
-                                    if(varPorAsignar.type!= variable.type)
+                                    if (varPorAsignar.type != variable.type)
                                     {
                                         Console.WriteLine("Error: El tipo de < " + porAsignar + " > no concuerda con la variable < " + variable.name + " >" + Environment.NewLine);
                                     }
                                     else if (variable.type == "number")
                                     {
                                         youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)varPorAsignar.location });
-                                        youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                        if (variable.IsArray == 0)
+                                            youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                        else
+                                            youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
                                         tc += 6;
                                     }
                                     else if (variable.type == "double")
                                     {
                                         youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)varPorAsignar.location });
-                                        youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                        if (variable.IsArray == 0)
+                                            youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                        else
+                                            youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
                                         tc += 6;
                                     }
                                     else if (variable.type == "character")
                                     {
                                         youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)varPorAsignar.location });
-                                        youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                        if (variable.IsArray == 0)
+                                            youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                        else
+                                            youngWriter.WriteToFile(file, POPCV, new ArrayList { (short)variable.location });
                                         tc += 6;
                                     }
                                     else if (variable.type == "text")
                                     {
                                         youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)varPorAsignar.location });
-                                        youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                        if (variable.IsArray == 0)
+                                            youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                        else
+                                            youngWriter.WriteToFile(file, POPSV, new ArrayList { (short)variable.location });
                                         tc += 6;
                                     }
                                     else if (variable.type == "boolean")
                                     {
                                         youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)varPorAsignar.location });
-                                        youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                        if (variable.IsArray == 0)
+                                            youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                        else
+                                            youngWriter.WriteToFile(file, POPBV, new ArrayList { (short)variable.location });
                                         tc += 6;
                                     }
                                 }
@@ -534,6 +585,160 @@ namespace Skipper
                             case "array":
                                 string nombreArray = context.children[2].GetChild(0).GetText();// checa queesto sea verdad
                                 string indVal = context.children[2].GetChild(2).GetText();
+                                string indType = GetInputType(indVal);
+                                if (indType == "number")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(indVal) });
+                                    youngWriter.WriteByte(file, (byte)IDX);
+                                    tc += 6;
+                                }
+                                else if (indType == "variable")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(indVal).location });
+                                    youngWriter.WriteByte(file, (byte)IDX);
+                                    tc += 4;
+                                }
+                                var arrayVar = GetVar(nombreArray);
+                                if (arrayVar.type == "number")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    tc += 3;
+                                    if (variable.IsArray == 0)
+                                    {
+                                        youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                    else
+                                    {
+                                        var idxType = GetInputType(ogidx);
+                                        if (idxType == "number")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 6;
+                                        }
+                                        else if (idxType == "variable")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 4;
+                                        }
+                                        youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                }
+                                else if (arrayVar.type == "double")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    tc += 3;
+                                    if (variable.IsArray == 0)
+                                    {
+                                        youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                    else
+                                    {
+                                        var idxType = GetInputType(ogidx);
+                                        if (idxType == "number")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 6;
+                                        }
+                                        else if (idxType == "variable")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 4;
+                                        }
+                                        tc += 3;
+                                        youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
+                                    }
+                                }
+                                else if (arrayVar.type == "character")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    tc += 3;
+                                    if (variable.IsArray == 0)
+                                    {
+                                        youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                    else
+                                    {
+                                        var idxType = GetInputType(ogidx);
+                                        if (idxType == "number")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 6;
+                                        }
+                                        else if (idxType == "variable")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 4;
+                                        }
+                                        tc += 3;
+                                        youngWriter.WriteToFile(file, POPCV, new ArrayList { (short)variable.location });
+                                    }
+                                }
+                                else if (arrayVar.type == "text")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    tc += 3;
+                                    if (variable.IsArray == 0)
+                                    {
+                                        youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                    else
+                                    {
+                                        var idxType = GetInputType(ogidx);
+                                        if (idxType == "number")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 6;
+                                        }
+                                        else if (idxType == "variable")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 4;
+                                        }
+                                        tc += 3;
+                                        youngWriter.WriteToFile(file, POPSV, new ArrayList { (short)variable.location });
+                                    }
+                                }
+                                else if (arrayVar.type == "boolean")
+                                {
+                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    tc += 3;
+                                    if (variable.IsArray == 0)
+                                    {
+                                        youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
+                                        tc += 3;
+                                    }
+                                    else
+                                    {
+                                        var idxType = GetInputType(ogidx);
+                                        if (idxType == "number")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(ogidx) });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 6;
+                                        }
+                                        else if (idxType == "variable")
+                                        {
+                                            youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)GetVar(ogidx).location });
+                                            youngWriter.WriteByte(file, (byte)IDX);
+                                            tc += 4;
+                                        }
+                                        tc += 3;
+                                        youngWriter.WriteToFile(file, POPBV, new ArrayList { (short)variable.location });
+                                    }
+                                }
                                 break;
                         }
                     }
