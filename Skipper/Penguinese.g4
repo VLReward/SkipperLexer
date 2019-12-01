@@ -39,7 +39,7 @@ valorBool		: (TRUE | FALSE) ;
 //				| variable EQUALS variable (mathSeq)+ ;
 //mathSeq			: OPERATOR valorNum #seqNum
 //				| OPERATOR variable #seqVar ;
-mathSimple		: variable EQUALS ( valorNum | variable ) OPERATOR ( valorNum | variable ) ;
+mathSimple		: variable EQUALS ( valorNum | variable ) (OPERATORPM  | OPERATORMD)( valorNum | variable ) ;
 math			: variable EQUALS valorNum (mathSeqMD)* (mathSeqPM)* 
 				| variable EQUALS variable (mathSeqMD)* (mathSeqPM)* ;
 mathSeqMD		: OPERATORMD valorNum #seqNum

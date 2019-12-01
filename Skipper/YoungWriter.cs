@@ -25,20 +25,33 @@ namespace Rico
         {
             //BinaryWriter youngWriter = new BinaryWriter(File.Open(filename, FileMode.Open), Encoding.ASCII, true);
             youngWriter.Write(command);
+
             if (obj is byte)
                 youngWriter.Write((byte)obj);
-            else if (obj is int)
-                youngWriter.Write((int)obj);
-            else if (obj is char)
-                youngWriter.Write((char)obj);
-            else if (obj is double)
-                youngWriter.Write((double)obj);
             else if (obj is string)
                 youngWriter.Write((string)obj);
             else if (obj is bool)
                 youngWriter.Write((bool)obj);
+            else if (obj is char)
+                youngWriter.Write((char)obj);
+            else if (obj is int)
+            {
+                byte[] es = BitConverter.GetBytes((int)obj);
+                Array.Reverse(es);
+                youngWriter.Write(es);
+            }
+            else if (obj is double)
+            {
+                byte[] es = BitConverter.GetBytes((double)obj);
+                Array.Reverse(es);
+                youngWriter.Write(es);
+            }
             else if (obj is short)
-                youngWriter.Write((short)obj);
+            {
+                byte[] es = BitConverter.GetBytes((short)obj);
+                Array.Reverse(es);
+                youngWriter.Write(es);
+            }
         }
 
         public void WriteByte(BinaryWriter youngWriter, byte command)

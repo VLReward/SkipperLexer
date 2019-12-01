@@ -1,9 +1,9 @@
 func main () {
- arrayof number[10] hola, hola2;
+ arrayof number[10] matricula;
  for(number i = 0; i < 10; i=i+1){
- escribirVar :: hola[i];
+ escribirVar :: matricula[i];
 };
  for(number i = 0; i < 10; i=i+1){
- imprimirVar :: hola[i];
+ imprimirVar :: matricula[i];
 };
 }

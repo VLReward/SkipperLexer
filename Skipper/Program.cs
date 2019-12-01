@@ -105,16 +105,17 @@ namespace Skipper
         public static List<varName> varList = new List<varName>();
         public static Stack<int> cicleStack = new Stack<int>();
         public static short tc = 0;
+        public const string zoinksName = "zoinksForSemiTest.ye";
 
         private static void Main(string[] args)
         {
             try
             {
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
-                    //BinaryWriter file = new BinaryWriter(File.Open("zoinks.ye", FileMode.Create), Encoding.ASCII, true);
+                    //BinaryWriter file = new BinaryWriter(File.Open(zoinksName, FileMode.Create), Encoding.ASCII, true);
                     youngWriter.WriteByte(file, (byte)73);//I
                     youngWriter.WriteByte(file, (byte)67);//C
                     youngWriter.WriteByte(file, (byte)67);//C
@@ -130,7 +131,7 @@ namespace Skipper
                     file.Dispose();
                 }
 
-                string text = File.ReadAllText(@"C:\AN\DebugStep.txt");
+                string text = File.ReadAllText(@"C:\AN\forStep.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
@@ -146,7 +147,7 @@ namespace Skipper
                 }
                 short td = (short)(varList[varList.Count - 1].location + varList[varList.Count - 1].byteSize);
 
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     youngWriter.WriteByte(file, (byte)0);//HALT
@@ -154,9 +155,13 @@ namespace Skipper
                     file.Close();
                     file.Dispose();
                 }
-                byte[] header = (new byte[] { (byte)73, (byte)67, (byte)67, (byte)50, (byte)48, (byte)50, (byte)48 }).Concat(BitConverter.GetBytes(tc)).ToArray();
+                byte[] tsc = BitConverter.GetBytes(tc);
+                byte[] tsd = BitConverter.GetBytes(td);
+                Array.Reverse(tsc);
+                Array.Reverse(tsd);
+                byte[] header = (new byte[] { (byte)73, (byte)67, (byte)67, (byte)50, (byte)48, (byte)50, (byte)48 }).Concat(tsc).ToArray();
                 //header = header.Concat(BitConverter.GetBytes(td)).ToArray();
-                YoungWriter.ReplaceData("zoinks.ye", 0, header.Concat(BitConverter.GetBytes(td)).ToArray());
+                YoungWriter.ReplaceData(zoinksName, 0, header.Concat(tsd).ToArray() );
             }
             catch (Exception ex)
             {
@@ -207,7 +212,7 @@ namespace Skipper
             string nombreVar = context.GetChild(0).GetText();
             string porAsignar = context.GetChild(2).GetText();
             YoungWriter youngWriter = new YoungWriter();
-            using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+            using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
             using (BinaryWriter file = new BinaryWriter(fileStream))
             {
                 varName variable;
@@ -529,7 +534,7 @@ namespace Skipper
                 {
                     //escribir 0;
                     YoungWriter youngWriter = new YoungWriter();
-                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                     using (BinaryWriter file = new BinaryWriter(fileStream))
                     {
                         youngWriter.WriteByte(file, EFE);//HALT
@@ -571,7 +576,7 @@ namespace Skipper
                 string valType = GetInputType(context.children[3].GetText());
                 string porAsignar = context.children[3].GetText();
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 { // faltan los tcs aqui
                     if (valType != variable.type)
@@ -644,7 +649,7 @@ namespace Skipper
                     }
                     varName porAsignar = GetVar(context.children[3].GetText());
                     YoungWriter youngWriter = new YoungWriter();
-                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                     using (BinaryWriter file = new BinaryWriter(fileStream))
                     {
                         if (porAsignar.type != variable.type)
@@ -696,7 +701,7 @@ namespace Skipper
                     string indVal = context.children[3].GetChild(2).GetText();
                     varName porAsignar = GetVar(nombreArray);
                     YoungWriter youngWriter = new YoungWriter();
-                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                     using (BinaryWriter file = new BinaryWriter(fileStream))
                     {
                         string tipoindex = GetInputType(context.children[3].GetChild(2).GetText());
@@ -820,7 +825,7 @@ namespace Skipper
                                 int item = 0;
                                 if (varList.Count > 0)
                                     item = varList[varList.Count - 1].location + varList[varList.Count - 1].byteSize;
-                                varList.Add(new varName { name = name, type = type, byteSize = size, IsArray = isArray, location = (item == 0 ? item : item + 1) }); //deberia ser +1, era antes location = item + 1 todo el tiempo
+                                varList.Add(new varName { name = name, type = type, byteSize = size, IsArray = isArray, location = item }); //deberia ser +1, era antes location = item + 1 todo el tiempo
                             }
                         }
                     }
@@ -833,7 +838,7 @@ namespace Skipper
                 {
 
                     YoungWriter youngWriter = new YoungWriter();
-                    using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                    using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                     using (BinaryWriter file = new BinaryWriter(fileStream))
                     {
                         int opCount = context.children.Count - 3;//numero de operaciones  
@@ -1061,7 +1066,7 @@ namespace Skipper
             public override void EnterCicloWhile(PenguineseParser.CicloWhileContext context)
             {//cosas que se hacen antes del primer ciclo
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     short posInicial = tc; // usa esto para revisar si si se esta escribiendo bien
@@ -1082,7 +1087,7 @@ namespace Skipper
                         idx2 = conditionList.GetChild(2).GetChild(0).GetChild(2).GetText();
                     }
                     List<Condition> condList = new List<Condition>();
-                    condList.Add(new Condition { val1 = firstOp, index1 = idx1, val2 = secOp, index2 = idx2, oper = oper, sequential = null });
+                    condList.Add(new Condition { val1 = secOp, index1 = idx2, val2 = firstOp, index2 = idx1, oper = oper, sequential = null });
                     for (int i = 3; i < conditionList.ChildCount; i++)
                     {
                         idx1 = idx2 = null;
@@ -1100,7 +1105,7 @@ namespace Skipper
                             secSeq = conditionList.GetChild(i).GetChild(3).GetChild(0).GetChild(0).GetText();
                             idx2 = conditionList.GetChild(i).GetChild(3).GetChild(0).GetChild(2).GetText();
                         }
-                        condList.Add(new Condition { val1 = firstSeq, index1 = idx1, val2 = secSeq, index2 = idx2, oper = opSeq, sequential = firstJoin });
+                        condList.Add(new Condition { val1 = secSeq, index1 = idx2, val2 = firstSeq, index2 = idx1, oper = opSeq, sequential = firstJoin });
                     }
                     foreach (Condition condition in condList)
                     {
@@ -1354,22 +1359,24 @@ namespace Skipper
             {//cosas que se hacen al acabar ciclo
                 int restartPos = cicleStack.Pop();// BRANCH 8 
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     youngWriter.WriteToFile(file, BRANCH, new ArrayList { (short)restartPos });
-                    tc++;
+                    tc += 3;
                     file.Close();
                     file.Dispose();
                 }
                 int endPos = cicleStack.Pop();
-                byte[] pointer = (new byte[] { BRNCHC }).Concat(BitConverter.GetBytes(tc)).ToArray();// BRNCHC 39
-                YoungWriter.ReplaceData("zoinks.ye", endPos, pointer);
+                byte[] tsc = BitConverter.GetBytes((short)(tc));
+                Array.Reverse(tsc);
+                byte[] pointer = (new byte[] { BRNCHC }).Concat(tsc).ToArray();// BRNCHC 39
+                YoungWriter.ReplaceData(zoinksName, endPos, pointer);
             }
             public override void EnterCicloIf(PenguineseParser.CicloIfContext context)
             {//chequeo de bool 
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     long posInicial = fileStream.Position; // usa esto para revisar si si se esta escribiendo bien
@@ -1389,7 +1396,7 @@ namespace Skipper
                         idx2 = context.children[2].GetChild(2).GetChild(0).GetChild(2).GetText();
                     }
                     List<Condition> condList = new List<Condition>();
-                    condList.Add(new Condition { val1 = firstOp, index1 = idx1, val2 = secOp, index2 = idx2, oper = oper, sequential = null });
+                    condList.Add(new Condition { val1 = secOp, index1 = idx2, val2 = firstOp, index2 = idx1, oper = oper, sequential = null });
                     for (int i = 3; i < context.children[2].ChildCount; i++)
                     {
                         idx1 = idx2 = null;
@@ -1407,7 +1414,7 @@ namespace Skipper
                             secSeq = context.children[2].GetChild(i).GetChild(3).GetChild(0).GetChild(0).GetText();
                             idx2 = context.children[2].GetChild(i).GetChild(3).GetChild(0).GetChild(2).GetText();
                         }
-                        condList.Add(new Condition { val1 = firstSeq, index1 = idx1, val2 = secSeq, index2 = idx2, oper = opSeq, sequential = firstJoin });
+                        condList.Add(new Condition { val1 = secSeq, index1 = idx2, val2 = firstSeq, index2 = idx1, oper = opSeq, sequential = firstJoin });
                     }
                     foreach (Condition condition in condList)
                     {
@@ -1658,8 +1665,10 @@ namespace Skipper
             public override void ExitCicloIf(PenguineseParser.CicloIfContext context)
             {//notar que aqui termina el if anterior 
                 int pos = cicleStack.Pop();
-                byte[] header = (new byte[] { BRNCHC }).Concat(BitConverter.GetBytes(tc)).ToArray();
-                YoungWriter.ReplaceData("zoinks.ye", pos, header);
+                byte[] tsc = BitConverter.GetBytes((short)(tc));
+                Array.Reverse(tsc);
+                byte[] pointer = (new byte[] { BRNCHC }).Concat(tsc).ToArray();// BRNCHC 39
+                YoungWriter.ReplaceData(zoinksName, pos, pointer);
             }
             public override void EnterCicloFor(PenguineseParser.CicloForContext context)
             {
@@ -1668,10 +1677,10 @@ namespace Skipper
                 string math = context.children[2].GetChild(4).GetText();
                 Asignar(asign);
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
-                    long posInicial = fileStream.Position; // usa esto para revisar si si se esta escribiendo bien
+                    long posInicial = tc; // usa esto para revisar si si se esta escribiendo bien
                     //IParseTree conditionList = context.children[2];
                     string firstOp = conditionList.GetChild(0).GetText();
                     string oper = conditionList.GetChild(1).GetText();
@@ -1689,7 +1698,7 @@ namespace Skipper
                         idx2 = conditionList.GetChild(2).GetChild(0).GetChild(2).GetText();
                     }
                     List<Condition> condList = new List<Condition>();
-                    condList.Add(new Condition { val1 = firstOp, index1 = idx1, val2 = secOp, index2 = idx2, oper = oper, sequential = null });
+                    condList.Add(new Condition { val1 = secOp, index1 = idx2, val2 = firstOp, index2 = idx1, oper = oper, sequential = null });
                     for (int i = 3; i < conditionList.ChildCount; i++)
                     {
                         idx1 = idx2 = null;
@@ -1707,7 +1716,7 @@ namespace Skipper
                             secSeq = conditionList.GetChild(i).GetChild(3).GetChild(0).GetChild(0).GetText();
                             idx2 = conditionList.GetChild(i).GetChild(3).GetChild(0).GetChild(2).GetText();
                         }
-                        condList.Add(new Condition { val1 = firstSeq, index1 = idx1, val2 = secSeq, index2 = idx2, oper = opSeq, sequential = firstJoin });
+                        condList.Add(new Condition { val1 = secSeq, index1 = idx2, val2 = firstSeq, index2 = idx1, oper = opSeq, sequential = firstJoin });
                     }
                     foreach (Condition condition in condList)
                     {
@@ -1960,7 +1969,7 @@ namespace Skipper
             public override void ExitCicloFor(PenguineseParser.CicloForContext context)
             {
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     IParseTree endMath = context.children[2].GetChild(4);
@@ -2104,17 +2113,19 @@ namespace Skipper
                     file.Dispose();
                 }
                 int restartPos = cicleStack.Pop();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     youngWriter.WriteToFile(file, BRANCH, new ArrayList { (short)restartPos });
-                    tc++;
+                    tc+=3;
                     file.Close();
                     file.Dispose();
                 }
                 int endPos = cicleStack.Pop();
-                byte[] pointer = (new byte[] { BRNCHC }).Concat(BitConverter.GetBytes(tc)).ToArray();
-                YoungWriter.ReplaceData("zoinks.ye", endPos, pointer);
+                byte[] tsc = BitConverter.GetBytes((short)(tc));
+                Array.Reverse(tsc);
+                byte[] pointer = (new byte[] { BRNCHC }).Concat(tsc).ToArray();
+                YoungWriter.ReplaceData(zoinksName, endPos, pointer);
             }
             public override void EnterCondicional(PenguineseParser.CondicionalContext context)
             {
@@ -2136,14 +2147,14 @@ namespace Skipper
             public override void EnterImprimirValor(PenguineseParser.ImprimirValorContext context)
             {
                 YoungWriter youngWriter = new YoungWriter();
-                using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     string x = GetInputType(context.children[3].GetText());
                     switch (x)
                     {
                         case "text":
-                            youngWriter.WriteToFile(file, PRTM, new ArrayList { context.children[3].GetText().Replace("\"", "").Length });
+                            youngWriter.WriteToFile(file, PRTM, new ArrayList { (byte)(context.children[3].GetText().Replace("\"", "").Length) });
                             tc += 3;
                             file.Write(context.children[3].GetText().Replace("\"", ""));
                             tc += (short)context.children[3].GetText().Replace("\"", "").Length;
@@ -2241,7 +2252,7 @@ namespace Skipper
                     {
                         YoungWriter youngWriter = new YoungWriter();
                         varName variable = GetVar(context.children[3].GetText());
-                        using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                        using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                         using (BinaryWriter file = new BinaryWriter(fileStream))
                         {
                             if (variable.type == "number")
@@ -2279,7 +2290,7 @@ namespace Skipper
                     else
                     {
                         YoungWriter youngWriter = new YoungWriter();
-                        using (Stream fileStream = new FileStream("zoinks.ye", FileMode.Append, FileAccess.Write, FileShare.None))
+                        using (Stream fileStream = new FileStream(zoinksName, FileMode.Append, FileAccess.Write, FileShare.None))
                         using (BinaryWriter file = new BinaryWriter(fileStream))
                         {
                             varName variable = GetVar(context.children[3].GetChild(0).GetText());
