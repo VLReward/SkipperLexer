@@ -33,26 +33,26 @@ using IToken = Antlr4.Runtime.IToken;
 public interface IPenguineseListener : IParseTreeListener {
 	/// <summary>
 	/// Enter a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterSeqNum([NotNull] PenguineseParser.SeqNumContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSeqNum([NotNull] PenguineseParser.SeqNumContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void EnterSeqVar([NotNull] PenguineseParser.SeqVarContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSeqVar([NotNull] PenguineseParser.SeqVarContext context);
@@ -336,6 +336,17 @@ public interface IPenguineseListener : IParseTreeListener {
 	void ExitValorBool([NotNull] PenguineseParser.ValorBoolContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMathSimple([NotNull] PenguineseParser.MathSimpleContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMathSimple([NotNull] PenguineseParser.MathSimpleContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -347,15 +358,26 @@ public interface IPenguineseListener : IParseTreeListener {
 	void ExitMath([NotNull] PenguineseParser.MathContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMathSeq([NotNull] PenguineseParser.MathSeqContext context);
+	void EnterMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context);
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMathSeq([NotNull] PenguineseParser.MathSeqContext context);
+	void ExitMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.valorNum"/>.
@@ -422,6 +444,17 @@ public interface IPenguineseListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitSeccionFor([NotNull] PenguineseParser.SeccionForContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterAsignFor([NotNull] PenguineseParser.AsignForContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitAsignFor([NotNull] PenguineseParser.AsignForContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.imprimirValor"/>.

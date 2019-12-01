@@ -37,14 +37,14 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 public partial class PenguineseBaseListener : IPenguineseListener {
 	/// <summary>
 	/// Enter a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterSeqNum([NotNull] PenguineseParser.SeqNumContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -52,14 +52,14 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 
 	/// <summary>
 	/// Enter a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void EnterSeqVar([NotNull] PenguineseParser.SeqVarContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -392,6 +392,19 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	public virtual void ExitValorBool([NotNull] PenguineseParser.ValorBoolContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMathSimple([NotNull] PenguineseParser.MathSimpleContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMathSimple([NotNull] PenguineseParser.MathSimpleContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -405,17 +418,30 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	public virtual void ExitMath([NotNull] PenguineseParser.MathContext context) { }
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterMathSeq([NotNull] PenguineseParser.MathSeqContext context) { }
+	public virtual void EnterMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitMathSeq([NotNull] PenguineseParser.MathSeqContext context) { }
+	public virtual void ExitMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.valorNum"/>.
@@ -494,6 +520,19 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitSeccionFor([NotNull] PenguineseParser.SeccionForContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsignFor([NotNull] PenguineseParser.AsignForContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsignFor([NotNull] PenguineseParser.AsignForContext context) { }
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.imprimirValor"/>.

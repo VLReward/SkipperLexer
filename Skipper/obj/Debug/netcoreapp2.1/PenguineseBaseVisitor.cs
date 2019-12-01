@@ -36,7 +36,7 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Result>, IPenguineseVisitor<Result> {
 	/// <summary>
 	/// Visit a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -48,7 +48,7 @@ public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -330,6 +330,17 @@ public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	public virtual Result VisitValorBool([NotNull] PenguineseParser.ValorBoolContext context) { return VisitChildren(context); }
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitMathSimple([NotNull] PenguineseParser.MathSimpleContext context) { return VisitChildren(context); }
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -341,7 +352,7 @@ public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	public virtual Result VisitMath([NotNull] PenguineseParser.MathContext context) { return VisitChildren(context); }
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
 	/// on <paramref name="context"/>.
@@ -349,7 +360,18 @@ public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	public virtual Result VisitMathSeq([NotNull] PenguineseParser.MathSeqContext context) { return VisitChildren(context); }
+	public virtual Result VisitMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.valorNum"/>.
@@ -416,6 +438,17 @@ public partial class PenguineseBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitSeccionFor([NotNull] PenguineseParser.SeccionForContext context) { return VisitChildren(context); }
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitAsignFor([NotNull] PenguineseParser.AsignForContext context) { return VisitChildren(context); }
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.imprimirValor"/>.

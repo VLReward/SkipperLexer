@@ -35,10 +35,17 @@ valorString		: STRING ;
 valorBool		: (TRUE | FALSE) ;
 
 //	operaciones matematicas
-math			: variable EQUALS valorNum (mathSeq)+
-				| variable EQUALS variable (mathSeq)+ ;
-mathSeq			: OPERATOR valorNum #seqNum
-				| OPERATOR variable #seqVar ;
+//math			: variable EQUALS valorNum (mathSeq)+  //descomentar esto si no se quiere forzar orden de operaciones
+//				| variable EQUALS variable (mathSeq)+ ;
+//mathSeq			: OPERATOR valorNum #seqNum
+//				| OPERATOR variable #seqVar ;
+mathSimple		: variable EQUALS ( valorNum | variable ) OPERATOR ( valorNum | variable ) ;
+math			: variable EQUALS valorNum (mathSeqMD)* (mathSeqPM)* 
+				| variable EQUALS variable (mathSeqMD)* (mathSeqPM)* ;
+mathSeqMD		: OPERATORMD valorNum #seqNum
+				| OPERATORMD variable #seqVar ;
+mathSeqPM		: OPERATORPM valorNum 
+				| OPERATORPM variable ;
 valorNum		: valorEntero | valorDec ;
 
 //	ciclos de codigo
@@ -48,7 +55,8 @@ ciclo			: IF OP condicional CP THEN OCB bloqueCodigo CCB #cicloIf
 condicional		: valorCond COND valorCond (condSeq)* ;
 valorCond		: ( variable | valorEntero | valorDec | valorChar | valorString | valorBool ) ;
 condSeq			: SepCOND valorCond COND valorCond ;
-seccionFor		: asignVar TERM condicional TERM math ;
+seccionFor		: asignFor TERM condicional TERM mathSimple ;
+asignFor		: variable EQUALS (valorNum | variable ) ;
 
 //	in/out
 imprimirValor	: READ COL COL ( variable | valorString ) ;
@@ -62,6 +70,8 @@ escribirValor	: WRITE COL COL ( variable ) ;
 fragment LOWERCASE  : [a-z] ;
 fragment UPPERCASE  : [A-Z] ;
 NUMERAL				: [0-9]+ ;	//	any number of digits
+OPERATORMD			: ( '*' | '/' ) ;
+OPERATORPM			: ( '+' | '-' ) ;
 OPERATOR			: ( '+' | '-' | '*' | '/' ) ;
 PLUS				: '+' ;
 COND				: ( '>=' | '==' | '<=' | '<' | '>' | '!=' );
@@ -108,5 +118,3 @@ WHITESPACE          : (' '|'\t'|'\r'? '\n' | '\r')+ -> skip ;
 //				| OPERATORMD variable #seqVar ;
 //mathSeqMD		: OPERATORPM valorNum 
 //				| OPERATORPM variable ;
-//OPERATORMD			: ( '*' | '/' ) ;
-//OPERATORPM			: ( '+' | '-' ) ;

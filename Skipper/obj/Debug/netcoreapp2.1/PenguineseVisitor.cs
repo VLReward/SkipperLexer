@@ -34,7 +34,7 @@ using IToken = Antlr4.Runtime.IToken;
 public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
 	/// Visit a parse tree produced by the <c>seqNum</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
@@ -42,7 +42,7 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 
 	/// <summary>
 	/// Visit a parse tree produced by the <c>seqVar</c>
-	/// labeled alternative in <see cref="PenguineseParser.mathSeq"/>.
+	/// labeled alternative in <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
@@ -224,6 +224,13 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitValorBool([NotNull] PenguineseParser.ValorBoolContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSimple"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMathSimple([NotNull] PenguineseParser.MathSimpleContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -231,11 +238,18 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMath([NotNull] PenguineseParser.MathContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeq"/>.
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeqMD"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitMathSeq([NotNull] PenguineseParser.MathSeqContext context);
+	Result VisitMathSeqMD([NotNull] PenguineseParser.MathSeqMDContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathSeqPM"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMathSeqPM([NotNull] PenguineseParser.MathSeqPMContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.valorNum"/>.
@@ -278,6 +292,13 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitSeccionFor([NotNull] PenguineseParser.SeccionForContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.asignFor"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsignFor([NotNull] PenguineseParser.AsignForContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.imprimirValor"/>.
