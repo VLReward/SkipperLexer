@@ -1,0 +1,18 @@
+func main() 
+{
+	number x;
+	number i;
+	number j;
+	number k;
+	i=0;
+	j=1;
+	imprimirVar :: i;
+	imprimirVar :: j;
+	for( x = 2; x < 100; x = x+1) 
+	{
+		k = i + j;
+		imprimirVar :: k;
+		i=j;
+		j=k;
+	};
+}
