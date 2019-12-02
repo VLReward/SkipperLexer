@@ -81,6 +81,11 @@ namespace Skipper
         public const byte CMPNE = 64;
         public const byte IDX = 65;
         public const byte BRNCHC = 66;
+        public const byte PUSHIV = 67;
+        public const byte PUSHDV = 68;
+        public const byte PUSHSV = 69;
+        public const byte PUSHBV = 70;
+        public const byte PUSHCV = 71;
         #endregion
 
         public class varName
@@ -105,7 +110,7 @@ namespace Skipper
         public static List<varName> varList = new List<varName>();
         public static Stack<int> cicleStack = new Stack<int>();
         public static short tc = 0;
-        public const string zoinksName = "zoinksForSemiTest.ye";
+        public const string zoinksName = "bubbleEsNuestraMobyDick.ye";
 
         private static void Main(string[] args)
         {
@@ -131,7 +136,7 @@ namespace Skipper
                     file.Dispose();
                 }
 
-                string text = File.ReadAllText(@"C:\AN\forStep.txt");
+                string text = File.ReadAllText(@"C:\AN\bubble.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
@@ -155,7 +160,7 @@ namespace Skipper
                     file.Close();
                     file.Dispose();
                 }
-                byte[] tsc = BitConverter.GetBytes(tc);
+                byte[] tsc = BitConverter.GetBytes((ushort)tc);
                 byte[] tsd = BitConverter.GetBytes(td);
                 Array.Reverse(tsc);
                 Array.Reverse(tsd);
@@ -364,7 +369,7 @@ namespace Skipper
                             varName arrayVar = GetVar(nombreArray);
                             if (arrayVar.type == "number")
                             {
-                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 tc += 3;
                                 if (variable.IsArray == 0)
                                 {
@@ -392,7 +397,7 @@ namespace Skipper
                             }
                             else if (arrayVar.type == "double")
                             {
-                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 tc += 3;
                                 if (variable.IsArray == 0)
                                 {
@@ -420,7 +425,7 @@ namespace Skipper
                             }
                             else if (arrayVar.type == "character")
                             {
-                                youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 tc += 3;
                                 if (variable.IsArray == 0)
                                 {
@@ -448,7 +453,7 @@ namespace Skipper
                             }
                             else if (arrayVar.type == "text")
                             {
-                                youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 tc += 3;
                                 if (variable.IsArray == 0)
                                 {
@@ -476,7 +481,7 @@ namespace Skipper
                             }
                             else if (arrayVar.type == "boolean")
                             {
-                                youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 tc += 3;
                                 if (variable.IsArray == 0)
                                 {
@@ -724,31 +729,31 @@ namespace Skipper
                         {
                             if (variable.type == "number")
                             {
-                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)porAsignar.location });
                                 youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
                                 tc += 6;
                             }
                             else if (variable.type == "double")
                             {
-                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)porAsignar.location });
                                 youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
                                 tc += 6;
                             }
                             else if (variable.type == "character")
                             {
-                                youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)porAsignar.location });
                                 youngWriter.WriteToFile(file, POPC, new ArrayList { (short)variable.location });
                                 tc += 6;
                             }
                             else if (variable.type == "text")
                             {
-                                youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)porAsignar.location });
                                 youngWriter.WriteToFile(file, POPS, new ArrayList { (short)variable.location });
                                 tc += 6;
                             }
                             else if (variable.type == "boolean")
                             {
-                                youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)porAsignar.location });
+                                youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)porAsignar.location });
                                 youngWriter.WriteToFile(file, POPB, new ArrayList { (short)variable.location });
                                 tc += 6;
                             }
@@ -888,12 +893,12 @@ namespace Skipper
                             }
                             if (temp.type == "number")
                             {
-                                youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)temp.location });
+                                youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)temp.location });
                                 tc += 3;
                             }
                             else if (temp.type == "double")
                             {
-                                youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)temp.location });
+                                youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)temp.location });
                                 tc += 3;
                             }
                             else
@@ -955,27 +960,27 @@ namespace Skipper
                                 {
                                     if (varArray.type == "number")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)varArray.location });
+                                        youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)varArray.location });
                                         tc += 3;
                                     }
                                     else if (varArray.type == "double")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)varArray.location });
+                                        youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)varArray.location });
                                         tc += 3;
                                     }
                                     else if (varArray.type == "character")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)varArray.location });
+                                        youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)varArray.location });
                                         tc += 3;
                                     }
                                     else if (varArray.type == "text")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)varArray.location });
+                                        youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)varArray.location });
                                         tc += 3;
                                     }
                                     else if (varArray.type == "boolean")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)varArray.location });
+                                        youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)varArray.location });
                                         tc += 3;
                                     }
                                 }
@@ -1185,23 +1190,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1284,23 +1289,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1494,23 +1499,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1593,23 +1598,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1652,11 +1657,11 @@ namespace Skipper
                             tc++;
                         }
                     }
-                    int tryPos = Convert.ToInt32(fileStream.Position);
-                    cicleStack.Push(tryPos);
                     youngWriter.WriteToFile(file, PUSHKB, new ArrayList { true });
                     youngWriter.WriteByte(file, CMPNE);
-                    youngWriter.WriteToFile(file, BRNCHC, new ArrayList { (short)1 });
+                    int tryPos = Convert.ToInt32(fileStream.Position);
+                    cicleStack.Push(tryPos);
+                    youngWriter.WriteToFile(file, BRNCHC, new ArrayList { (short)42 });
                     tc += 6;
                     file.Close();
                     file.Dispose();
@@ -1796,23 +1801,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1895,23 +1900,23 @@ namespace Skipper
                                 varName arrayVar = GetVar(nombreArray);
                                 if (arrayVar.type == "number")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "double")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "character")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHC, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHCV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "text")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHS, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHSV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else if (arrayVar.type == "boolean")
                                 {
-                                    youngWriter.WriteToFile(file, PUSHB, new ArrayList { (short)arrayVar.location });
+                                    youngWriter.WriteToFile(file, PUSHBV, new ArrayList { (short)arrayVar.location });
                                 }
                                 else
                                     Console.WriteLine("Context Error: < " + nombreArray + " > se usa sin declararse" + Environment.NewLine);
@@ -1958,7 +1963,7 @@ namespace Skipper
                     youngWriter.WriteByte(file, CMPNE);
                     int tryPos = Convert.ToInt32(fileStream.Position);
                     cicleStack.Push(tryPos);
-                    youngWriter.WriteToFile(file, BRNCHC, new ArrayList { (short)1 });
+                    youngWriter.WriteToFile(file, BRNCHC, new ArrayList { (short)69 });
                     tc += 6;
                     int tryInitial = Convert.ToInt32(posInicial);
                     cicleStack.Push(tryInitial);
@@ -2036,12 +2041,12 @@ namespace Skipper
                                     var variable = GetVar(nombreArray);
                                     if (variable.type == "number")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHI, new ArrayList { (short)variable.location });
+                                        youngWriter.WriteToFile(file, PUSHIV, new ArrayList { (short)variable.location });
                                         tc += 3;
                                     }
                                     if (variable.type == "double")
                                     {
-                                        youngWriter.WriteToFile(file, PUSHD, new ArrayList { (short)variable.location });
+                                        youngWriter.WriteToFile(file, PUSHDV, new ArrayList { (short)variable.location });
                                         tc += 3;
                                     }
                                 }
@@ -2122,7 +2127,8 @@ namespace Skipper
                     file.Dispose();
                 }
                 int endPos = cicleStack.Pop();
-                byte[] tsc = BitConverter.GetBytes((short)(tc));
+                ushort testtc = (ushort)tc;
+                byte[] tsc = BitConverter.GetBytes((short)(testtc));
                 Array.Reverse(tsc);
                 byte[] pointer = (new byte[] { BRNCHC }).Concat(tsc).ToArray();
                 YoungWriter.ReplaceData(zoinksName, endPos, pointer);
