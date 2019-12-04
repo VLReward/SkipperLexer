@@ -1,0 +1,45 @@
+func main () {
+	arrayof number[7] matriculas;
+	arrayof text[7] nombres;
+	text aux;
+	number i, j, k, temp ;
+	imprimirLinea :: "Hola Crayola";
+	i=0;
+	k = 1;
+	temp=0;
+	for ( j = 0; j < 7; j=j+1 ) {
+		imprimirLinea :: "Dame Matricula:";
+		escribirVar :: matriculas[j];
+		imprimirLinea :: "Dame Nombre:";
+		escribirVar :: nombres[j];
+	};
+	for ( j = 0; j < 6; j=j+1 ) {
+		for ( i = 0; i < 6; i= i+1 ) {
+			k = i + 1;
+		   if ( nombres[i] > nombres[k]) then {
+			  imprimirVar :: "nombres[i]";
+			  imprimirLinea :: nombres[i];
+			  imprimirVar :: "nombres[k]";
+			  imprimirLinea :: nombres[k];
+			  imprimirLinea :: "Swap Triggered";
+			  temp= matriculas[i];
+			  matriculas[i] = matriculas[k];
+			  matriculas[k] = temp;
+			  aux = nombres[i];
+			  imprimirVar :: "AUX: ";
+			  imprimirLinea :: aux;
+			  nombres[i] = nombres[k];
+			  nombres[k] = aux;
+			  imprimirVar :: "nombres[i]";
+			  imprimirLinea :: nombres[i];
+			  imprimirVar :: "nombres[k]";
+			  imprimirLinea :: nombres[k];
+		   };
+		};
+	 };
+	for ( j = 0; j < 7; j=j+1 ) {
+		imprimirVar :: matriculas[j];
+		imprimirVar :: "-";
+		imprimirLinea :: nombres[j];
+	};
+}

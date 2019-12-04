@@ -86,6 +86,7 @@ namespace Skipper
         public const byte PUSHSV = 69;
         public const byte PUSHBV = 70;
         public const byte PUSHCV = 71;
+        public const byte CR = 72;
         #endregion
 
         public class varName
@@ -110,7 +111,7 @@ namespace Skipper
         public static List<varName> varList = new List<varName>();
         public static Stack<int> cicleStack = new Stack<int>();
         public static short tc = 0;
-        public const string zoinksName = "bubbleEsNuestraMobyDick.ye";
+        public const string zoinksName = "IsThisRegresion.ye";
 
         private static void Main(string[] args)
         {
@@ -136,7 +137,7 @@ namespace Skipper
                     file.Dispose();
                 }
 
-                string text = File.ReadAllText(@"C:\AN\bubble.txt");
+                string text = File.ReadAllText(@"C:\Users\Rolis\Documents\GitHub\SkipperLexer\bubbleCheang.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
@@ -166,7 +167,7 @@ namespace Skipper
                 Array.Reverse(tsd);
                 byte[] header = (new byte[] { (byte)73, (byte)67, (byte)67, (byte)50, (byte)48, (byte)50, (byte)48 }).Concat(tsc).ToArray();
                 //header = header.Concat(BitConverter.GetBytes(td)).ToArray();
-                YoungWriter.ReplaceData(zoinksName, 0, header.Concat(tsd).ToArray() );
+                YoungWriter.ReplaceData(zoinksName, 0, header.Concat(tsd).ToArray());
             }
             catch (Exception ex)
             {
@@ -249,6 +250,8 @@ namespace Skipper
                 else
                 {
                     string tipoPorAsignar = GetInputType(porAsignar);
+                    if (tipoPorAsignar != "array" && tipoPorAsignar != "variable")
+                        tipoPorAsignar = variable.type;
                     switch (tipoPorAsignar)
                     {
                         case "text":
@@ -268,12 +271,24 @@ namespace Skipper
                             tc += 5;
                             break;
                         case "number":
-                            youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(porAsignar) });
-                            if (variable.IsArray == 0)
-                                youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                            if (variable.type == "number")
+                            {
+                                youngWriter.WriteToFile(file, PUSHKI, new ArrayList { int.Parse(porAsignar) });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPI, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
+                                tc += 8;
+                            }
                             else
-                                youngWriter.WriteToFile(file, POPIV, new ArrayList { (short)variable.location });
-                            tc += 8;
+                            {
+                                youngWriter.WriteToFile(file, PUSHKD, new ArrayList { double.Parse(porAsignar) });
+                                if (variable.IsArray == 0)
+                                    youngWriter.WriteToFile(file, POPD, new ArrayList { (short)variable.location });
+                                else
+                                    youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
+                                tc += 12;
+                            }
                             break;
                         case "double":
                             youngWriter.WriteToFile(file, PUSHKD, new ArrayList { double.Parse(porAsignar) });
@@ -1057,15 +1072,14 @@ namespace Skipper
                                 youngWriter.WriteToFile(file, POPDV, new ArrayList { (short)variable.location });
                             else
                                 Console.WriteLine("Context Error: < " + variable.name + " > no es un numero" + Environment.NewLine);
+                            tc += 3;
                         }
-                        Console.WriteLine("OperacionVeN " + context.GetText() + Environment.NewLine);
                         file.Close();
                         file.Dispose();
                     }
                 }
                 catch (Exception ex)
                 { }
-                Console.WriteLine("Math " + context.GetText() + Environment.NewLine);
             }
 
             public override void EnterCicloWhile(PenguineseParser.CicloWhileContext context)
@@ -2055,7 +2069,7 @@ namespace Skipper
                                 break;
                         }
                     }
-                    switch(operador)
+                    switch (operador)
                     {
                         case "+":
                             youngWriter.WriteByte(file, (byte)SUM);
@@ -2071,7 +2085,7 @@ namespace Skipper
                             break;
                     }
                     tc++;
-                    switch(GetInputType(nombreVar))
+                    switch (GetInputType(nombreVar))
                     {
                         case "variable":
                             if (!IsVarInList(nombreVar))
@@ -2122,7 +2136,7 @@ namespace Skipper
                 using (BinaryWriter file = new BinaryWriter(fileStream))
                 {
                     youngWriter.WriteToFile(file, BRANCH, new ArrayList { (short)restartPos });
-                    tc+=3;
+                    tc += 3;
                     file.Close();
                     file.Dispose();
                 }
@@ -2132,23 +2146,6 @@ namespace Skipper
                 Array.Reverse(tsc);
                 byte[] pointer = (new byte[] { BRNCHC }).Concat(tsc).ToArray();
                 YoungWriter.ReplaceData(zoinksName, endPos, pointer);
-            }
-            public override void EnterCondicional(PenguineseParser.CondicionalContext context)
-            {
-                Console.WriteLine("Condicional " + context.GetText() + Environment.NewLine);
-            }
-            public override void EnterValorCond(PenguineseParser.ValorCondContext context)
-            {
-                Console.WriteLine("ValorCond " + context.GetText() + Environment.NewLine);
-            }
-            public override void EnterCondSeq(PenguineseParser.CondSeqContext context)
-            {
-                Console.WriteLine("CondSeq " + context.GetText() + Environment.NewLine);
-            }
-            public override void EnterSeccionFor(PenguineseParser.SeccionForContext context)
-            {// tiene toda la carne de EnterCicloFor, preferirira usar esto para decidir las primeras acciones
-                //primero se deberia declarar y asignar la variable
-                Console.WriteLine("SeccionFor " + context.GetText() + Environment.NewLine);
             }
             public override void EnterImprimirValor(PenguineseParser.ImprimirValorContext context)
             {
@@ -2161,8 +2158,10 @@ namespace Skipper
                     {
                         case "text":
                             youngWriter.WriteToFile(file, PRTM, new ArrayList { (byte)(context.children[3].GetText().Replace("\"", "").Length) });
-                            tc += 3;
-                            file.Write(context.children[3].GetText().Replace("\"", ""));
+                            tc += 2;
+                            byte[] es = Encoding.ASCII.GetBytes((string)context.children[3].GetText().Replace("\"", ""));
+
+                            file.Write(es);
                             tc += (short)context.children[3].GetText().Replace("\"", "").Length;
                             break;
                         case "array":
@@ -2242,6 +2241,11 @@ namespace Skipper
                         default:
                             Console.WriteLine("Error: unexpected input");
                             break;
+                    }
+                    if (context.children[0].GetText() == "imprimirLinea")
+                    {
+                        youngWriter.WriteByte(file, (byte)CR);
+                        tc++;
                     }
                     file.Close();
                     file.Dispose();

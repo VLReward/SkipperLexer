@@ -43,7 +43,7 @@ namespace Rico
             else if (obj is double)
             {
                 byte[] es = BitConverter.GetBytes((double)obj);
-                Array.Reverse(es);
+                //Array.Reverse(es);
                 youngWriter.Write(es);
             }
             else if (obj is short)

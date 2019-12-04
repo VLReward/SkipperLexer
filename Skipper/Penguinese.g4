@@ -103,7 +103,7 @@ ARRAYOF				: 'arrayof' ;
 BOOLEAN				: 'boolean' ;
 HALT				: 'NOOT NOOT' ;
 RETURN				: 'regresar' ;
-READ				: 'imprimirVar' ;
+READ				: ('imprimirVar' | 'imprimirLinea' );
 WRITE				: 'escribirVar';
 LETTER              : (LOWERCASE | UPPERCASE) ;
 CHAR				: '"' LETTER '"' ;

@@ -1,0 +1,34 @@
+func main() {
+arrayof double[20] vector;
+number i, j, k;
+vector[0] =0;
+vector[1]=1;
+imprimirVar :: "vector[0]: ";
+imprimirLinea :: vector[0];
+imprimirVar :: "vector[1]: ";
+imprimirLinea :: vector[1];
+for(i=2; i<20; i=i+1){
+	imprimirVar :: "i: ";
+	imprimirLinea :: i;
+	imprimirVar :: "j (i - 2): ";
+	j=i-2;
+	imprimirLinea :: j;
+	imprimirVar :: "k (i - 1): ";
+	k=i-1;
+	imprimirLinea :: k;
+	imprimirVar :: "vector[j]: ";
+	imprimirLinea :: vector[j];
+	imprimirVar :: "vector[k]: ";
+	imprimirLinea :: vector[k];
+	imprimirVar :: "Imprimire Vector: ";
+	vector[i] = vector[j] + vector[k];
+	imprimirLinea :: vector[i];
+	imprimirLinea :: "Imprimi Vector!";
+};
+for(i=0; i<20; i=i+1){
+	imprimirVar :: "[";
+	imprimirVar :: i;
+	imprimirVar :: "]";
+	imprimirLinea :: vector[i];
+};
+}

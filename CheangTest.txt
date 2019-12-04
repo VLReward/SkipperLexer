@@ -1,0 +1,36 @@
+func main() {
+arrayof double[20] vector;
+double a, b, c, d;
+number i, j, k;
+a=37.2;
+imprimirVar :: "a: ";
+imprimirVar :: a;
+b= 0-24.7;
+imprimirVar :: "b (0-24.7): ";
+imprimirVar :: b;
+c= b*20;
+imprimirVar :: "c (b * 20): ";
+imprimirVar :: c;
+d=b-5.3;
+imprimirVar :: "d (b-5.3): ";
+imprimirVar :: d;
+c=c/d;
+imprimirVar :: "c (c/d): ";
+imprimirVar :: c;
+c=a+c;
+imprimirVar :: "El resultado es (a + c): ";
+imprimirLinea :: c;
+vector[0] =0;
+vector[1]=1;
+for(i=2; i<20; i=i+1){
+	j=i-2;
+	k=i-1;
+	vector[i] = vector[j] + vector[k];
+};
+for(i=0; i<20; i=i+1){
+	imprimirVar :: "[";
+	imprimirVar :: i;
+	imprimirVar :: "]";
+	imprimirLinea :: vector[i];
+};
+}

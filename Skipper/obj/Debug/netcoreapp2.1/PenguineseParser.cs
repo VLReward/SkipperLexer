@@ -59,7 +59,7 @@ public partial class PenguineseParser : Parser {
 		"')'", "'['", "']'", "'{'", "'}'", "'.'", "'='", "':'", "'true'", "'false'", 
 		"'if'", "'then'", "'while'", "'for'", "'func'", "'main'", "'double'", 
 		"'character'", "'text'", "'number'", "'arrayof'", "'boolean'", "'NOOT NOOT'", 
-		"'regresar'", "'imprimirVar'", "'escribirVar'"
+		"'regresar'", null, "'escribirVar'"
 	};
 	private static readonly string[] _SymbolicNames = {
 		null, "NUMERAL", "OPERATORMD", "OPERATORPM", "OPERATOR", "PLUS", "COND", 
