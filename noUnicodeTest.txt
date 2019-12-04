@@ -1,0 +1,13 @@
+func main () {
+	character test;
+	test = "c";
+	imprimirVar :: "c: ";
+	imprimirLinea :: test;
+	test = "4";
+	imprimirVar :: "4: ";
+	imprimirLinea :: test;
+	imprimirVar :: "Dame Double: ";
+	escribirVar :: test;
+	imprimirVar :: "Recibi Esto: ";
+	imprimirLinea :: test;
+}

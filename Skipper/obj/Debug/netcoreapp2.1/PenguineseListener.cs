@@ -347,6 +347,17 @@ public interface IPenguineseListener : IParseTreeListener {
 	void ExitMathSimple([NotNull] PenguineseParser.MathSimpleContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathArray"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterMathArray([NotNull] PenguineseParser.MathArrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathArray"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitMathArray([NotNull] PenguineseParser.MathArrayContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

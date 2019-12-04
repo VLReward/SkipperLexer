@@ -231,6 +231,13 @@ public interface IPenguineseVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitMathSimple([NotNull] PenguineseParser.MathSimpleContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PenguineseParser.mathArray"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMathArray([NotNull] PenguineseParser.MathArrayContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

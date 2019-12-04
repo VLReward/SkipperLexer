@@ -1,0 +1,6 @@
+func main () {
+	character test;
+	test = 'c';
+	imprimirVar :: "C: ";
+	imprimirLinea :: test;
+}

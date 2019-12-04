@@ -1,0 +1,6 @@
+func main () {
+	arrayof number[2] test;
+	number i = 0;
+	test[i + 1] = 2;
+	imprimirLinea :: "5.59: " :: test :: "Imprimo Sequencial owo";
+}

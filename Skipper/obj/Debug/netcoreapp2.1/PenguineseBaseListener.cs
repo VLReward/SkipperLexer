@@ -405,6 +405,19 @@ public partial class PenguineseBaseListener : IPenguineseListener {
 	public virtual void ExitMathSimple([NotNull] PenguineseParser.MathSimpleContext context) { }
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PenguineseParser.mathArray"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMathArray([NotNull] PenguineseParser.MathArrayContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PenguineseParser.mathArray"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMathArray([NotNull] PenguineseParser.MathArrayContext context) { }
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PenguineseParser.math"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

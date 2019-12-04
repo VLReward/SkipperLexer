@@ -1,0 +1,7 @@
+func main () {
+	boolean test;
+	test = true;
+	test = false ;
+	escribirVar :: test;
+	imprimirLinea :: test;
+}

@@ -15,7 +15,7 @@ expresion		: ( declararVar | asignSimple | math | ciclo | imprimirValor | escrib
 declararVar		: ( decVar | asignVar ) ;
 asignVar		: tipoVarS nombreVar EQUALS valorVar #asignarValor
 				| tipoVarS nombreVar EQUALS variable #asignarVariable; 
-asignSimple		: variable EQUALS (valorNum | variable ) ;
+asignSimple		: variable EQUALS (valorVar | variable ) ;
 
 //	definicion de variables
 decVar			: tipoVar nombreVar ( COM nombreVar)* ;	//	number x , y , z, ..... n
@@ -24,7 +24,7 @@ tipoVar			: ARRAYOF tipoVarS OBR NUMERAL CBR
 tipoVarS		: (CHARACTER | DOUBLE | BOOLEAN | NUMBER | TEXT) ;
 nombreVar		: (WORD | LETTER) ;
 variable		: nombreVar #nombreSimple
-				| nombreVar OBR (nombreVar | valorEntero) CBR #nombreArreglo ;
+				| nombreVar OBR (nombreVar | valorEntero | mathArray ) CBR #nombreArreglo ;
 
 //	inicializacion variables
 valorVar		: ( valorEntero | valorDec | valorChar | valorString |valorBool ) ;
@@ -40,6 +40,7 @@ valorBool		: (TRUE | FALSE) ;
 //mathSeq			: OPERATOR valorNum #seqNum
 //				| OPERATOR variable #seqVar ;
 mathSimple		: variable EQUALS ( valorNum | variable ) (OPERATORPM  | OPERATORMD)( valorNum | variable ) ;
+mathArray		:  ( valorNum | variable ) (OPERATORPM  | OPERATORMD)( valorNum | variable ) ;
 math			: variable EQUALS valorNum (mathSeqMD)* (mathSeqPM)* 
 				| variable EQUALS variable (mathSeqMD)* (mathSeqPM)* ;
 mathSeqMD		: OPERATORMD valorNum #seqNum
@@ -59,7 +60,7 @@ seccionFor		: asignFor TERM condicional TERM mathSimple ;
 asignFor		: variable EQUALS (valorNum | variable ) ;
 
 //	in/out
-imprimirValor	: READ COL COL ( variable | valorString ) ;
+imprimirValor	: READ ( COL COL ( variable | valorString ) )+ ;
 //nombreValores	: ( variable | valorString ) ( imprimirSeq )* ;
 //imprimirSeq		: PLUS ( variable | valorString ) ;
 escribirValor	: WRITE COL COL ( variable ) ;
