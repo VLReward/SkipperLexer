@@ -33,7 +33,7 @@ namespace Rico
             else if (obj is bool)
                 youngWriter.Write((bool)obj);
             else if (obj is char)
-                youngWriter.Write((char)obj);
+                youngWriter.Write((byte)((char)obj));
             else if (obj is int)
             {
                 byte[] es = BitConverter.GetBytes((int)obj);

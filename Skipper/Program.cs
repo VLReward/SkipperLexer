@@ -111,7 +111,7 @@ namespace Skipper
         public static List<varName> varList = new List<varName>();
         public static Stack<int> cicleStack = new Stack<int>();
         public static short tc = 0;
-        public const string zoinksName = "FibonacciFunkyArrays2.ye";
+        public const string zoinksName = "1byte.ye";
 
         private static void Main(string[] args)
         {
@@ -137,7 +137,7 @@ namespace Skipper
                     file.Dispose();
                 }
 
-                string text = File.ReadAllText(@"C:\Users\Rolis\Documents\GitHub\SkipperLexer\FibonacciFunkyArrays.txt");
+                string text = File.ReadAllText(@"C:\Users\Rolis\Documents\GitHub\SkipperLexer\noUnicodeTest.txt");
                 AntlrInputStream inputStream = new AntlrInputStream(text.ToString());// copia datos de string a un arry de chars
                 PenguineseLexer lexer = new PenguineseLexer(inputStream);    // crea un lexer nuevo
                 CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);    // lista de tokens 
